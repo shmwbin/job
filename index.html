@@ -3,36 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>স্মার্ট টিন - বাংলা জোন</title>
+    <title>স্মার্ট টিন - শর্টস জোন</title>
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
 </head>
 <body>
     <div class="app-container">
-        <!-- টপ স্ট্যাটাস বার -->
-        <header>
-            <div class="level-box">লেভেল: <span id="level">১</span></div>
-            <div class="score-box"><span id="score">০</span> XP</div>
+        <!-- টপ ফ্লোটিং হেডার -->
+        <header class="floating-header">
+            <div class="brand">🔥 স্মার্ট শর্টস</div>
+            <div class="score-badge">XP: <span id="score">০</span></div>
         </header>
 
-        <!-- মূল অ্যানিমেটেড কার্ড ফিড -->
-        <main id="feed-container">
-            <div class="card animate-pop" id="card-box">
-                <!-- ডাইনামিক কন্টেন্ট এখানে লোড হবে -->
-            </div>
+        <!-- ভার্টিকাল শর্টস ফিড কন্টেইনার (যেখানে রিলসের মতো উপর-নিচে স্ক্রোল বা নেক্সট হবে) -->
+        <main id="shorts-feed" class="shorts-container">
+            <!-- ডাইনামিক শর্টস কার্ড এখানে লোড হবে -->
         </main>
 
-        <!-- কুইজ সেকশন -->
-        <section id="quiz-section" class="hidden animate-fade">
-            <h3 id="question-text">প্রশ্ন</h3>
-            <div id="options-container"></div>
-        </section>
-
-        <!-- নিচের নেভিগেশন বার -->
-        <nav class="bottom-nav">
-            <button onclick="nextCard()" class="btn-next">পরবর্তী ম্যাজিক 🔥</button>
-            <button onclick="startQuiz()" class="btn-quiz">বুদ্ধির পরীক্ষা 🧠</button>
-        </nav>
+        <!-- রাইট সাইড অ্যাকশন বার (লাইক, নেক্সট, শেয়ার বাটন যেমন রিলসে থাকে) -->
+        <aside class="action-sidebar">
+            <button class="action-btn" onclick="likeShort()">❤️<span id="like-count">১২০</span></button>
+            <button class="action-btn" onclick="nextShort()">⚡<span class="btn-text">পরেরটা</span></button>
+            <button class="action-btn" onclick="shareApp()">↗️</button>
+        </aside>
     </div>
 
     <script src="app.js"></script>
