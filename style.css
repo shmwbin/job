@@ -31,7 +31,7 @@ body, html {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index: 30;
+    z-index: 40;
     background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
     pointer-events: none;
 }
@@ -76,23 +76,25 @@ body, html {
     height: 100%;
     border: none;
     z-index: 1;
-    pointer-events: none;
+    pointer-events: none; /* ভিডিওর নিজস্ব টাচ ব্লক করার জন্য */
 }
-.touch-overlay {
+/* সোয়াইপ শিল্ড লেয়ার যা ভিডিও বা ছবির ওপর থাকবে এবং বাম-ডান সোয়াইপ ধরবে */
+.swipe-shield-layer {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 20;
+    z-index: 25;
     background: transparent;
+    touch-action: pan-y;
 }
 .short-content-overlay {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    z-index: 10;
+    z-index: 20;
     background: linear-gradient(to top, rgba(0,0,0,0.95) 50%, rgba(0,0,0,0.5) 80%, transparent 100%);
     padding: 50px 20px 40px 20px;
     pointer-events: none;
@@ -121,7 +123,7 @@ body, html {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    z-index: 35;
+    z-index: 45;
     align-items: center;
 }
 .action-btn {
