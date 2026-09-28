@@ -16,6 +16,7 @@ body, html {
     background: #111;
     display: flex;
     flex-direction: column;
+    touch-action: pan-y; /* স্মুথ টাচ স্ক্রিন সোয়াইপের জন্য */
 }
 .floating-header {
     position: absolute;
@@ -28,6 +29,7 @@ body, html {
     align-items: center;
     z-index: 10;
     background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+    pointer-events: none;
 }
 .brand {
     font-weight: bold;
@@ -56,18 +58,27 @@ body, html {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    padding: 20px;
     box-sizing: border-box;
     background-size: cover;
     background-position: center;
-    animation: fadeIn 0.3s ease-in-out;
+    animation: slideUp 0.3s ease-in-out;
 }
-/* কার্ডের নিচে লেখার জন্য সুন্দর শ্যাডো ও ব্যাকগ্রাউন্ড গ্রাডিয়েন্ট */
+.short-card iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    z-index: 1;
+    pointer-events: none; /* যাতে ভিডিওর ওপর টাচ করলে সহজে সোয়াইপ করা যায় */
+}
 .short-content-overlay {
-    background: linear-gradient(to top, rgba(0,0,0,0.9) 40%, rgba(0,0,0,0.3) 80%, transparent 100%);
-    padding: 30px 20px 60px 20px;
+    position: relative;
+    z-index: 2;
+    background: linear-gradient(to top, rgba(0,0,0,0.95) 40%, rgba(0,0,0,0.4) 80%, transparent 100%);
+    padding: 40px 20px 60px 20px;
     border-radius: 20px 20px 0 0;
-    margin-bottom: 20px;
 }
 .short-tag {
     background: #ff334b;
@@ -80,12 +91,11 @@ body, html {
     margin-bottom: 10px;
 }
 .short-title {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: bold;
     line-height: 1.5;
     margin: 0;
 }
-/* ডান দিকের রিলস স্টাইল অ্যাকশন বাটন */
 .action-sidebar {
     position: absolute;
     right: 15px;
@@ -119,7 +129,7 @@ body, html {
     font-size: 0.6rem;
     margin-top: 2px;
 }
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+@keyframes slideUp {
+    from { transform: translateY(100%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
 }
