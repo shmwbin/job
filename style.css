@@ -1,127 +1,125 @@
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #0b0f19;
-    color: #f1f5f9;
+body, html {
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    background-color: #000;
+    color: #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     height: 100vh;
-}
-.app-container {
-    width: 100%;
-    max-width: 400px;
-    height: 100vh;
-    background: #1e1b4b;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.6);
-    border-radius: 12px;
     overflow: hidden;
 }
-header {
+.app-container {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    height: 100vh;
+    margin: 0 auto;
+    background: #111;
+    display: flex;
+    flex-direction: column;
+}
+.floating-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
     padding: 15px 20px;
-    background: #311042;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 2px solid #4c1d95;
+    z-index: 10;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+}
+.brand {
     font-weight: bold;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
+    color: #ff334b;
 }
-.level-box {
-    color: #38bdf8;
-}
-.score-box {
-    color: #4ade80;
-    background: #022c22;
+.score-badge {
+    background: rgba(255, 255, 255, 0.2);
     padding: 5px 12px;
     border-radius: 20px;
+    font-weight: bold;
+    color: #00ffcc;
 }
-main {
+.shorts-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+.short-card {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
     padding: 20px;
-    flex-grow: 1;
+    box-sizing: border-box;
+    background-size: cover;
+    background-position: center;
+    animation: fadeIn 0.3s ease-in-out;
+}
+/* কার্ডের নিচে লেখার জন্য সুন্দর শ্যাডো ও ব্যাকগ্রাউন্ড গ্রাডিয়েন্ট */
+.short-content-overlay {
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 40%, rgba(0,0,0,0.3) 80%, transparent 100%);
+    padding: 30px 20px 60px 20px;
+    border-radius: 20px 20px 0 0;
+    margin-bottom: 20px;
+}
+.short-tag {
+    background: #ff334b;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+.short-title {
+    font-size: 1.3rem;
+    font-weight: bold;
+    line-height: 1.5;
+    margin: 0;
+}
+/* ডান দিকের রিলস স্টাইল অ্যাকশন বাটন */
+.action-sidebar {
+    position: absolute;
+    right: 15px;
+    bottom: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    z-index: 10;
+    align-items: center;
+}
+.action-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    color: white;
+    font-size: 1.2rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-align: center;
-}
-.card {
-    background: linear-gradient(135deg, #4f46e5, #7c3aed);
-    padding: 35px 25px;
-    border-radius: 24px;
-    box-shadow: 0 10px 25px rgba(124, 58, 237, 0.4);
-    font-size: 1.25rem;
-    line-height: 1.6;
-    width: 85%;
-    transition: transform 0.3s ease;
-}
-/* স্মুথ পপ অ্যানিমেশন */
-.animate-pop {
-    animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-}
-@keyframes popIn {
-    0% { transform: scale(0.8); opacity: 0; }
-    100% { transform: scale(1); opacity: 1; }
-}
-.hidden {
-    display: none !important;
-}
-#quiz-section {
-    padding: 20px;
-    background: #312e81;
-    border-radius: 18px;
-    margin: 15px;
-    text-align: center;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-}
-#options-container {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-top: 15px;
-}
-.option-btn {
-    padding: 12px;
-    border: none;
-    border-radius: 10px;
-    background: #4338ca;
-    color: white;
-    font-size: 1rem;
     cursor: pointer;
-    transition: 0.2s;
+    backdrop-filter: blur(5px);
+    transition: transform 0.2s;
 }
-.option-btn:hover {
-    background: #6366f1;
-    transform: scale(1.02);
+.action-btn:active {
+    transform: scale(0.9);
 }
-.bottom-nav {
-    display: flex;
-    padding: 15px;
-    background: #311042;
-    gap: 10px;
-    border-top: 2px solid #4c1d95;
+.action-btn .btn-text {
+    font-size: 0.6rem;
+    margin-top: 2px;
 }
-.bottom-nav button {
-    flex: 1;
-    padding: 14px;
-    border: none;
-    border-radius: 12px;
-    color: white;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-}
-.btn-next {
-    background: #059669;
-}
-.btn-quiz {
-    background: #d97706;
-}
-.bottom-nav button:active {
-    transform: scale(0.95);
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
