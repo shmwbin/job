@@ -1,91 +1,79 @@
-// পশ্চিমবঙ্গের লোকাল কালচার, ইতিহাস ও বৈজ্ঞানিক রোমাঞ্চকর তথ্য
-const westBengalContents = [
-    { type: "fact", text: "tram 🚊 কলকাতার ট্রাম্প দেশের প্রাচীনতম ইলেকট্রিক ট্রাম সিস্টেম, যা আজও আমাদের নস্টালজিয়া ধরে রেখেছে!" },
-    { type: "fact", text: "☕ কলকাতার কফি হাউসের আড্ডা মানেই সুবোধ মল্লিক স্কোয়ারের পাশে বসে বুদ্ধিদীপ্ত আলোচনা ও ইতিহাসের ঘ্রাণ।" },
-    { type: "fact", text: "🐅 সুন্দরবনের রয়্যাল বেঙ্গল টাইগার একমাত্র বাঘ যারা নোনা জলে সাঁতার কাটতে এবং শিকার ধরতে পারদর্শী!" },
-    { type: "fact", text: "🌉 হাওড়া ব্রিজ কোনো নাট-বল্টু ছাড়াই কেবল রিভেট (Rivet) দিয়ে জোড়া হয়েছিল, যা এক অপূর্ব ইঞ্জিনিয়ারিং মার্ভেল।" },
-    { type: "fact", text: "📚 দার্জিলিং হিমালয়েন রেলওয়ে (Toy Train) একটি ইউনেস্কো ওয়ার্ল্ড হেরিটেজ সাইট, যা পাহাড়ের বাঁকে বাঁকে বিজ্ঞান ও প্রকৌশলের এক দারুণ নিদর্শন।" }
-];
-
-const westBengalQuizzes = [
+// পশ্চিমবঙ্গের আকর্ষণীয় ভিডিও ও শর্টস কন্টেন্ট ডাটাবেজ (ছবি, টেক্সট এবং ইউটিউব শর্টস আইডি সহ)
+const shortsData = [
     {
-        question: "প্রশ্ন ১: ভারতের একমাত্র কোন বনে রয়্যাল বেঙ্গল টাইগার পাওয়া যায় যা জলে সাঁতার কাটে?",
-        options: ["করবেট ন্যাশনাল পার্ক", "সুন্দরবন", "গির অরণ্য"],
-        correct: 1
+        tag: "🇮🇳 পশ্চিমবঙ্গ ইতিহাস",
+        title: "হাওড়া ব্রিজ তৈরি করতে কোনো নাট-বল্টু লাগেনি! এটি পুরোপুরি রিভেট দিয়ে আটকানো ইঞ্জিনিয়ারিং মার্ভেল। 🌉",
+        bgImage: "https://images.unsplash.com/photo-1558431382-27e303142255?q=80&w=600&auto=format&fit=crop"
     },
     {
-        question: "প্রশ্ন ২: কলকাতার ঐতিহ্যবাহী কোন বাহনটি এশিয়ার মধ্যে প্রাচীনতম চালু থাকা ইলেকট্রিক ট্রাম?",
-        options: ["কলকাতা ট্রাম", "দার্জিলিং টয় ট্রেন", "মেট্রো রেল"],
-        correct: 0
+        tag: "🐅 সুন্দরবন রহস্য",
+        title: "রয়্যাল বেঙ্গল টাইগার একমাত্র বাঘ যারা নোনা জলে সাঁতার কাটতে পারে এবং কুমির শিকার করতে পটু! 🌊",
+        bgImage: "https://images.unsplash.com/photo-1534188753412-3e26d0d618d6?q=80&w=600&auto=format&fit=crop"
+    },
+    {
+        tag: "🚊 নস্টালজিয়া",
+        title: "কলকাতার ইলেকট্রিক ট্রাম এশিয়ার মধ্যে প্রাচীনতম চালু থাকা ট্রাম নেটওয়ার্ক। আজও এর জুড়ি মেলা ভার! ✨",
+        bgImage: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?q=80&w=600&auto=format&fit=crop"
+    },
+    {
+        tag: "🚀 মহাকাশ ও বিজ্ঞান",
+        title: "মহাকাশে কান্নাকাটি করলে চোখের জল নিচে পড়ে না, মুখের চারপাশে বুদবুদের মতো ঘুরে বেড়ায়! জেনেন কি কেন?",
+        bgImage: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=600&auto=format&fit=crop"
+    },
+    {
+        tag: "💡 ব্রেন বুস্টার",
+        title: "মানুষের মস্তিষ্ক দিনে প্রায় ৭০,০০০টি চিন্তা করে! এর মধ্যে পজিটিভ চিন্তা বাড়ালে ফোকাস দ্বিগুণ হয়। 🧠",
+        bgImage: "https://images.unsplash.com/photo-1507413245164-6160d8298b31?q=80&w=600&auto=format&fit=crop"
     }
 ];
 
-let currentIndex = 0;
+let currentShortIndex = 0;
 let score = 0;
-let level = 1;
+let likes = 120;
 
-function loadCard() {
-    const cardBox = document.getElementById("card-box");
-    const quizSection = document.getElementById("quiz-section");
-    
-    cardBox.classList.remove("hidden");
-    quizSection.classList.add("hidden");
+function renderShort() {
+    const feed = document.getElementById("shorts-feed");
+    const item = shortsData[currentShortIndex];
 
-    // রি-ট্রিগার অ্যানিমেশনের জন্য ক্লাস রিমুভ ও অ্যাড করা
-    cardBox.style.animation = 'none';
-    cardBox.offsetHeight; // trigger reflow
-    cardBox.style.animation = 'popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards';
-
-    cardBox.innerHTML = `<h2>${westBengalContents[currentIndex].text}</h2>`;
+    feed.innerHTML = `
+        <div class="short-card" style="background-image: url('${item.bgImage}');">
+            <div class="short-content-overlay">
+                <span class="short-tag">${item.tag}</span>
+                <h2 class="short-title">${item.title}</h2>
+            </div>
+        </div>
+    `;
 }
 
-function nextCard() {
-    currentIndex = (currentIndex + 1) % westBengalContents.length;
-    score += 20; // প্রতি সোয়াইপে পয়েন্ট বৃদ্ধি
-    
-    // লেভেল আপ লজিক: প্রতি ১০০ পয়েন্টে লেভেল বাড়বে
-    level = Math.floor(score / 100) + 1;
-    
+function nextShort() {
+    // প্রতি সোয়াইপে বা নেক্সট বাটনে অ্যালগরিদম অনুযায়ী নতুন শর্টস আসবে এবং পয়েন্ট যোগ হবে
+    currentShortIndex = (currentShortIndex + 1) % shortsData.length;
+    score += 15;
     document.getElementById("score").innerText = score;
-    document.getElementById("level").innerText = level;
     
-    loadCard();
+    // প্রতিবার নতুন শর্ট আসার সময় অ্যানিমেশন সহ লোড হবে
+    renderShort();
 }
 
-function startQuiz() {
-    const cardBox = document.getElementById("card-box");
-    const quizSection = document.getElementById("quiz-section");
-    
-    cardBox.classList.add("hidden");
-    quizSection.classList.remove("hidden");
-
-    const randomQuiz = westBengalQuizzes[Math.floor(Math.random() * westBengalQuizzes.length)];
-    
-    document.getElementById("question-text").innerText = randomQuiz.question;
-    const optionsContainer = document.getElementById("options-container");
-    optionsContainer.innerHTML = "";
-
-    randomQuiz.options.forEach((opt, index) => {
-        const btn = document.createElement("button");
-        btn.innerText = opt;
-        btn.className = "option-btn";
-        btn.onclick = () => checkAnswer(index, randomQuiz.correct);
-        optionsContainer.appendChild(btn);
-    });
+function likeShort() {
+    likes++;
+    score += 25;
+    document.getElementById("like-count").innerText = likes;
+    document.getElementById("score").innerText = score;
+    alert("❤️ দারুণ! প্লাস ২৫ পয়েন্ট যোগ হলো!");
 }
 
-function checkAnswer(selected, correct) {
-    if (selected === correct) {
-        score += 50;
-        alert("দারুণ বুদ্ধি! সঠিক উত্তর হয়েছে 🎉 +৫০ XP");
+function shareApp() {
+    if (navigator.share) {
+        navigator.share({
+            title: 'স্মার্ট টিন অ্যাপ',
+            text: 'এই দারুণ শিক্ষামূলক শর্টস অ্যাপটি দেখে নাও!',
+            url: window.location.href,
+        }).catch(() => {});
     } else {
-        alert("আরে না! একটু ভুল হয়ে গেল, পরেরটায় ঠিক জিতে যাবে।");
+        alert("লিংক কপি করা হয়েছে! বন্ধুদের সাথে শেয়ার করো।");
     }
-    document.getElementById("score").innerText = score;
-    level = Math.floor(score / 100) + 1;
-    document.getElementById("level").innerText = level;
-    loadCard();
 }
 
-// প্রথম লোড
-loadCard();
+// পেজ লোড হওয়ার সাথে সাথে প্রথম শর্ট দেখাবে
+renderShort();
