@@ -31,5 +31,55 @@
     </div>
 
     <script src="app.js"></script>
+    <!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>স্মার্ট টিন - শর্টস জোন</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <div class="app-container" id="app-container">
+        <!-- টপ ফ্লোটিং হেডার -->
+        <header class="floating-header">
+            <div class="brand">🔥 স্মার্ট শর্টস জোন</div>
+            <div class="score-badge">XP: <span id="score">০</span></div>
+        </header>
+
+        <!-- শর্টস ও ইমেজ ফিড কন্টেইনার -->
+        <main id="shorts-feed" class="shorts-container">
+            <!-- ডাইনামিক শর্টস এখানে লোড হবে -->
+        </main>
+
+        <!-- অদৃশ্য গ্লাস টাচ শিল্ড (বাম-ডান সোয়াইপ করার জন্য) -->
+        <div id="swipe-shield" class="swipe-shield-layer"></div>
+
+        <!-- ডান দিকের অ্যাকশন বার -->
+        <aside class="action-sidebar">
+            <button class="action-btn" onclick="likeShort()">❤️<span id="like-count">১২০</span></button>
+            <button class="action-btn" onclick="nextShort()">⚡<span class="btn-text">পরেরটা</span></button>
+        </aside>
+
+        <!-- PWA ইনস্টল করার কাস্টম ব্যানার -->
+        <div id="install-banner" class="install-banner hidden">
+            <div class="banner-content">
+                <img src="https://res.cloudinary.com/ewu5hckc/image/upload/v1790583115/shmshort.png" alt="Logo" class="banner-logo">
+                <div class="banner-text">
+                    <h4>স্মার্ট টিন অ্যাপ ইনস্টল করুন</h4>
+                    <p>দ্রুত অ্যাক্সেস ও অফলাইন ব্যবহারের জন্য হোমস্ক্রিনে যোগ করুন!</p>
+                </div>
+            </div>
+            <div class="banner-actions">
+                <button id="install-btn" class="btn-install">ইনস্টল</button>
+                <button id="close-banner" class="btn-close">পরে</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
 </body>
 </html>
