@@ -16,7 +16,7 @@ body, html {
     background: #111;
     display: flex;
     flex-direction: column;
-    touch-action: pan-y; /* স্মুথ টাচ স্ক্রিন সোয়াইপের জন্য */
+    touch-action: pan-y;
 }
 .floating-header {
     position: absolute;
@@ -33,7 +33,7 @@ body, html {
 }
 .brand {
     font-weight: bold;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     color: #ff334b;
 }
 .score-badge {
@@ -71,7 +71,6 @@ body, html {
     height: 100%;
     border: none;
     z-index: 1;
-    pointer-events: none; /* যাতে ভিডিওর ওপর টাচ করলে সহজে সোয়াইপ করা যায় */
 }
 .short-content-overlay {
     position: relative;
@@ -79,6 +78,7 @@ body, html {
     background: linear-gradient(to top, rgba(0,0,0,0.95) 40%, rgba(0,0,0,0.4) 80%, transparent 100%);
     padding: 40px 20px 60px 20px;
     border-radius: 20px 20px 0 0;
+    pointer-events: none;
 }
 .short-tag {
     background: #ff334b;
@@ -91,9 +91,9 @@ body, html {
     margin-bottom: 10px;
 }
 .short-title {
-    font-size: 1.2rem;
+    font-size: 1.15rem;
     font-weight: bold;
-    line-height: 1.5;
+    line-height: 1.4;
     margin: 0;
 }
 .action-sidebar {
