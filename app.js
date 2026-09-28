@@ -11,7 +11,6 @@ async function fetchShortsFromGoogleSheet() {
         const data = await response.json();
         
         if (data && data.length > 0) {
-            // ডেটাকে রিভার্স (.reverse()) করে দেওয়া হয়েছে, যাতে গুগল শিটের নিচের লেটেস্ট এন্ট্রি সবার আগে দেখায়
             mixedShortsData = data.map(item => ({
                 type: item.type || item.Type || "video",
                 tag: item.tag || item.Tag || "✨ Educational",
@@ -32,7 +31,7 @@ function renderShort() {
     const feed = document.getElementById("shorts-feed");
     
     if (mixedShortsData.length === 0) {
-        feed.innerHTML = `<div class="short-card" style="display:flex; justify-content:center; align-items:center;"><h2>লোড হচ্ছে... 🚀</h2></div>`;
+        feed.innerHTML = `<div class="short-card" style="display:flex; justify-content:center; align-items:center;"><h2>Load hocche... 🚀</h2></div>`;
         return;
     }
 
@@ -77,25 +76,30 @@ function likeShort() {
     document.getElementById("score").innerText = score;
 }
 
-let touchStartX = 0;
-let touchEndX = 0;
+// Up and Down Swipe Logic (Upor ba niche swipe korar jonno)
+let touchStartY = 0;
+let touchEndY = 0;
 
 const swipeShield = document.getElementById("swipe-shield");
 
 swipeShield.addEventListener('touchstart', e => {
-    touchStartX = e.changedTouches[0].screenX;
+    touchStartY = e.changedTouches[0].screenY;
 });
 
 swipeShield.addEventListener('touchend', e => {
-    touchEndX = e.changedTouches[0].screenX;
-    handleSwipeGesture();
+    touchEndY = e.changedTouches[0].screenY;
+    handleVerticalSwipe();
 });
 
-function handleSwipeGesture() {
-    let diff = touchStartX - touchEndX;
+function handleVerticalSwipe() {
+    let diff = touchStartY - touchEndY;
+    
+    // Jodi upor er dike swipe kora hoy (Swipe Up -> Porer video asbe)
     if (diff > 50) {
         nextShort();
-    } else if (diff < -50) {
+    }
+    // Jodi nicher dike swipe kora hoy (Swipe Down -> Ager video asbe)
+    else if (diff < -50) {
         prevShort();
     }
 }
@@ -107,7 +111,7 @@ const closeBannerBtn = document.getElementById("close-banner");
 
 window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
-    deferredPrompt = e;
+nych-deferredPrompt = e;
     setTimeout(() => {
         installBanner.classList.remove("hidden");
     }, 2000);
