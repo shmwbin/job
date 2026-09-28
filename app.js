@@ -4,12 +4,11 @@ let score = 0;
 let likes = 120;
 
 async function fetchShortsFromGoogleSheet() {
-    // আপনার নতুন এবং আপডেট করা গুগল শিট এপিআই লিংক
     const sheetApiUrl = "https://script.google.com/macros/s/AKfycby7rtnrKKi0qfw5APEeMunxw7zcv6onlvFls4MbkQPWt9h9IqycuYi9JTOahEm4h_tM/exec";
     
     // লোডিং স্ক্রিন দেখানো
     const feed = document.getElementById("shorts-feed");
-    feed.innerHTML = `<div class="short-card" style="display:flex; justify-content:center; align-items:center; background:#000; color:#fff;"><h2>ডেটা লোড হচ্ছে... 🚀</h2></div>`;
+    feed.innerHTML = `<div class="short-card" style="display:flex; justify-content:center; align-items:center; background:#000; color:#fff;"><h2>র‌্যান্ডম শর্টস লোড হচ্ছে... 🚀</h2></div>`;
 
     try {
         const response = await fetch(sheetApiUrl);
@@ -18,13 +17,20 @@ async function fetchShortsFromGoogleSheet() {
         console.log("Fetched Data from Sheet:", data);
 
         if (data && data.length > 0) {
-            mixedShortsData = data.map(item => ({
+            let formattedData = data.map(item => ({
                 type: item.type || item.Type || "video",
                 tag: item.tag || item.Tag || "✨ Educational",
                 title: item.title || item.Title || "N/A",
                 mediaUrl: item.mediaUrl || item.media_url || item.MediaUrl || ""
-            })).reverse(); // লেটেস্ট কনটেন্ট সবার আগে দেখানোর জন্য
+            }));
             
+            // অ্যারেটিকে এলোমেলো (Random Shuffle) করার লজিক
+            for (let i = formattedData.length - 1; i > 0; i--) {
+                let j = Math.floor(Math.random() * (i + 1));
+                [formattedData[i], formattedData[j]] = [formattedData[j], formattedData[i]];
+            }
+
+            mixedShortsData = formattedData;
             renderShort();
         } else {
             feed.innerHTML = `<div class="short-card" style="display:flex; justify-content:center; align-items:center; background:#000; color:#fff;"><h2>গুগল শিটে কোনো ডেটা পাওয়া যায়নি!</h2></div>`;
