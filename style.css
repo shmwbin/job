@@ -1,1 +1,65 @@
-
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #0f172a;
+    color: #f8fafc;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.app-container {
+    width: 100%;
+    max-width: 400px;
+    height: 100vh;
+    background: #1e293b;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+header {
+    padding: 15px;
+    background: #0f172a;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #334155;
+}
+main {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.card {
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    padding: 25px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    font-size: 1.2rem;
+    line-height: 1.5;
+}
+.bottom-nav {
+    display: flex;
+    padding: 15px;
+    background: #0f172a;
+    gap: 10px;
+}
+.bottom-nav button {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background: #10b981;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+.bottom-nav button:active {
+    transform: scale(0.95);
+}
