@@ -2,7 +2,7 @@ const mixedShortsData = [
     {
         type: "video",
         tag: "✨ স্পেশাল শর্টস ১",
-        title: "মনোরম রোমান্টিক ও সুন্দর মুহূর্তের শর্টস ভিডিও উপভোগ করো! 💖",
+        title: "মনোরম রোমান্টিক ও সুন্দর মুহূর্তের শর্টস ভিডিও উপভোগ করো! 💖 (বাম/ডান সোয়াইপ করুন)",
         mediaUrl: "https://www.youtube.com/embed/QvxqoXJxVxM?autoplay=1&mute=1&loop=1&playlist=QvxqoXJxVxM&controls=0"
     },
     {
@@ -76,6 +76,11 @@ function nextShort() {
     renderShort();
 }
 
+function prevShort() {
+    currentIndex = (currentIndex - 1 + mixedShortsData.length) % mixedShortsData.length;
+    renderShort();
+}
+
 function likeShort() {
     likes++;
     score += 25;
@@ -83,27 +88,31 @@ function likeShort() {
     document.getElementById("score").innerText = score;
 }
 
-// টাচ সোয়াইপ লজিক
-let touchStartY = 0;
-let touchEndY = 0;
+// বাম ও ডান সোয়াইপ (Left / Right Swipe) হ্যান্ডেল করার জন্য টাচ লজিক
+let touchStartX = 0;
+let touchEndX = 0;
 
-const touchLayer = document.getElementById("touch-layer");
+const swipeShield = document.getElementById("swipe-shield");
 
-touchLayer.addEventListener('touchstart', e => {
-    touchStartY = e.changedTouches[0].screenY;
+swipeShield.addEventListener('touchstart', e => {
+    touchStartX = e.changedTouches[0].screenX;
 });
 
-touchLayer.addEventListener('touchend', e => {
-    touchEndY = e.changedTouches[0].screenY;
-    handleSwipe();
+swipeShield.addEventListener('touchend', e => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipeGesture();
 });
 
-function handleSwipe() {
-    if (touchStartY - touchEndY > 50) {
-        nextShort(); // ওপরের দিকে সোয়াইপ করলে পরেরটা আসবে
-    } else if (touchEndY - touchStartY > 50) {
-        currentIndex = (currentIndex - 1 + mixedShortsData.length) % mixedShortsData.length;
-        renderShort(); // নিচের দিকে সোয়াইপ করলে আগেরটায় যাবে
+function handleSwipeGesture() {
+    let diff = touchStartX - touchEndX;
+    
+    // যদি বাম দিকে সোয়াইপ করা হয় (Swipe Left -> পরের ভিডিও/ছবি আসবে)
+    if (diff > 50) {
+        nextShort();
+    }
+    // যদি ডান দিকে সোয়াইপ করা হয় (Swipe Right -> আগের ভিডিও/ছবি আসবে)
+    else if (diff < -50) {
+        prevShort();
     }
 }
 
