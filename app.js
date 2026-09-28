@@ -3,7 +3,7 @@ const mixedShortsData = [
         type: "video",
         tag: "✨ স্পেশাল শর্টস ১",
         title: "মনোরম রোমান্টিক ও সুন্দর মুহূর্তের শর্টস ভিডিও উপভোগ করো! 💖 (বাম/ডান সোয়াইপ করুন)",
-        mediaUrl: "https://www.youtube.com/embed/QvxqoXJxVxM?autoplay=1&mute=0&loop=1&playlist=QvxqoXJxVxM&controls=0&modestbranding=1&rel=0"
+        mediaUrl: "https://www.youtube.com/embed/QvxqoXJxVxM?autoplay=1&mute=0&loop=1&playlist=QvxqoXJxVxM&controls=0&modestbranding=1&rel=0&playsinline=1"
     },
     {
         type: "image",
@@ -15,7 +15,7 @@ const mixedShortsData = [
         type: "video",
         tag: "✨ স্পেশাল শর্টস ২",
         title: "বিশ্বকে ভালোবাসার বার্তা ছড়ানোর দারুণ একটি সুন্দর মুহূর্ত! 🌸",
-        mediaUrl: "https://www.youtube.com/embed/vYZcp-o4VSo?autoplay=1&mute=0&loop=1&playlist=vYZcp-o4VSo&controls=0&modestbranding=1&rel=0"
+        mediaUrl: "https://www.youtube.com/embed/vYZcp-o4VSo?autoplay=1&mute=0&loop=1&playlist=vYZcp-o4VSo&controls=0&modestbranding=1&rel=0&playsinline=1"
     },
     {
         type: "image",
@@ -27,7 +27,7 @@ const mixedShortsData = [
         type: "video",
         tag: "✨ স্পেশাল শর্টস ৩",
         title: "প্রকৃতির মাঝে সুন্দর এক রূপকথার ছোঁয়া! 🍂",
-        mediaUrl: "https://www.youtube.com/embed/tjBJV_soGEA?autoplay=1&mute=0&loop=1&playlist=tjBJV_soGEA&controls=0&modestbranding=1&rel=0"
+        mediaUrl: "https://www.youtube.com/embed/tjBJV_soGEA?autoplay=1&mute=0&loop=1&playlist=tjBJV_soGEA&controls=0&modestbranding=1&rel=0&playsinline=1"
     },
     {
         type: "image",
@@ -39,7 +39,7 @@ const mixedShortsData = [
         type: "video",
         tag: "✨ স্পেশাল শর্টস ৪",
         title: "ফুলের রানী ও বहारের চমৎকার ব্যাকগ্রাউন্ড মিউজিক শর্টস! 🌷",
-        mediaUrl: "https://www.youtube.com/embed/-W-Cky9skw4?autoplay=1&mute=0&loop=1&playlist=-W-Cky9skw4&controls=0&modestbranding=1&rel=0"
+        mediaUrl: "https://www.youtube.com/embed/-W-Cky9skw4?autoplay=1&mute=0&loop=1&playlist=-W-Cky9skw4&controls=0&modestbranding=1&rel=0&playsinline=1"
     }
 ];
 
@@ -53,7 +53,8 @@ function renderShort() {
 
     let mediaContent = "";
     if (item.type === "video") {
-        mediaContent = `<iframe src="${item.mediaUrl}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>`;
+        // loading="lazy" এবং অন্যান্য প্যারামিটার যুক্ত করা হয়েছে যাতে ভিডিও দ্রুত লোড হয়
+        mediaContent = `<iframe src="${item.mediaUrl}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>`;
     } else {
         mediaContent = `<div class="short-card" style="background-image: url('${item.mediaUrl}'); position: absolute; width: 100%; height: 100%;"></div>`;
     }
