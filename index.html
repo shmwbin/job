@@ -3,35 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TeenMind - Smart Zone</title>
+    <title>স্মার্ট টিন - বাংলা জোন</title>
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
 </head>
 <body>
     <div class="app-container">
-        <!-- Top Status Bar -->
+        <!-- টপ স্ট্যাটাস বার -->
         <header>
             <div class="level-box">লেভেল: <span id="level">১</span></div>
-            <div class="score-box">পয়েন্ট: <span id="score">০</span> XP</div>
+            <div class="score-box"><span id="score">০</span> XP</div>
         </header>
 
-        <!-- Main Feed / Challenge Area -->
+        <!-- মূল অ্যানিমেটেড কার্ড ফিড -->
         <main id="feed-container">
-            <div class="card" id="card-box">
-                <!-- Dynamic Content Loads Here -->
+            <div class="card animate-pop" id="card-box">
+                <!-- ডাইনামিক কন্টেন্ট এখানে লোড হবে -->
             </div>
         </main>
 
-        <!-- Interactive Question Section (Hidden by default, shown for quizzes) -->
-        <section id="quiz-section" class="hidden">
-            <h3 id="question-text">প্রশ্ন এখানে আসবে</h3>
+        <!-- কুইজ সেকশন -->
+        <section id="quiz-section" class="hidden animate-fade">
+            <h3 id="question-text">প্রশ্ন</h3>
             <div id="options-container"></div>
         </section>
 
-        <!-- Bottom Navigation & Controls -->
+        <!-- নিচের নেভিগেশন বার -->
         <nav class="bottom-nav">
-            <button onclick="nextCard()" class="btn-next">পরবর্তী তথ্য 🚀</button>
-            <button onclick="startQuiz()" class="btn-quiz">মিনি কুইজ 🧠</button>
+            <button onclick="nextCard()" class="btn-next">পরবর্তী ম্যাজিক 🔥</button>
+            <button onclick="startQuiz()" class="btn-quiz">বুদ্ধির পরীক্ষা 🧠</button>
         </nav>
     </div>
 
