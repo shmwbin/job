@@ -4,7 +4,8 @@ let score = 0;
 let likes = 120;
 
 async function fetchShortsFromGoogleSheet() {
-    const sheetApiUrl = "https://script.google.com/macros/s/AKfycbyy3eZ0KB4_HOJbTlTj4cMxMc5EdaO-J3jx6ZGTjfK4tmgYAZ8j7qoJQmz2nLh_K7Zi/exec";
+    // আপনার নতুন এবং আপডেট করা গুগল শিট এপিআই লিংক
+    const sheetApiUrl = "https://script.google.com/macros/s/AKfycby7rtnrKKi0qfw5APEeMunxw7zcv6onlvFls4MbkQPWt9h9IqycuYi9JTOahEm4h_tM/exec";
     
     // লোডিং স্ক্রিন দেখানো
     const feed = document.getElementById("shorts-feed");
@@ -14,7 +15,7 @@ async function fetchShortsFromGoogleSheet() {
         const response = await fetch(sheetApiUrl);
         const data = await response.json();
         
-        console.log("Fetched Data from Sheet:", data); // কনসোলে ডেটা চেক করার জন্য
+        console.log("Fetched Data from Sheet:", data);
 
         if (data && data.length > 0) {
             mixedShortsData = data.map(item => ({
@@ -22,7 +23,7 @@ async function fetchShortsFromGoogleSheet() {
                 tag: item.tag || item.Tag || "✨ Educational",
                 title: item.title || item.Title || "N/A",
                 mediaUrl: item.mediaUrl || item.media_url || item.MediaUrl || ""
-            })).reverse();
+            })).reverse(); // লেটেস্ট কনটেন্ট সবার আগে দেখানোর জন্য
             
             renderShort();
         } else {
