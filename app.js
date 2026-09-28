@@ -88,7 +88,7 @@ function likeShort() {
     document.getElementById("score").innerText = score;
 }
 
-// বাম ও ডান সোয়াইপ (Left / Right Swipe) হ্যান্ডেল করার জন্য টাচ লজিক
+// বাম ও ডান সোয়াইপ হ্যান্ডেল করার জন্য টাচ লজিক
 let touchStartX = 0;
 let touchEndX = 0;
 
@@ -105,16 +105,43 @@ swipeShield.addEventListener('touchend', e => {
 
 function handleSwipeGesture() {
     let diff = touchStartX - touchEndX;
-    
-    // যদি বাম দিকে সোয়াইপ করা হয় (Swipe Left -> পরের ভিডিও/ছবি আসবে)
     if (diff > 50) {
-        nextShort();
-    }
-    // যদি ডান দিকে সোয়াইপ করা হয় (Swipe Right -> আগের ভিডিও/ছবি আসবে)
-    else if (diff < -50) {
-        prevShort();
+        nextShort(); // বামে সোয়াইপ -> পরেরটা
+    } else if (diff < -50) {
+        prevShort(); // ডানে সোয়াইপ -> আগেরটা
     }
 }
+
+// PWA ইনস্টল ব্যানার লজিক
+let deferredPrompt;
+const installBanner = document.getElementById("install-banner");
+const installBtn = document.getElementById("install-btn");
+const closeBannerBtn = document.getElementById("close-banner");
+
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    // ওয়েবসাইট খোলার কয়েক সেকেন্ড পর ব্যানারটি ভেসে উঠবে
+    setTimeout(() => {
+        installBanner.classList.remove("hidden");
+    }, 2000);
+});
+
+installBtn.addEventListener('click', async () => {
+    if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted') {
+            console.log('User accepted the install prompt');
+        }
+        deferredPrompt = null;
+        installBanner.classList.add("hidden");
+    }
+});
+
+closeBannerBtn.addEventListener('click', () => {
+    installBanner.classList.add("hidden");
+});
 
 // প্রথম লোড
 renderShort();
