@@ -31,7 +31,7 @@ function renderShort() {
     const feed = document.getElementById("shorts-feed");
     
     if (mixedShortsData.length === 0) {
-        feed.innerHTML = `<div class="short-card" style="display:flex; justify-content:center; align-items:center;"><h2>Load hocche... 🚀</h2></div>`;
+        feed.innerHTML = `<div class="short-card" style="display:flex; justify-content:center; align-items:center;"><h2>লোড হচ্ছে... 🚀</h2></div>`;
         return;
     }
 
@@ -76,7 +76,7 @@ function likeShort() {
     document.getElementById("score").innerText = score;
 }
 
-// Up and Down Swipe Logic (Upor ba niche swipe korar jonno)
+// ইনস্ট্যান্ট এবং অত্যন্ত সংবেদনশীল আপ ও ডাউন সোয়াইপ লজিক
 let touchStartY = 0;
 let touchEndY = 0;
 
@@ -84,23 +84,21 @@ const swipeShield = document.getElementById("swipe-shield");
 
 swipeShield.addEventListener('touchstart', e => {
     touchStartY = e.changedTouches[0].screenY;
-});
+}, { passive: true });
 
 swipeShield.addEventListener('touchend', e => {
     touchEndY = e.changedTouches[0].screenY;
     handleVerticalSwipe();
-});
+}, { passive: true });
 
 function handleVerticalSwipe() {
     let diff = touchStartY - touchEndY;
     
-    // Jodi upor er dike swipe kora hoy (Swipe Up -> Porer video asbe)
-    if (diff > 50) {
-        nextShort();
-    }
-    // Jodi nicher dike swipe kora hoy (Swipe Down -> Ager video asbe)
-    else if (diff < -50) {
-        prevShort();
+    // থ্রেশহোল্ড কমিয়ে ৩০ করা হয়েছে, যাতে সামান্য টানেই কাজ করে
+    if (diff > 30) {
+        nextShort(); // ওপরের দিকে সোয়াইপ -> পরের ভিডিও
+    } else if (diff < -30) {
+        prevShort(); // নিচের দিকে সোয়াইপ -> আগের ভিডিও
     }
 }
 
@@ -111,7 +109,7 @@ const closeBannerBtn = document.getElementById("close-banner");
 
 window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
-nych-deferredPrompt = e;
+    deferredPrompt = e;
     setTimeout(() => {
         installBanner.classList.remove("hidden");
     }, 2000);
