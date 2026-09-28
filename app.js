@@ -11,13 +11,14 @@ async function fetchShortsFromGoogleSheet() {
         const data = await response.json();
         
         if (data && data.length > 0) {
-            // Data mapping to ensure keys match properly
+            // ডেটাকে রিভার্স (.reverse()) করে দেওয়া হয়েছে, যাতে গুগল শিটের নিচের লেটেস্ট এন্ট্রি সবার আগে দেখায়
             mixedShortsData = data.map(item => ({
                 type: item.type || item.Type || "video",
                 tag: item.tag || item.Tag || "✨ Educational",
                 title: item.title || item.Title || "N/A",
                 mediaUrl: item.mediaUrl || item.media_url || item.MediaUrl || ""
-            }));
+            })).reverse();
+            
             renderShort();
         } else {
             console.log("Google Sheet-e kono data paoya jayni!");
@@ -31,7 +32,7 @@ function renderShort() {
     const feed = document.getElementById("shorts-feed");
     
     if (mixedShortsData.length === 0) {
-        feed.innerHTML = `<div class="short-card" style="display:flex; justify-content:center; align-items:center;"><h2>Load hocche... 🚀</h2></div>`;
+        feed.innerHTML = `<div class="short-card" style="display:flex; justify-content:center; align-items:center;"><h2>লোড হচ্ছে... 🚀</h2></div>`;
         return;
     }
 
