@@ -1,45 +1,45 @@
 const mixedShortsData = [
     {
         type: "video",
-        tag: "✨ Spesal Shorts ১",
-        title: "Monorom romantic o sundor muhurter shorts video upobhog koro! 💖",
-        mediaUrl: "https://www.youtube.com/embed/QvxqoXJxVxM?autoplay=1&mute=1&loop=1&playlist=QvxqoXJxVxM"
+        tag: "✨ স্পেশাল শর্টস ১",
+        title: "মনোরম রোমান্টিক ও সুন্দর মুহূর্তের শর্টস ভিডিও উপভোগ করো! 💖",
+        mediaUrl: "https://www.youtube.com/embed/QvxqoXJxVxM?autoplay=1&mute=1&loop=1&playlist=QvxqoXJxVxM&controls=0"
     },
     {
         type: "image",
-        tag: "🇮🇳 Poschimbonggo Itihas",
-        title: "Haora bridge toiri korte kono nat-boltu lageni! Eta puropuri rivet diye atkano engineering marvel. 🌉",
+        tag: "🇮🇳 পশ্চিমবঙ্গ ইতিহাস",
+        title: "হাওড়া ব্রিজ তৈরি করতে কোনো নাট-বল্টু লাগেনি! এটি পুরোপুরি রিভেট দিয়ে আটকানো ইঞ্জিনিয়ারিং মার্ভেল। 🌉",
         mediaUrl: "https://images.unsplash.com/photo-1558431382-27e303142255?q=80&w=600&auto=format&fit=crop"
     },
     {
         type: "video",
-        tag: "✨ Spesal Shorts ২",
-        title: "Biswo ke bhalobasar barta choranor darun ekti sundor muhurto! 🌸",
-        mediaUrl: "https://www.youtube.com/embed/vYZcp-o4VSo?autoplay=1&mute=1&loop=1&playlist=vYZcp-o4VSo"
+        tag: "✨ স্পেশাল শর্টস ২",
+        title: "বিশ্বকে ভালোবাসার বার্তা ছড়ানোর দারুণ একটি সুন্দর মুহূর্ত! 🌸",
+        mediaUrl: "https://www.youtube.com/embed/vYZcp-o4VSo?autoplay=1&mute=1&loop=1&playlist=vYZcp-o4VSo&controls=0"
     },
     {
         type: "image",
-        tag: "🐅 Sundarban Rohoshyo",
-        title: "Royalty Bengal Tiger ekmatro bag jara nona jole satar kat te pare o kumir shikar korte potu! 🌊",
+        tag: "🐅 সুন্দরবন রহস্য",
+        title: "রয়্যাল বেঙ্গল টাইগার একমাত্র বাঘ যারা নোনা জলে সাঁতার কাটতে পারে এবং কুমির শিকার করতে পটু! 🌊",
         mediaUrl: "https://images.unsplash.com/photo-1534188753412-3e26d0d618d6?q=80&w=600&auto=format&fit=crop"
     },
     {
         type: "video",
-        tag: "✨ Spesal Shorts ৩",
-        title: "Prokritir majhe sundor ek rupkothar chhoa! 🍂",
-        mediaUrl: "https://www.youtube.com/embed/tjBJV_soGEA?autoplay=1&mute=1&loop=1&playlist=tjBJV_soGEA"
+        tag: "✨ স্পেশাল শর্টস ৩",
+        title: "প্রকৃতির মাঝে সুন্দর এক রূপকথার ছোঁয়া! 🍂",
+        mediaUrl: "https://www.youtube.com/embed/tjBJV_soGEA?autoplay=1&mute=1&loop=1&playlist=tjBJV_soGEA&controls=0"
     },
     {
         type: "image",
-        tag: "🚊 Nostalgia",
-        title: "Kolkatar electric tram eashiyar modhye prachintamo chalu thaka tram network. Aajoer juri mela bhar! ✨",
+        tag: "🚊 নস্টালজিয়া",
+        title: "কলকাতার ইলেকট্রিক ট্রাম এশিয়ার মধ্যে প্রাচীনতম চালু থাকা ট্রাম নেটওয়ার্ক। আজও এর জুড়ি মেলা ভার! ✨",
         mediaUrl: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?q=80&w=600&auto=format&fit=crop"
     },
     {
         type: "video",
-        tag: "✨ Spesal Shorts ৪",
-        title: "Fuler rani o baharer chomotkar background music shorts! 🌷",
-        mediaUrl: "https://www.youtube.com/embed/-W-Cky9skw4?autoplay=1&mute=1&loop=1&playlist=-W-Cky9skw4"
+        tag: "✨ স্পেশাল শর্টস ৪",
+        title: "ফুলের রানী ও বहारের চমৎকার ব্যাকগ্রাউন্ড মিউজিক শর্টস! 🌷",
+        mediaUrl: "https://www.youtube.com/embed/-W-Cky9skw4?autoplay=1&mute=1&loop=1&playlist=-W-Cky9skw4&controls=0"
     }
 ];
 
@@ -53,7 +53,7 @@ function renderShort() {
 
     let mediaContent = "";
     if (item.type === "video") {
-        mediaContent = `<iframe src="${item.mediaUrl}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+        mediaContent = `<iframe src="${item.mediaUrl}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>`;
     } else {
         mediaContent = `<div class="short-card" style="background-image: url('${item.mediaUrl}'); position: absolute; width: 100%; height: 100%;"></div>`;
     }
@@ -83,7 +83,7 @@ function likeShort() {
     document.getElementById("score").innerText = score;
 }
 
-// Touch layer er upor swipe gesture handle korar jonno
+// টাচ সোয়াইপ লজিক
 let touchStartY = 0;
 let touchEndY = 0;
 
@@ -100,12 +100,12 @@ touchLayer.addEventListener('touchend', e => {
 
 function handleSwipe() {
     if (touchStartY - touchEndY > 50) {
-        nextShort(); // Uporer dike swipe korle porer short asbe
+        nextShort(); // ওপরের দিকে সোয়াইপ করলে পরেরটা আসবে
     } else if (touchEndY - touchStartY > 50) {
         currentIndex = (currentIndex - 1 + mixedShortsData.length) % mixedShortsData.length;
-        renderShort(); // Nicher dike swipe korle ager tai jabe
+        renderShort(); // নিচের দিকে সোয়াইপ করলে আগেরটায় যাবে
     }
 }
 
-// Initial load
+// প্রথম লোড
 renderShort();
