@@ -1,1 +1,32 @@
-Hello World
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TeenMind - Explore & Grow</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>🔥 TeenMind Zone</h1>
+            <p>Score: <span id="score">0</span> XP</p>
+        </header>
+
+        <main id="feed-container">
+            <!-- Dynamic addictive content will load here -->
+            <div class="card" id="card-box">
+                <h2>Loading magic...</h2>
+            </div>
+        </main>
+
+        <nav class="bottom-nav">
+            <button onclick="nextCard()">Next 🔥</button>
+            <button onclick="likeCard()">❤️ Like</button>
+        </nav>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
