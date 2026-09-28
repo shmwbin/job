@@ -6,10 +6,16 @@ let likes = 120;
 async function fetchShortsFromGoogleSheet() {
     const sheetApiUrl = "https://script.google.com/macros/s/AKfycbyy3eZ0KB4_HOJbTlTj4cMxMc5EdaO-J3jx6ZGTjfK4tmgYAZ8j7qoJQmz2nLh_K7Zi/exec";
     
+    // লোডিং স্ক্রিন দেখানো
+    const feed = document.getElementById("shorts-feed");
+    feed.innerHTML = `<div class="short-card" style="display:flex; justify-content:center; align-items:center; background:#000; color:#fff;"><h2>ডেটা লোড হচ্ছে... 🚀</h2></div>`;
+
     try {
         const response = await fetch(sheetApiUrl);
         const data = await response.json();
         
+        console.log("Fetched Data from Sheet:", data); // কনসোলে ডেটা চেক করার জন্য
+
         if (data && data.length > 0) {
             mixedShortsData = data.map(item => ({
                 type: item.type || item.Type || "video",
@@ -20,20 +26,18 @@ async function fetchShortsFromGoogleSheet() {
             
             renderShort();
         } else {
-            console.log("Google Sheet-e kono data paoya jayni!");
+            feed.innerHTML = `<div class="short-card" style="display:flex; justify-content:center; align-items:center; background:#000; color:#fff;"><h2>গুগল শিটে কোনো ডেটা পাওয়া যায়নি!</h2></div>`;
         }
     } catch (error) {
-        console.error("Data load korte somastha hoyeche:", error);
+        console.error("Data load error:", error);
+        feed.innerHTML = `<div class="short-card" style="display:flex; justify-content:center; align-items:center; background:#000; color:#ff334b;"><h2>ডেটা লোড করতে সমস্যা হয়েছে!</h2></div>`;
     }
 }
 
 function renderShort() {
     const feed = document.getElementById("shorts-feed");
     
-    if (mixedShortsData.length === 0) {
-        feed.innerHTML = `<div class="short-card" style="display:flex; justify-content:center; align-items:center;"><h2>লোড হচ্ছে... 🚀</h2></div>`;
-        return;
-    }
+    if (mixedShortsData.length === 0) return;
 
     const item = mixedShortsData[currentIndex];
 
@@ -76,7 +80,7 @@ function likeShort() {
     document.getElementById("score").innerText = score;
 }
 
-// ইনস্ট্যান্ট এবং অত্যন্ত সংবেদনশীল আপ ও ডাউন সোয়াইপ লজিক
+// ইনস্ট্যান্ট এবং সংবেদনশীল আপ ও ডাউন সোয়াইপ লজিক
 let touchStartY = 0;
 let touchEndY = 0;
 
@@ -94,7 +98,6 @@ swipeShield.addEventListener('touchend', e => {
 function handleVerticalSwipe() {
     let diff = touchStartY - touchEndY;
     
-    // থ্রেশহোল্ড কমিয়ে ৩০ করা হয়েছে, যাতে সামান্য টানেই কাজ করে
     if (diff > 30) {
         nextShort(); // ওপরের দিকে সোয়াইপ -> পরের ভিডিও
     } else if (diff < -30) {
