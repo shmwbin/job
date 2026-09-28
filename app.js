@@ -1,5 +1,11 @@
-// ছবি ও ইউটিউব শর্টস ভিডিও অল্টারনেট করে সাজানো ডাটাবেজ
+// আপনার দেওয়া ইউটিউব শর্টস লিংক এবং ছবির অল্টারনেট তালিকা
 const mixedShortsData = [
+    {
+        type: "video",
+        tag: "✨ স্পেশাল শর্টস ১",
+        title: "মনোরম রোমান্টিক ও সুন্দর মুহূর্তের শর্টস ভিডিও উপভোগ করো! 💖",
+        mediaUrl: "https://www.youtube.com/embed/QvxqoXJxVxM?autoplay=1&mute=1&loop=1&playlist=QvxqoXJxVxM"
+    },
     {
         type: "image",
         tag: "🇮🇳 পশ্চিমবঙ্গ ইতিহাস",
@@ -8,9 +14,9 @@ const mixedShortsData = [
     },
     {
         type: "video",
-        tag: "🚀 বিজ্ঞান ও মহাকাশ",
-        title: "মহাকাশে কান্নাকাটি করলে চোখের জল কোথায় যায়? জেনে নাও মজার এই বিজ্ঞান! 🌌",
-        mediaUrl: "https://www.youtube.com/embed/jfKfPfyJRdk?autoplay=1&mute=1&controls=0&loop=1"
+        tag: "✨ স্পেশাল শর্টস ২",
+        title: "বিশ্বকে ভালোবাসার বার্তা ছড়ানোর দারুণ একটি সুন্দর মুহূর্ত! 🌸",
+        mediaUrl: "https://www.youtube.com/embed/vYZcp-o4VSo?autoplay=1&mute=1&loop=1&playlist=vYZcp-o4VSo"
     },
     {
         type: "image",
@@ -20,15 +26,21 @@ const mixedShortsData = [
     },
     {
         type: "video",
-        tag: "💡 ব্রেন বুস্টার",
-        title: "মস্তিষ্ককে শার্প রাখার জাদুকরী কিছু সহজ টেকনিক যা তোমার পড়শোনাতেও সাহায্য করবে! 🧠",
-        mediaUrl: "https://www.youtube.com/embed/5qap5aO4i9A?autoplay=1&mute=1&controls=0&loop=1"
+        tag: "✨ স্পেশাল শর্টস ৩",
+        title: "প্রকৃতির মাঝে সুন্দর এক রূপকথার ছোঁয়া! 🍂",
+        mediaUrl: "https://www.youtube.com/embed/tjBJV_soGEA?autoplay=1&mute=1&loop=1&playlist=tjBJV_soGEA"
     },
     {
         type: "image",
         tag: "🚊 নস্টালজিয়া",
         title: "কলকাতার ইলেকট্রিক ট্রাম এশিয়ার মধ্যে প্রাচীনতম চালু থাকা ট্রাম নেটওয়ার্ক। আজও এর জুড়ি মেলা ভার! ✨",
         mediaUrl: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?q=80&w=600&auto=format&fit=crop"
+    },
+    {
+        type: "video",
+        tag: "✨ স্পেশাল শর্টস ৪",
+        title: "ফুলের রানী ও বहारের চমৎকার ব্যাকগ্রাউন্ড মিউজিক শর্টস! 🌷",
+        mediaUrl: "https://www.youtube.com/embed/-W-Cky9skw4?autoplay=1&mute=1&loop=1&playlist=-W-Cky9skw4"
     }
 ];
 
@@ -42,7 +54,7 @@ function renderShort() {
 
     let mediaContent = "";
     if (item.type === "video") {
-        mediaContent = `<iframe src="${item.mediaUrl}" allow="autoplay"></iframe>`;
+        mediaContent = `<iframe src="${item.mediaUrl}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
     } else {
         mediaContent = `<div class="short-card" style="background-image: url('${item.mediaUrl}'); position: absolute; width: 100%; height: 100%;"></div>`;
     }
@@ -72,7 +84,7 @@ function likeShort() {
     document.getElementById("score").innerText = score;
 }
 
-// মোবাইল বা টাচ স্ক্রিনে আঙুল দিয়ে ওপরের দিকে টানলে (Swipe Up) পরের শর্ট আসবে
+// মোবাইল স্ক্রিনে আঙুল দিয়ে ওপরের দিকে টানলে (Swipe Up) পরের শর্ট আসবে
 let touchStartY = 0;
 let touchEndY = 0;
 
@@ -86,14 +98,11 @@ document.addEventListener('touchend', e => {
 });
 
 function handleSwipe() {
-    // যদি আঙুল ওপরের দিকে টানা হয় (Swipe Up)
     if (touchStartY - touchEndY > 50) {
-        nextShort();
-    }
-    // যদি আঙুল নিচের দিকে টানা হয় (Swipe Down) আগেরটায় যাওয়ার জন্য চাইলে রাখতে পারেন
-    else if (touchEndY - touchStartY > 50) {
+        nextShort(); // ওপরের দিকে সোয়াইপ করলে পরের ভিডিও বা ছবি আসবে
+    } else if (touchEndY - touchStartY > 50) {
         currentIndex = (currentIndex - 1 + mixedShortsData.length) % mixedShortsData.length;
-        renderShort();
+        renderShort(); // নিচের দিকে সোয়াইপ করলে আগেরটায় যাবে
     }
 }
 
