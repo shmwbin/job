@@ -76,8 +76,10 @@ body, html {
     height: 100%;
     border: none;
     z-index: 1;
-    pointer-events: none;
+    pointer-events: none; /* ভিডিও যাতে কোনো টাচ ইভেন্ট না ধরে */
 }
+
+/* এই লেয়ারটি ইউটিউবের ওপর দেওয়ালের মতো কাজ করবে, ফলে কোনো কন্ট্রোল বাটন আর ভেসে উঠবে না */
 .swipe-shield-layer {
     position: absolute;
     top: 0;
@@ -89,7 +91,6 @@ body, html {
     touch-action: pan-y;
 }
 
-/* টেক্সট যাতে কেটে না যায় এবং ওপরের দিকে সুন্দরভাবে থাকে */
 .short-content-overlay {
     position: absolute;
     bottom: 20px;
