@@ -1,9 +1,8 @@
-let mixedShortsData = []; // গুগল শিট থেকে ডেটা আসার জন্য খালি অ্যারে
+let mixedShortsData = [];
 let currentIndex = 0;
 let score = 0;
 let likes = 120;
 
-// আপনার গুগল শিট থেকে ডেটা ফেচ (Fetch) করার ফাংশন
 async function fetchShortsFromGoogleSheet() {
     const sheetApiUrl = "https://script.google.com/macros/s/AKfycbyy3eZ0KB4_HOJbTlTj4cMxMc5EdaO-J3jx6ZGTjfK4tmgYAZ8j7qoJQmz2nLh_K7Zi/exec";
     
@@ -12,13 +11,19 @@ async function fetchShortsFromGoogleSheet() {
         const data = await response.json();
         
         if (data && data.length > 0) {
-            mixedShortsData = data;
-            renderShort(); // ডেটা আসার পর প্রথম শর্ট লোড হবে
+            // Data mapping to ensure keys match properly
+            mixedShortsData = data.map(item => ({
+                type: item.type || item.Type || "video",
+                tag: item.tag || item.Tag || "✨ Educational",
+                title: item.title || item.Title || "N/A",
+                mediaUrl: item.mediaUrl || item.media_url || item.MediaUrl || ""
+            }));
+            renderShort();
         } else {
-            console.log("গুগল শিটে কোনো ডেটা পাওয়া যায়নি!");
+            console.log("Google Sheet-e kono data paoya jayni!");
         }
     } catch (error) {
-        console.error("ডেটা লোড করতে সমস্যা হয়েছে:", error);
+        console.error("Data load korte somastha hoyeche:", error);
     }
 }
 
@@ -26,14 +31,14 @@ function renderShort() {
     const feed = document.getElementById("shorts-feed");
     
     if (mixedShortsData.length === 0) {
-        feed.innerHTML = `<div class="short-card" style="display:flex; justify-content:center; align-items:center;"><h2>লোড হচ্ছে... 🚀</h2></div>`;
+        feed.innerHTML = `<div class="short-card" style="display:flex; justify-content:center; align-items:center;"><h2>Load hocche... 🚀</h2></div>`;
         return;
     }
 
     const item = mixedShortsData[currentIndex];
 
     let mediaContent = "";
-    if (item.type === "video") {
+    if (item.type.toLowerCase() === "video") {
         mediaContent = `<iframe src="${item.mediaUrl}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>`;
     } else {
         mediaContent = `<div class="short-card" style="background-image: url('${item.mediaUrl}'); position: absolute; width: 100%; height: 100%;"></div>`;
@@ -71,7 +76,6 @@ function likeShort() {
     document.getElementById("score").innerText = score;
 }
 
-// বাম ও ডান সোয়াইপ হ্যান্ডেল করার জন্য টাচ লজিক
 let touchStartX = 0;
 let touchEndX = 0;
 
@@ -89,13 +93,12 @@ swipeShield.addEventListener('touchend', e => {
 function handleSwipeGesture() {
     let diff = touchStartX - touchEndX;
     if (diff > 50) {
-        nextShort(); // বামে সোয়াইপ -> পরেরটা
+        nextShort();
     } else if (diff < -50) {
-        prevShort(); // ডানে সোয়াইপ -> আগেরটা
+        prevShort();
     }
 }
 
-// PWA ইনস্টল ব্যানার লজিক
 let deferredPrompt;
 const installBanner = document.getElementById("install-banner");
 const installBtn = document.getElementById("install-btn");
@@ -125,5 +128,4 @@ closeBannerBtn.addEventListener('click', () => {
     installBanner.classList.add("hidden");
 });
 
-// অ্যাপ চালু হওয়ার সাথে সাথে গুগল শিট থেকে ডেটা ফেচ করা শুরু করবে
 fetchShortsFromGoogleSheet();
