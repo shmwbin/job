@@ -121,7 +121,6 @@ const closeBannerBtn = document.getElementById("close-banner");
 window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
-    // ওয়েবসাইট খোলার কয়েক সেকেন্ড পর ব্যানারটি ভেসে উঠবে
     setTimeout(() => {
         installBanner.classList.remove("hidden");
     }, 2000);
