@@ -1,45 +1,44 @@
-// আপনার দেওয়া ইউটিউব শর্টস লিংক এবং ছবির অল্টারনেট তালিকা
 const mixedShortsData = [
     {
         type: "video",
-        tag: "✨ স্পেশাল শর্টস ১",
-        title: "মনোরম রোমান্টিক ও সুন্দর মুহূর্তের শর্টস ভিডিও উপভোগ করো! 💖",
+        tag: "✨ Spesal Shorts ১",
+        title: "Monorom romantic o sundor muhurter shorts video upobhog koro! 💖",
         mediaUrl: "https://www.youtube.com/embed/QvxqoXJxVxM?autoplay=1&mute=1&loop=1&playlist=QvxqoXJxVxM"
     },
     {
         type: "image",
-        tag: "🇮🇳 পশ্চিমবঙ্গ ইতিহাস",
-        title: "হাওড়া ব্রিজ তৈরি করতে কোনো নাট-বল্টু লাগেনি! এটি পুরোপুরি রিভেট দিয়ে আটকানো ইঞ্জিনিয়ারিং মার্ভেল। 🌉",
+        tag: "🇮🇳 Poschimbonggo Itihas",
+        title: "Haora bridge toiri korte kono nat-boltu lageni! Eta puropuri rivet diye atkano engineering marvel. 🌉",
         mediaUrl: "https://images.unsplash.com/photo-1558431382-27e303142255?q=80&w=600&auto=format&fit=crop"
     },
     {
         type: "video",
-        tag: "✨ স্পেশাল শর্টস ২",
-        title: "বিশ্বকে ভালোবাসার বার্তা ছড়ানোর দারুণ একটি সুন্দর মুহূর্ত! 🌸",
+        tag: "✨ Spesal Shorts ২",
+        title: "Biswo ke bhalobasar barta choranor darun ekti sundor muhurto! 🌸",
         mediaUrl: "https://www.youtube.com/embed/vYZcp-o4VSo?autoplay=1&mute=1&loop=1&playlist=vYZcp-o4VSo"
     },
     {
         type: "image",
-        tag: "🐅 সুন্দরবন রহস্য",
-        title: "রয়্যাল বেঙ্গল টাইগার একমাত্র বাঘ যারা নোনা জলে সাঁতার কাটতে পারে এবং কুমির শিকার করতে পটু! 🌊",
+        tag: "🐅 Sundarban Rohoshyo",
+        title: "Royalty Bengal Tiger ekmatro bag jara nona jole satar kat te pare o kumir shikar korte potu! 🌊",
         mediaUrl: "https://images.unsplash.com/photo-1534188753412-3e26d0d618d6?q=80&w=600&auto=format&fit=crop"
     },
     {
         type: "video",
-        tag: "✨ স্পেশাল শর্টস ৩",
-        title: "প্রকৃতির মাঝে সুন্দর এক রূপকথার ছোঁয়া! 🍂",
+        tag: "✨ Spesal Shorts ৩",
+        title: "Prokritir majhe sundor ek rupkothar chhoa! 🍂",
         mediaUrl: "https://www.youtube.com/embed/tjBJV_soGEA?autoplay=1&mute=1&loop=1&playlist=tjBJV_soGEA"
     },
     {
         type: "image",
-        tag: "🚊 নস্টালজিয়া",
-        title: "কলকাতার ইলেকট্রিক ট্রাম এশিয়ার মধ্যে প্রাচীনতম চালু থাকা ট্রাম নেটওয়ার্ক। আজও এর জুড়ি মেলা ভার! ✨",
+        tag: "🚊 Nostalgia",
+        title: "Kolkatar electric tram eashiyar modhye prachintamo chalu thaka tram network. Aajoer juri mela bhar! ✨",
         mediaUrl: "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?q=80&w=600&auto=format&fit=crop"
     },
     {
         type: "video",
-        tag: "✨ স্পেশাল শর্টস ৪",
-        title: "ফুলের রানী ও বहारের চমৎকার ব্যাকগ্রাউন্ড মিউজিক শর্টস! 🌷",
+        tag: "✨ Spesal Shorts ৪",
+        title: "Fuler rani o baharer chomotkar background music shorts! 🌷",
         mediaUrl: "https://www.youtube.com/embed/-W-Cky9skw4?autoplay=1&mute=1&loop=1&playlist=-W-Cky9skw4"
     }
 ];
@@ -84,27 +83,29 @@ function likeShort() {
     document.getElementById("score").innerText = score;
 }
 
-// মোবাইল স্ক্রিনে আঙুল দিয়ে ওপরের দিকে টানলে (Swipe Up) পরের শর্ট আসবে
+// Touch layer er upor swipe gesture handle korar jonno
 let touchStartY = 0;
 let touchEndY = 0;
 
-document.addEventListener('touchstart', e => {
+const touchLayer = document.getElementById("touch-layer");
+
+touchLayer.addEventListener('touchstart', e => {
     touchStartY = e.changedTouches[0].screenY;
 });
 
-document.addEventListener('touchend', e => {
+touchLayer.addEventListener('touchend', e => {
     touchEndY = e.changedTouches[0].screenY;
     handleSwipe();
 });
 
 function handleSwipe() {
     if (touchStartY - touchEndY > 50) {
-        nextShort(); // ওপরের দিকে সোয়াইপ করলে পরের ভিডিও বা ছবি আসবে
+        nextShort(); // Uporer dike swipe korle porer short asbe
     } else if (touchEndY - touchStartY > 50) {
         currentIndex = (currentIndex - 1 + mixedShortsData.length) % mixedShortsData.length;
-        renderShort(); // নিচের দিকে সোয়াইপ করলে আগেরটায় যাবে
+        renderShort(); // Nicher dike swipe korle ager tai jabe
     }
 }
 
-// প্রথম লোড
+// Initial load
 renderShort();
