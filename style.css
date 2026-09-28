@@ -76,9 +76,8 @@ body, html {
     height: 100%;
     border: none;
     z-index: 1;
-    pointer-events: none; /* ভিডিওর নিজস্ব টাচ ব্লক করার জন্য */
+    pointer-events: none;
 }
-/* সোয়াইপ শিল্ড লেয়ার যা ভিডিও বা ছবির ওপর থাকবে এবং বাম-ডান সোয়াইপ ধরবে */
 .swipe-shield-layer {
     position: absolute;
     top: 0;
@@ -89,14 +88,15 @@ body, html {
     background: transparent;
     touch-action: pan-y;
 }
+/* টেক্সট যাতে কেটে না যায় এবং সুন্দরভাবে ভেসে থাকে তার জন্য ফিক্সড প্যাডিং ও গ্রেডিয়েন্ট */
 .short-content-overlay {
     position: absolute;
-    bottom: 0;
+    bottom: 70px;
     left: 0;
-    right: 0;
+    right: 70px;
     z-index: 20;
-    background: linear-gradient(to top, rgba(0,0,0,0.95) 50%, rgba(0,0,0,0.5) 80%, transparent 100%);
-    padding: 50px 20px 40px 20px;
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 60%, transparent 100%);
+    padding: 25px 20px 15px 20px;
     pointer-events: none;
 }
 .short-tag {
@@ -104,17 +104,19 @@ body, html {
     color: white;
     padding: 4px 10px;
     border-radius: 6px;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     font-weight: bold;
     display: inline-block;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 .short-title {
-    font-size: 1.15rem;
+    font-size: 1rem;
     font-weight: bold;
     line-height: 1.4;
     margin: 0;
     color: #fff;
+    max-height: 4.2em;
+    overflow: hidden;
 }
 .action-sidebar {
     position: absolute;
