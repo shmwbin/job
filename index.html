@@ -1,205 +1,562 @@
+```html
 <!DOCTYPE html>
 <html lang="bn">
 
 <head>
-
 <meta charset="UTF-8">
 
 <meta name="viewport"
       content="width=device-width, initial-scale=1.0">
 
+<meta name="theme-color"
+      content="#07111f">
+
 <meta name="description"
-      content="পশ্চিমবঙ্গের সর্বশেষ সরকারি চাকরির খবর। চাকরির পদ, শূন্যপদ, যোগ্যতা ও আবেদনের শেষ তারিখ বাংলায় দেখুন।">
+      content="পশ্চিমবঙ্গের সর্বশেষ সরকারি চাকরির বিজ্ঞপ্তি। পদ, শূন্যপদ, যোগ্যতা ও আবেদনের শেষ তারিখ বাংলায় দেখুন।">
 
 <title>
 পশ্চিমবঙ্গ সরকারি চাকরি | SHM Digital
 </title>
 
+<!-- Google Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap"
+      rel="stylesheet">
+
 <style>
 
+/* =====================================================
+   RESET
+===================================================== */
+
 * {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
+
+/* =====================================================
+   BODY
+===================================================== */
+
 body {
 
-    margin: 0;
-
     font-family:
+        "Hind Siliguri",
         "Noto Sans Bengali",
         "Nirmala UI",
         Arial,
         sans-serif;
 
     background:
-        #f5f7fb;
+        #f3f6fa;
 
     color:
         #172033;
 
+    line-height:
+        1.6;
 }
 
 
-/* =====================================
-   Header
-===================================== */
+/* =====================================================
+   HEADER
+===================================================== */
 
 .header {
 
     background:
         linear-gradient(
             135deg,
-            #07111f,
-            #102a43
+            #07111f 0%,
+            #0b1830 55%,
+            #123c59 100%
         );
 
-    color: white;
+    color:
+        #ffffff;
 
-    padding: 45px 20px;
+    padding:
+        42px 18px 48px;
 
-    text-align: center;
+    text-align:
+        center;
 
+    position:
+        relative;
+
+    overflow:
+        hidden;
+}
+
+.header::before {
+
+    content: "";
+
+    position:
+        absolute;
+
+    width:
+        300px;
+
+    height:
+        300px;
+
+    border-radius:
+        50%;
+
+    background:
+        rgba(85,214,255,.10);
+
+    top:
+        -160px;
+
+    right:
+        -80px;
+}
+
+.header::after {
+
+    content: "";
+
+    position:
+        absolute;
+
+    width:
+        250px;
+
+    height:
+        250px;
+
+    border-radius:
+        50%;
+
+    background:
+        rgba(139,92,246,.10);
+
+    bottom:
+        -160px;
+
+    left:
+        -80px;
+}
+
+.header-content {
+
+    max-width:
+        1100px;
+
+    margin:
+        auto;
+
+    position:
+        relative;
+
+    z-index:
+        2;
+}
+
+.logo {
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    width:
+        58px;
+
+    height:
+        58px;
+
+    border-radius:
+        16px;
+
+    background:
+        rgba(255,255,255,.10);
+
+    border:
+        1px solid rgba(255,255,255,.15);
+
+    font-size:
+        28px;
+
+    margin-bottom:
+        14px;
 }
 
 .header h1 {
 
-    margin: 0 0 10px;
+    font-size:
+        clamp(26px, 5vw, 42px);
 
-    font-size: 32px;
+    font-weight:
+        700;
 
+    line-height:
+        1.25;
+
+    margin-bottom:
+        8px;
 }
 
 .header p {
 
-    margin: 0;
+    font-size:
+        16px;
 
-    opacity: .85;
-
-    font-size: 16px;
-
+    color:
+        rgba(255,255,255,.78);
 }
 
 
-/* =====================================
-   Main
-===================================== */
+/* =====================================================
+   CONTAINER
+===================================================== */
 
 .container {
 
-    max-width: 1150px;
+    width:
+        min(1100px, 100%);
 
-    margin: auto;
+    margin:
+        -22px auto 0;
 
-    padding: 25px 15px 60px;
+    padding:
+        0 15px 50px;
 
+    position:
+        relative;
+
+    z-index:
+        5;
 }
 
 
-/* =====================================
-   Toolbar
-===================================== */
+/* =====================================================
+   CONTROL PANEL
+===================================================== */
 
-.toolbar {
+.control-panel {
 
-    background: white;
+    background:
+        #ffffff;
 
-    border-radius: 16px;
+    border-radius:
+        18px;
 
-    padding: 18px;
-
-    margin-bottom: 22px;
+    padding:
+        18px;
 
     box-shadow:
-        0 5px 20px
-        rgba(0,0,0,.06);
+        0 8px 30px rgba(7,17,31,.08);
 
+    border:
+        1px solid #e9edf3;
+
+    margin-bottom:
+        22px;
 }
 
-.search {
+.search-row {
 
-    width: 100%;
+    display:
+        flex;
 
-    padding: 13px 16px;
-
-    border: 1px solid #d8dee8;
-
-    border-radius: 10px;
-
-    outline: none;
-
-    font-size: 15px;
-
+    gap:
+        10px;
 }
 
-.search:focus {
+.search-box {
+
+    flex:
+        1;
+
+    position:
+        relative;
+}
+
+.search-box span {
+
+    position:
+        absolute;
+
+    left:
+        15px;
+
+    top:
+        50%;
+
+    transform:
+        translateY(-50%);
+
+    color:
+        #718096;
+
+    font-size:
+        18px;
+}
+
+#searchBox {
+
+    width:
+        100%;
+
+    height:
+        48px;
+
+    border:
+        1px solid #dbe2ea;
+
+    border-radius:
+        11px;
+
+    padding:
+        0 15px 0 44px;
+
+    outline:
+        none;
+
+    font-family:
+        inherit;
+
+    font-size:
+        15px;
+
+    background:
+        #f9fafc;
+
+    transition:
+        .2s;
+}
+
+#searchBox:focus {
 
     border-color:
-        #377dff;
+        #55d6ff;
 
+    background:
+        #ffffff;
+
+    box-shadow:
+        0 0 0 3px rgba(85,214,255,.10);
+}
+
+.refresh-btn {
+
+    height:
+        48px;
+
+    border:
+        none;
+
+    border-radius:
+        11px;
+
+    padding:
+        0 18px;
+
+    background:
+        #07111f;
+
+    color:
+        white;
+
+    font-family:
+        inherit;
+
+    font-size:
+        15px;
+
+    font-weight:
+        600;
+
+    cursor:
+        pointer;
+
+    transition:
+        .2s;
+}
+
+.refresh-btn:hover {
+
+    transform:
+        translateY(-1px);
+
+    background:
+        #102a43;
+}
+
+.refresh-btn.loading {
+
+    opacity:
+        .65;
+
+    pointer-events:
+        none;
 }
 
 
-/* =====================================
-   Status
-===================================== */
+/* =====================================================
+   STATUS
+===================================================== */
 
-.status {
+.status-row {
 
-    display: flex;
+    display:
+        flex;
 
     justify-content:
         space-between;
 
-    align-items: center;
+    align-items:
+        center;
 
-    flex-wrap: wrap;
+    gap:
+        10px;
 
-    gap: 10px;
+    flex-wrap:
+        wrap;
 
-    margin-bottom: 18px;
+    margin-top:
+        14px;
 
+    font-size:
+        14px;
 }
 
-.count {
+.job-count {
 
-    font-weight: 600;
+    color:
+        #172033;
 
+    font-weight:
+        600;
 }
 
 .updated {
 
-    color: #6b7280;
-
-    font-size: 13px;
-
+    color:
+        #718096;
 }
 
 
-/* =====================================
-   Job Card
-===================================== */
+/* =====================================================
+   SECTION TITLE
+===================================================== */
+
+.section-heading {
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        center;
+
+    gap:
+        15px;
+
+    margin:
+        24px 0 15px;
+}
+
+.section-heading h2 {
+
+    font-size:
+        24px;
+
+    font-weight:
+        700;
+
+    color:
+        #102a43;
+}
+
+.live-badge {
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    gap:
+        6px;
+
+    padding:
+        5px 10px;
+
+    border-radius:
+        20px;
+
+    background:
+        #ecfdf5;
+
+    color:
+        #047857;
+
+    font-size:
+        12px;
+
+    font-weight:
+        600;
+}
+
+.live-dot {
+
+    width:
+        7px;
+
+    height:
+        7px;
+
+    border-radius:
+        50%;
+
+    background:
+        #10b981;
+}
+
+
+/* =====================================================
+   JOB CARD
+===================================================== */
 
 .job-card {
 
-    background: white;
-
-    border-radius: 16px;
-
-    margin-bottom: 16px;
-
-    padding: 20px;
-
-    box-shadow:
-        0 5px 20px
-        rgba(0,0,0,.06);
+    background:
+        #ffffff;
 
     border:
-        1px solid #edf0f5;
+        1px solid #e7ebf0;
+
+    border-radius:
+        17px;
+
+    padding:
+        20px;
+
+    margin-bottom:
+        15px;
+
+    box-shadow:
+        0 5px 20px rgba(7,17,31,.055);
 
     transition:
-        transform .2s,
-        box-shadow .2s;
-
+        .2s;
 }
 
 .job-card:hover {
@@ -208,150 +565,177 @@ body {
         translateY(-2px);
 
     box-shadow:
-        0 10px 28px
-        rgba(0,0,0,.10);
-
+        0 10px 28px rgba(7,17,31,.09);
 }
 
 
-/* =====================================
-   Job Top
-===================================== */
+/* =====================================================
+   JOB TOP
+===================================================== */
 
 .job-top {
 
-    display: flex;
-
-    justify-content:
-        space-between;
-
-    gap: 15px;
+    display:
+        flex;
 
     align-items:
         flex-start;
 
+    justify-content:
+        space-between;
+
+    gap:
+        15px;
 }
 
 .job-title {
 
-    margin: 0;
-
-    font-size: 21px;
-
-    line-height: 1.5;
-
     color:
         #102a43;
 
+    font-size:
+        20px;
+
+    font-weight:
+        700;
+
+    line-height:
+        1.45;
 }
 
 .new-badge {
 
+    flex-shrink:
+        0;
+
     background:
         #e11d48;
 
-    color: white;
+    color:
+        #ffffff;
 
-    font-size: 11px;
+    padding:
+        4px 9px;
 
-    padding: 5px 9px;
+    border-radius:
+        20px;
 
-    border-radius: 20px;
+    font-size:
+        11px;
 
-    white-space:
-        nowrap;
-
+    font-weight:
+        600;
 }
 
 
-/* =====================================
-   Job Date
-===================================== */
+/* =====================================================
+   DATE
+===================================================== */
 
 .post-date {
 
     color:
-        #6b7280;
+        #718096;
 
-    font-size: 13px;
+    font-size:
+        13px;
 
     margin:
-        6px 0 16px;
-
+        5px 0 16px;
 }
 
 
-/* =====================================
-   Information
-===================================== */
+/* =====================================================
+   INFORMATION GRID
+===================================================== */
 
 .job-info {
 
-    display: grid;
+    display:
+        grid;
 
     grid-template-columns:
         repeat(2, 1fr);
 
-    gap: 12px;
-
+    gap:
+        10px;
 }
 
-.info {
+.info-box {
 
     background:
         #f8fafc;
 
-    padding: 12px;
+    border:
+        1px solid #eef1f5;
 
-    border-radius: 10px;
+    border-radius:
+        11px;
 
-    font-size: 14px;
-
+    padding:
+        12px;
 }
 
 .info-label {
 
-    display: block;
-
-    font-size: 12px;
+    display:
+        block;
 
     color:
-        #6b7280;
+        #718096;
 
-    margin-bottom: 4px;
+    font-size:
+        12px;
 
+    margin-bottom:
+        3px;
 }
 
 .info-value {
 
+    display:
+        block;
+
+    color:
+        #26364a;
+
+    font-size:
+        14px;
+
     font-weight:
         600;
 
+    word-break:
+        break-word;
 }
 
 
-/* =====================================
-   Footer
-===================================== */
+/* =====================================================
+   JOB FOOTER
+===================================================== */
 
 .job-footer {
 
-    display: flex;
+    display:
+        flex;
 
     justify-content:
         space-between;
 
-    align-items: center;
+    align-items:
+        center;
 
-    gap: 10px;
+    gap:
+        12px;
 
-    margin-top: 18px;
+    margin-top:
+        17px;
 
-    padding-top: 15px;
+    padding-top:
+        15px;
 
     border-top:
-        1px solid #edf0f5;
-
+        1px solid #edf0f4;
 }
 
 .last-date {
@@ -359,25 +743,39 @@ body {
     color:
         #c62828;
 
+    font-size:
+        14px;
+
     font-weight:
         600;
-
-    font-size: 14px;
-
 }
 
-.view-button {
+.details-btn {
 
-    background:
-        #2563eb;
+    display:
+        inline-flex;
 
-    color: white;
+    align-items:
+        center;
+
+    justify-content:
+        center;
 
     text-decoration:
         none;
 
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #1d4ed8
+        );
+
+    color:
+        #ffffff;
+
     padding:
-        10px 16px;
+        9px 15px;
 
     border-radius:
         9px;
@@ -388,34 +786,196 @@ body {
     font-weight:
         600;
 
+    white-space:
+        nowrap;
+
+    transition:
+        .2s;
 }
 
-.view-button:hover {
+.details-btn:hover {
+
+    transform:
+        translateY(-1px);
+
+    opacity:
+        .92;
+}
+
+
+/* =====================================================
+   LOADING
+===================================================== */
+
+.loading-box {
 
     background:
-        #1d4ed8;
+        #ffffff;
 
-}
+    border:
+        1px solid #e7ebf0;
 
+    border-radius:
+        16px;
 
-/* =====================================
-   Source
-===================================== */
+    padding:
+        45px 20px;
 
-.source {
-
-    text-align: center;
+    text-align:
+        center;
 
     color:
-        #6b7280;
+        #718096;
+}
 
-    font-size: 13px;
+.spinner {
 
-    margin-top: 30px;
+    width:
+        34px;
+
+    height:
+        34px;
+
+    border:
+        3px solid #e5e7eb;
+
+    border-top-color:
+        #2563eb;
+
+    border-radius:
+        50%;
+
+    margin:
+        0 auto 14px;
+
+    animation:
+        spin .8s linear infinite;
+}
+
+@keyframes spin {
+
+    to {
+        transform:
+            rotate(360deg);
+    }
 
 }
 
-.source a {
+
+/* =====================================================
+   ERROR
+===================================================== */
+
+.error-box {
+
+    background:
+        #fff1f2;
+
+    border:
+        1px solid #fecdd3;
+
+    color:
+        #9f1239;
+
+    border-radius:
+        14px;
+
+    padding:
+        25px;
+
+    text-align:
+        center;
+
+    line-height:
+        1.8;
+}
+
+.retry-btn {
+
+    margin-top:
+        12px;
+
+    border:
+        none;
+
+    background:
+        #be123c;
+
+    color:
+        white;
+
+    padding:
+        9px 15px;
+
+    border-radius:
+        8px;
+
+    cursor:
+        pointer;
+
+    font-family:
+        inherit;
+
+    font-weight:
+        600;
+}
+
+
+/* =====================================================
+   EMPTY
+===================================================== */
+
+.empty-box {
+
+    background:
+        #ffffff;
+
+    border-radius:
+        15px;
+
+    padding:
+        40px 20px;
+
+    text-align:
+        center;
+
+    color:
+        #718096;
+}
+
+
+/* =====================================================
+   SOURCE
+===================================================== */
+
+.source-box {
+
+    margin-top:
+        28px;
+
+    padding:
+        18px;
+
+    background:
+        #ffffff;
+
+    border:
+        1px solid #e7ebf0;
+
+    border-radius:
+        14px;
+
+    text-align:
+        center;
+
+    color:
+        #718096;
+
+    font-size:
+        13px;
+}
+
+.source-box a {
 
     color:
         #2563eb;
@@ -423,90 +983,95 @@ body {
     text-decoration:
         none;
 
+    font-weight:
+        600;
 }
 
+.warning {
 
-/* =====================================
-   Loading
-===================================== */
+    margin-top:
+        8px;
 
-.loading {
-
-    text-align:
-        center;
-
-    padding:
-        50px 20px;
-
-    color:
-        #6b7280;
-
-}
-
-
-/* =====================================
-   Error
-===================================== */
-
-.error {
-
-    background:
-        #fff1f2;
-
-    color:
-        #be123c;
-
-    padding:
-        20px;
-
-    border-radius:
+    font-size:
         12px;
 
-    text-align:
-        center;
-
+    color:
+        #8a6d3b;
 }
 
 
-/* =====================================
-   Mobile
-===================================== */
+/* =====================================================
+   FOOTER
+===================================================== */
 
-@media(max-width:700px) {
+.footer {
+
+    text-align:
+        center;
+
+    padding:
+        25px 15px 35px;
+
+    color:
+        #718096;
+
+    font-size:
+        13px;
+}
+
+.footer strong {
+
+    color:
+        #102a43;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 700px) {
 
     .header {
 
         padding:
-            32px 15px;
-
+            32px 15px 40px;
     }
 
-    .header h1 {
+    .container {
 
-        font-size:
-            25px;
-
+        margin-top:
+            -18px;
     }
 
-    .job-top {
+    .search-row {
 
         flex-direction:
             column;
-
     }
 
-    .job-title {
+    .refresh-btn {
 
-        font-size:
-            18px;
-
+        width:
+            100%;
     }
 
     .job-info {
 
         grid-template-columns:
             1fr;
+    }
 
+    .job-top {
+
+        flex-direction:
+            column;
+    }
+
+    .job-title {
+
+        font-size:
+            18px;
     }
 
     .job-footer {
@@ -516,14 +1081,54 @@ body {
 
         align-items:
             stretch;
-
     }
 
-    .view-button {
+    .details-btn {
+
+        width:
+            100%;
+    }
+
+    .last-date {
 
         text-align:
             center;
+    }
 
+    .section-heading {
+
+        align-items:
+            flex-start;
+
+        flex-direction:
+            column;
+    }
+
+}
+
+
+/* =====================================================
+   VERY SMALL SCREEN
+===================================================== */
+
+@media (max-width: 420px) {
+
+    .header h1 {
+
+        font-size:
+            25px;
+    }
+
+    .control-panel {
+
+        padding:
+            14px;
+    }
+
+    .job-card {
+
+        padding:
+            15px;
     }
 
 }
@@ -536,92 +1141,151 @@ body {
 <body>
 
 
-<!-- =====================================
-     Header
-===================================== -->
+<!-- ===================================================
+     HEADER
+=================================================== -->
 
 <header class="header">
 
-    <h1>
-        পশ্চিমবঙ্গের সর্বশেষ সরকারি চাকরি
-    </h1>
+    <div class="header-content">
 
-    <p>
-        Latest West Bengal Government Job Updates
-    </p>
+        <div class="logo">
+            💼
+        </div>
+
+        <h1>
+            পশ্চিমবঙ্গের সর্বশেষ সরকারি চাকরি
+        </h1>
+
+        <p>
+            Latest West Bengal Government Job Updates
+        </p>
+
+    </div>
 
 </header>
 
 
+<!-- ===================================================
+     MAIN
+=================================================== -->
+
 <main class="container">
 
 
-    <!-- Search -->
+    <!-- CONTROL PANEL -->
 
-    <div class="toolbar">
+    <div class="control-panel">
 
-        <input
-            type="search"
-            id="searchBox"
-            class="search"
-            placeholder="চাকরি, পদ, যোগ্যতা বা প্রতিষ্ঠান খুঁজুন..."
-        >
+        <div class="search-row">
+
+            <div class="search-box">
+
+                <span>
+                    🔍
+                </span>
+
+                <input
+                    type="search"
+                    id="searchBox"
+                    placeholder="চাকরি, পদ, যোগ্যতা বা প্রতিষ্ঠান খুঁজুন..."
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+            <button
+                class="refresh-btn"
+                id="refreshBtn"
+                onclick="loadJobs()"
+            >
+                ↻ আপডেট
+            </button>
+
+        </div>
+
+
+        <div class="status-row">
+
+            <div
+                class="job-count"
+                id="jobCount"
+            >
+                চাকরির তথ্য লোড হচ্ছে...
+            </div>
+
+            <div
+                class="updated"
+                id="updated"
+            >
+            </div>
+
+        </div>
 
     </div>
 
 
-    <!-- Status -->
+    <!-- SECTION HEADING -->
 
-    <div class="status">
+    <div class="section-heading">
 
-        <div
-            id="jobCount"
-            class="count"
-        >
-            চাকরি লোড হচ্ছে...
-        </div>
+        <h2>
+            সর্বশেষ চাকরির বিজ্ঞপ্তি
+        </h2>
 
-        <div
-            id="updated"
-            class="updated"
-        >
+        <div class="live-badge">
+
+            <span class="live-dot"></span>
+
+            LIVE DATA
+
         </div>
 
     </div>
 
 
-    <!-- Jobs -->
+    <!-- JOB LIST -->
 
     <div id="jobs">
 
-        <div class="loading">
+        <div class="loading-box">
 
-            চাকরির সর্বশেষ তথ্য সংগ্রহ করা হচ্ছে...
+            <div class="spinner"></div>
+
+            <div>
+                সর্বশেষ চাকরির তথ্য সংগ্রহ করা হচ্ছে...
+            </div>
 
         </div>
 
     </div>
 
 
-    <!-- Source -->
+    <!-- SOURCE -->
 
-    <div class="source">
+    <div class="source-box">
 
-        তথ্যসূত্র:
-        <a
-            href="https://www.freejobalert.com/wb-government-jobs/"
-            target="_blank"
-            rel="noopener noreferrer"
-        >
-            FreeJobAlert.com
-        </a>
+        <div>
 
-        <br>
+            তথ্যসূত্র:
 
-        <span>
+            <a
+                href="https://www.freejobalert.com/wb-government-jobs/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                FreeJobAlert
+            </a>
+
+        </div>
+
+        <div class="warning">
+
             আবেদন করার আগে সংশ্লিষ্ট নিয়োগকারী প্রতিষ্ঠানের
-            অফিসিয়াল বিজ্ঞপ্তি যাচাই করুন।
-        </span>
+            অফিসিয়াল বিজ্ঞপ্তি অবশ্যই যাচাই করুন।
+
+        </div>
 
     </div>
 
@@ -629,21 +1293,45 @@ body {
 </main>
 
 
+<!-- ===================================================
+     FOOTER
+=================================================== -->
+
+<footer class="footer">
+
+    <strong>
+        SHM Digital
+    </strong>
+
+    &nbsp;•&nbsp;
+
+    Government Job Information
+
+</footer>
+
+
 <script>
 
+/* =====================================================
+   YOUR GOOGLE APPS SCRIPT API
+===================================================== */
 
-/* =====================================
-   Global Jobs
-===================================== */
+const API_URL =
+"https://script.google.com/macros/s/AKfycbweTExzyf5vvONyMJ-olDDwAZnwdBhJFGvcr83PKPrbdpUraYA75HCIyZpzEdZaRbFtWw/exec";
+
+
+/* =====================================================
+   GLOBAL DATA
+===================================================== */
 
 let allJobs = [];
 
 
-/* =====================================
-   Bengali Translation
-===================================== */
+/* =====================================================
+   BENGALI TRANSLATION DICTIONARY
+===================================================== */
 
-const dictionary = {
+const translations = {
 
     "Project Assistant":
         "প্রকল্প সহকারী",
@@ -651,17 +1339,14 @@ const dictionary = {
     "Project Associate":
         "প্রকল্প সহযোগী",
 
-    "Project Associate - I":
-        "প্রকল্প সহযোগী - I",
-
     "Project Research Scientist":
         "প্রকল্প গবেষণা বিজ্ঞানী",
 
-    "Project Research Scientist-I":
-        "প্রকল্প গবেষণা বিজ্ঞানী-I",
-
     "Project Technical Support":
         "প্রকল্প কারিগরি সহায়তা",
+
+    "Project Fellow":
+        "প্রকল্প ফেলো",
 
     "Junior Research Fellow":
         "জুনিয়র রিসার্চ ফেলো",
@@ -675,9 +1360,6 @@ const dictionary = {
     "Research Scholar":
         "গবেষক",
 
-    "Project Fellow":
-        "প্রকল্প ফেলো",
-
     "Assistant Professor":
         "সহকারী অধ্যাপক",
 
@@ -687,8 +1369,38 @@ const dictionary = {
     "Professor":
         "অধ্যাপক",
 
-    "Private Secretary":
-        "ব্যক্তিগত সচিব",
+    "Technical Assistant":
+        "কারিগরি সহকারী",
+
+    "Technical Assistants":
+        "কারিগরি সহকারী",
+
+    "Senior Technical Assistant":
+        "সিনিয়র কারিগরি সহকারী",
+
+    "Junior Technical Assistant":
+        "জুনিয়র কারিগরি সহকারী",
+
+    "Medical Officer":
+        "মেডিক্যাল অফিসার",
+
+    "Medical Dresser":
+        "মেডিক্যাল ড্রেসার",
+
+    "Staff Nurse":
+        "স্টাফ নার্স",
+
+    "Nurse":
+        "নার্স",
+
+    "Pharmacist":
+        "ফার্মাসিস্ট",
+
+    "Laboratory Technician":
+        "ল্যাবরেটরি টেকনিশিয়ান",
+
+    "Lab Technician":
+        "ল্যাব টেকনিশিয়ান",
 
     "Driver":
         "চালক",
@@ -699,59 +1411,53 @@ const dictionary = {
     "Night Guard":
         "নৈশপ্রহরী",
 
-    "Multipurpose Staff":
-        "বহুমুখী কর্মী",
-
     "Safaiwala":
         "সাফাইকর্মী",
 
-    "Technical Assistant":
-        "কারিগরি সহকারী",
+    "Multi Tasking Staff":
+        "মাল্টি টাস্কিং স্টাফ",
 
-    "Technical Assistants":
-        "কারিগরি সহকারী",
+    "Multipurpose Staff":
+        "বহুমুখী কর্মী",
 
-    "Site Engineer":
-        "সাইট ইঞ্জিনিয়ার",
+    "Office Assistant":
+        "অফিস সহকারী",
+
+    "Data Entry Operator":
+        "ডেটা এন্ট্রি অপারেটর",
+
+    "Clerk":
+        "ক্লার্ক",
+
+    "Lower Division Clerk":
+        "লোয়ার ডিভিশন ক্লার্ক",
+
+    "Upper Division Clerk":
+        "আপার ডিভিশন ক্লার্ক",
+
+    "Accountant":
+        "হিসাবরক্ষক",
 
     "Librarian":
         "গ্রন্থাগারিক",
 
-    "Marketing Lead":
-        "মার্কেটিং লিড",
-
-    "Trade Apprentice":
-        "ট্রেড শিক্ষানবিশ",
-
-    "Medical Dresser":
-        "মেডিক্যাল ড্রেসার",
-
-    "Chief Hydraulic Engineer":
-        "চিফ হাইড্রলিক ইঞ্জিনিয়ার",
+    "Library Assistant":
+        "লাইব্রেরি সহকারী",
 
     "Executive Trainee":
         "এক্সিকিউটিভ ট্রেইনি",
 
-    "Business Development Officer":
-        "বিজনেস ডেভেলপমেন্ট অফিসার",
+    "Trade Apprentice":
+        "ট্রেড শিক্ষানবিশ",
 
-    "Lady Hostel Superintendent":
-        "লেডি হোস্টেল সুপারিনটেনডেন্ট",
+    "Apprentice":
+        "শিক্ষানবিশ",
 
-    "Lady hostel superintendent":
-        "লেডি হোস্টেল সুপারিনটেনডেন্ট",
+    "Graduate Apprentice":
+        "গ্র্যাজুয়েট শিক্ষানবিশ",
 
-    "Archive Assistant":
-        "আর্কাইভ সহকারী",
-
-    "Video Assistant":
-        "ভিডিও সহকারী",
-
-    "Chief Information Security Officer":
-        "চিফ ইনফরমেশন সিকিউরিটি অফিসার",
-
-    "Land Revenue & Rent Recovery Officer":
-        "ভূমি রাজস্ব ও খাজনা পুনরুদ্ধার কর্মকর্তা",
+    "Diploma Apprentice":
+        "ডিপ্লোমা শিক্ষানবিশ",
 
     "Any Graduate":
         "যেকোনো স্নাতক",
@@ -759,16 +1465,22 @@ const dictionary = {
     "Any Post Graduate":
         "যেকোনো স্নাতকোত্তর",
 
-    "Any Masters Degree":
-        "যেকোনো মাস্টার্স ডিগ্রি",
-
     "Any Bachelors Degree":
         "যেকোনো ব্যাচেলর ডিগ্রি",
+
+    "Any Masters Degree":
+        "যেকোনো মাস্টার্স ডিগ্রি",
 
     "10TH":
         "মাধ্যমিক / ১০ম শ্রেণি",
 
     "12TH":
+        "উচ্চমাধ্যমিক / ১২শ শ্রেণি",
+
+    "10th":
+        "মাধ্যমিক / ১০ম শ্রেণি",
+
+    "12th":
         "উচ্চমাধ্যমিক / ১২শ শ্রেণি",
 
     "Diploma":
@@ -777,180 +1489,325 @@ const dictionary = {
     "ITI":
         "আইটিআই",
 
+    "Vacancy":
+        "শূন্যপদ",
+
+    "Vacancies":
+        "শূন্যপদ",
+
     "Posts":
         "টি পদ",
 
     "Post":
-        "পদ"
+        "পদ",
+
+    "Recruitment":
+        "নিয়োগ",
+
+    "Apply Online":
+        "অনলাইনে আবেদন",
+
+    "Online Application":
+        "অনলাইন আবেদন"
 
 };
 
 
-/* =====================================
-   Translate Function
-===================================== */
+/* =====================================================
+   TRANSLATION FUNCTION
+===================================================== */
 
 function translateText(text) {
 
-    if (!text) return "";
+    if (!text) {
+        return "";
+    }
 
-    let result = text;
-
-    /*
-    | Longer phrases first
-    */
+    let result =
+        String(text);
 
     const keys =
-        Object.keys(dictionary)
-        .sort((a, b) =>
-            b.length - a.length
+        Object.keys(translations)
+        .sort(
+            (a, b) =>
+                b.length - a.length
         );
 
-    keys.forEach(key => {
+    keys.forEach(function(key) {
 
-        const value =
-            dictionary[key];
+        const escaped =
+            key.replace(
+                /[.*+?^${}()|[\]\\]/g,
+                "\\$&"
+            );
 
         const regex =
             new RegExp(
-                key.replace(
-                    /[.*+?^${}()|[\]\\]/g,
-                    "\\$&"
-                ),
+                escaped,
                 "gi"
             );
 
         result =
             result.replace(
                 regex,
-                value
+                translations[key]
             );
 
     });
 
     return result;
-
 }
 
 
-/* =====================================
-   HTML Escape
-===================================== */
+/* =====================================================
+   HTML ESCAPE
+===================================================== */
 
 function escapeHTML(value) {
 
-    if (!value) return "";
+    if (
+        value === null ||
+        value === undefined
+    ) {
+        return "";
+    }
 
     return String(value)
 
-        .replace(/&/g, "&amp;")
+        .replace(
+            /&/g,
+            "&amp;"
+        )
 
-        .replace(/</g, "&lt;")
+        .replace(
+            /</g,
+            "&lt;"
+        )
 
-        .replace(/>/g, "&gt;")
+        .replace(
+            />/g,
+            "&gt;"
+        )
 
-        .replace(/"/g, "&quot;")
+        .replace(
+            /"/g,
+            "&quot;"
+        )
 
-        .replace(/'/g, "&#039;");
-
+        .replace(
+            /'/g,
+            "&#039;"
+        );
 }
 
 
-/* =====================================
-   Load Jobs
-===================================== */
+/* =====================================================
+   LOAD JOBS
+===================================================== */
 
 async function loadJobs() {
 
-    const container =
+    const jobsContainer =
         document.getElementById("jobs");
+
+    const refreshBtn =
+        document.getElementById("refreshBtn");
+
+
+    refreshBtn.classList.add(
+        "loading"
+    );
+
+    refreshBtn.textContent =
+        "↻ লোড হচ্ছে...";
+
+
+    jobsContainer.innerHTML = `
+
+        <div class="loading-box">
+
+            <div class="spinner"></div>
+
+            <div>
+                সর্বশেষ চাকরির তথ্য সংগ্রহ করা হচ্ছে...
+            </div>
+
+        </div>
+
+    `;
+
 
     try {
 
+        /*
+         * Cache busting
+         */
+
+        const requestURL =
+            API_URL +
+            "?t=" +
+            Date.now();
+
+
         const response =
             await fetch(
-                "jobs.php?t=" +
-                Date.now()
+                requestURL,
+                {
+                    method:
+                        "GET",
+
+                    cache:
+                        "no-store"
+                }
             );
+
 
         if (!response.ok) {
 
             throw new Error(
-                "Server Error"
+                "HTTP Error: " +
+                response.status
             );
 
         }
+
 
         const data =
             await response.json();
 
-        if (!data.success) {
+
+        if (
+            !data ||
+            data.success !== true
+        ) {
 
             throw new Error(
-                data.message ||
-                "Unable to load jobs"
+                "API returned invalid data."
             );
 
         }
 
+
         allJobs =
-            data.jobs || [];
+            Array.isArray(data.jobs)
+            ? data.jobs
+            : [];
 
-        document.getElementById(
-            "updated"
-        ).textContent =
-            "সর্বশেষ আপডেট: " +
-            data.updated;
 
-        renderJobs(allJobs);
+        /*
+         * Updated time
+         */
+
+        if (data.updated) {
+
+            document.getElementById(
+                "updated"
+            ).textContent =
+                "সর্বশেষ আপডেট: " +
+                formatDate(
+                    data.updated
+                );
+
+        }
+
+
+        renderJobs(
+            allJobs
+        );
+
 
     }
 
     catch(error) {
 
-        console.error(error);
+        console.error(
+            "Job API Error:",
+            error
+        );
 
-        container.innerHTML = `
 
-            <div class="error">
+        jobsContainer.innerHTML = `
 
-                এই মুহূর্তে চাকরির তথ্য
-                লোড করা যাচ্ছে না।
+            <div class="error-box">
 
-                <br><br>
+                <strong>
+                    ⚠️ চাকরির তথ্য লোড করা যায়নি
+                </strong>
+
+                <br>
+
+                Google Apps Script API
+                বর্তমানে response দিচ্ছে না
+                অথবা API-এর data format পরিবর্তিত হয়েছে।
+
+                <br>
 
                 কিছুক্ষণ পরে আবার চেষ্টা করুন।
+
+                <br>
+
+                <button
+                    class="retry-btn"
+                    onclick="loadJobs()"
+                >
+                    আবার চেষ্টা করুন
+                </button>
 
             </div>
 
         `;
 
+
+        document.getElementById(
+            "jobCount"
+        ).textContent =
+            "তথ্য পাওয়া যায়নি";
+
     }
+
+
+    refreshBtn.classList.remove(
+        "loading"
+    );
+
+    refreshBtn.textContent =
+        "↻ আপডেট";
 
 }
 
 
-/* =====================================
-   Render Jobs
-===================================== */
+/* =====================================================
+   RENDER JOBS
+===================================================== */
 
 function renderJobs(jobs) {
 
     const container =
-        document.getElementById("jobs");
+        document.getElementById(
+            "jobs"
+        );
 
-    document.getElementById(
-        "jobCount"
-    ).textContent =
+    const count =
+        document.getElementById(
+            "jobCount"
+        );
+
+
+    count.textContent =
         "মোট " +
         jobs.length +
         "টি চাকরির তথ্য";
+
 
     if (!jobs.length) {
 
         container.innerHTML = `
 
-            <div class="loading">
+            <div class="empty-box">
+
+                🔎
+
+                <br><br>
 
                 কোনো চাকরির তথ্য পাওয়া যায়নি।
 
@@ -959,194 +1816,252 @@ function renderJobs(jobs) {
         `;
 
         return;
-
     }
 
 
     container.innerHTML =
-        jobs.map((job, index) => {
+        jobs.map(
+            function(job, index) {
 
-            const title =
-                translateText(
-                    job.job_title
+                return createJobCard(
+                    job,
+                    index
                 );
 
-            const post =
-                translateText(
-                    job.post_name
-                );
-
-            const qualification =
-                translateText(
-                    job.qualification
-                );
-
-            const vacancy =
-                translateText(
-                    job.vacancy
-                );
-
-
-            /*
-            | First 5 jobs get NEW badge
-            */
-
-            const badge =
-                index < 5
-                ? `<span class="new-badge">
-                    নতুন
-                   </span>`
-                : "";
-
-
-            return `
-
-                <article class="job-card">
-
-
-                    <div class="job-top">
-
-                        <h2 class="job-title">
-
-                            ${escapeHTML(title)}
-
-                        </h2>
-
-                        ${badge}
-
-                    </div>
-
-
-                    <div class="post-date">
-
-                        প্রকাশের তারিখ:
-                        ${escapeHTML(
-                            job.post_date
-                        )}
-
-                    </div>
-
-
-                    <div class="job-info">
-
-
-                        <div class="info">
-
-                            <span class="info-label">
-                                পদের নাম
-                            </span>
-
-                            <span class="info-value">
-                                ${escapeHTML(post)}
-                            </span>
-
-                        </div>
-
-
-                        <div class="info">
-
-                            <span class="info-label">
-                                শূন্যপদ
-                            </span>
-
-                            <span class="info-value">
-                                ${escapeHTML(vacancy)}
-                            </span>
-
-                        </div>
-
-
-                        <div class="info">
-
-                            <span class="info-label">
-                                শিক্ষাগত যোগ্যতা
-                            </span>
-
-                            <span class="info-value">
-                                ${escapeHTML(
-                                    qualification
-                                )}
-                            </span>
-
-                        </div>
-
-
-                        <div class="info">
-
-                            <span class="info-label">
-                                আবেদনের শেষ তারিখ
-                            </span>
-
-                            <span class="info-value">
-                                ${escapeHTML(
-                                    job.last_date
-                                )}
-                            </span>
-
-                        </div>
-
-
-                    </div>
-
-
-                    <div class="job-footer">
-
-
-                        <div class="last-date">
-
-                            শেষ তারিখ:
-                            ${escapeHTML(
-                                job.last_date
-                            )}
-
-                        </div>
-
-
-                        <a
-
-                            href="${escapeHTML(
-                                job.url
-                            )}"
-
-                            target="_blank"
-
-                            rel="noopener noreferrer"
-
-                            class="view-button"
-
-                        >
-
-                            বিস্তারিত দেখুন →
-
-                        </a>
-
-
-                    </div>
-
-
-                </article>
-
-            `;
-
-        }).join("");
+            }
+        ).join("");
 
 }
 
 
-/* =====================================
-   Search
-===================================== */
+/* =====================================================
+   CREATE JOB CARD
+===================================================== */
+
+function createJobCard(
+    job,
+    index
+) {
+
+    const title =
+        translateText(
+            job.job_title ||
+            job.title ||
+            ""
+        );
+
+
+    const post =
+        translateText(
+            job.post_name ||
+            job.post ||
+            ""
+        );
+
+
+    const vacancy =
+        translateText(
+            job.vacancy ||
+            ""
+        );
+
+
+    const qualification =
+        translateText(
+            job.qualification ||
+            ""
+        );
+
+
+    const postDate =
+        job.post_date ||
+        job.date ||
+        "-";
+
+
+    const lastDate =
+        job.last_date ||
+        "-";
+
+
+    const url =
+        job.url ||
+        job.link ||
+        "#";
+
+
+    /*
+     * New badge
+     */
+
+    const badge =
+        index < 5
+        ? `
+            <span class="new-badge">
+                নতুন
+            </span>
+          `
+        : "";
+
+
+    return `
+
+        <article class="job-card">
+
+
+            <div class="job-top">
+
+                <h3 class="job-title">
+
+                    ${escapeHTML(title)}
+
+                </h3>
+
+                ${badge}
+
+            </div>
+
+
+            <div class="post-date">
+
+                📅 প্রকাশের তারিখ:
+                ${escapeHTML(postDate)}
+
+            </div>
+
+
+            <div class="job-info">
+
+
+                <div class="info-box">
+
+                    <span class="info-label">
+                        পদের নাম
+                    </span>
+
+                    <span class="info-value">
+
+                        ${escapeHTML(post)}
+
+                    </span>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <span class="info-label">
+                        শূন্যপদ
+                    </span>
+
+                    <span class="info-value">
+
+                        ${escapeHTML(vacancy)}
+
+                    </span>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <span class="info-label">
+                        শিক্ষাগত যোগ্যতা
+                    </span>
+
+                    <span class="info-value">
+
+                        ${escapeHTML(
+                            qualification
+                        )}
+
+                    </span>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <span class="info-label">
+                        আবেদনের শেষ তারিখ
+                    </span>
+
+                    <span class="info-value">
+
+                        ${escapeHTML(lastDate)}
+
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="job-footer">
+
+
+                <div class="last-date">
+
+                    ⏳ শেষ তারিখ:
+                    ${escapeHTML(lastDate)}
+
+                </div>
+
+
+                ${
+                    url !== "#"
+                    ?
+
+                    `
+
+                    <a
+                        class="details-btn"
+                        href="${escapeHTML(url)}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+
+                        বিস্তারিত দেখুন
+                        →
+                    
+                    </a>
+
+                    `
+
+                    :
+
+                    ""
+
+                }
+
+
+            </div>
+
+
+        </article>
+
+    `;
+
+}
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
 
 document
-.getElementById("searchBox")
+.getElementById(
+    "searchBox"
+)
 .addEventListener(
     "input",
     function() {
 
         const query =
             this.value
-            .toLowerCase()
-            .trim();
+            .trim()
+            .toLowerCase();
 
 
         if (!query) {
@@ -1156,31 +2071,70 @@ document
             );
 
             return;
-
         }
 
 
         const filtered =
-            allJobs.filter(job => {
+            allJobs.filter(
+                function(job) {
 
-                const text = (
+                    const originalText = [
 
-                    job.job_title +
-                    " " +
-                    job.post_name +
-                    " " +
-                    job.vacancy +
-                    " " +
-                    job.qualification
+                        job.job_title,
 
-                ).toLowerCase();
+                        job.post_name,
+
+                        job.vacancy,
+
+                        job.qualification,
+
+                        job.post_date,
+
+                        job.last_date
+
+                    ]
+                    .filter(Boolean)
+                    .join(" ")
+                    .toLowerCase();
 
 
-                return text.includes(
-                    query
-                );
+                    const bengaliText = [
 
-            });
+                        translateText(
+                            job.job_title || ""
+                        ),
+
+                        translateText(
+                            job.post_name || ""
+                        ),
+
+                        translateText(
+                            job.qualification || ""
+                        ),
+
+                        translateText(
+                            job.vacancy || ""
+                        )
+
+                    ]
+                    .join(" ")
+                    .toLowerCase();
+
+
+                    return (
+
+                        originalText
+                        .includes(query)
+
+                        ||
+
+                        bengaliText
+                        .includes(query)
+
+                    );
+
+                }
+            );
 
 
         renderJobs(
@@ -1191,20 +2145,74 @@ document
 );
 
 
-/* =====================================
-   Initial Load
-===================================== */
+/* =====================================================
+   DATE FORMAT
+===================================================== */
+
+function formatDate(value) {
+
+    try {
+
+        const date =
+            new Date(value);
+
+        if (
+            isNaN(
+                date.getTime()
+            )
+        ) {
+
+            return value;
+
+        }
+
+
+        return date.toLocaleString(
+            "bn-BD",
+            {
+                day:
+                    "2-digit",
+
+                month:
+                    "2-digit",
+
+                year:
+                    "numeric",
+
+                hour:
+                    "2-digit",
+
+                minute:
+                    "2-digit"
+            }
+        );
+
+    }
+
+    catch(e) {
+
+        return value;
+
+    }
+
+}
+
+
+/* =====================================================
+   INITIAL LOAD
+===================================================== */
 
 loadJobs();
 
 
+/* =====================================================
+   AUTO REFRESH
+===================================================== */
+
 /*
-|--------------------------------------------------------------------------
-| Automatic Refresh
-|--------------------------------------------------------------------------
-| প্রতি 15 মিনিটে data check করবে।
-|--------------------------------------------------------------------------
-*/
+ * প্রতি 15 মিনিটে API থেকে
+ * নতুন data check করবে।
+ */
 
 setInterval(
     loadJobs,
@@ -1213,7 +2221,7 @@ setInterval(
 
 </script>
 
-
 </body>
 
 </html>
+```
