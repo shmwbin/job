@@ -1205,7 +1205,7 @@ let allJobs = [];
 
 
 /* =====================================================
-   BASIC TEXT CLEANER
+   BASIC TEXT CLEANER (Rectified)
    ===================================================== */
 
 function escapeHTML(value) {
@@ -1224,7 +1224,7 @@ function escapeHTML(value) {
 
         .replace(/"/g, "&quot;")
 
-        .replace(./g, "&#039;");
+        .replace(/'/g, "&#039;");
 
 }
 
@@ -1294,7 +1294,6 @@ function translateText(text) {
 
     Object.keys(dictionary).forEach(function(key) {
 
-        // Case-insensitive replacement for keywords
         const regex = new RegExp(key, "gi");
         result = result.replace(regex, dictionary[key]);
 
@@ -1721,7 +1720,7 @@ async function loadJobs(showLoading = true) {
 
 
         jobCount.textContent =
-            "তথ্য লোড করা যায়নি.";
+            "তথ্য লোড করা যায়নি।";
 
 
     } finally {
