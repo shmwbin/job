@@ -1205,7 +1205,7 @@ let allJobs = [];
 
 
 /* =====================================================
-   BASIC TEXT CLEANER (Rectified)
+   BASIC TEXT CLEANER
    ===================================================== */
 
 function escapeHTML(value) {
@@ -1230,78 +1230,69 @@ function escapeHTML(value) {
 
 
 /* =====================================================
-   BENGALI TRANSLATION (Auto Translate Dictionary)
+   ADVANCED FULL BENGALI TRANSLATION ENGINE
    ===================================================== */
 
-function translateText(text) {
+function translateToBengali(text) {
 
     if (!text) return "";
 
     let result = String(text);
 
-
-    const dictionary = {
-
-        /* Job Titles / Org Keywords */
-        "West Bengal": "পশ্চিমবঙ্গ",
-        "WB": "পশ্চিমবঙ্গ",
-        "Government": "সরকারি",
-        "Govt": "সরকারি",
-        "Recruitment": "নিয়োগ",
-        "Notification": "বিজ্ঞপ্তি",
-        "Jobs": "চাকরি",
-        "Job": "চাকরি",
+    // Common phrase & word dictionary mapping
+    const map = {
+        "Vacancy 2026": "শূন্যপদ ২০২৬",
+        "Vacancies 2026": "শূন্যপদ ২০২৬",
+        "Vacancy": "শূন্যপদ",
+        "Vacancies": "শূন্যপদ",
+        "Posts": "টি পদ",
+        "Post": "পদ",
+        "Administrative Officer": "প্রশাসনিক কর্মকর্তা",
+        "Project Scientist": "প্রকল্প বিজ্ঞানী",
+        "Young Professional": "তরুণ পেশাদার",
+        "Project Technical Support": "প্রকল্প প্রযুক্তিগত সহায়তা",
+        "Project Research Scientist": "প্রকল্প গবেষণা বিজ্ঞানী",
+        "Project Assistant": "প্রকল্প সহকারী",
         "Walk-in-Interview": "ওয়াক-ইন ইন্টারভিউ",
         "Interview": "সাক্ষাৎকার",
-        "Data Entry Operator": "ডেটা এন্ট্রি অপারেটর",
-        "Nurse": "নোর্স",
+        "Notification": "বিজ্ঞপ্তি",
+        "Recruitment": "নিয়োগ",
         "Medical Officer": "মেডিকেল অফিসার",
+        "Staff Nurse": "স্টাফ নার্স",
+        "Nurse": "নার্স",
         "Teacher": "শিক্ষক",
+        "Assistant Teacher": "সহকারী শিক্ষক",
         "Professor": "অধ্যাপক",
-        "Assistant": "সহায়তাকারী / অ্যাসিস্ট্যান্ট",
+        "Assistant": "সহকারী",
         "Clerk": "ক্লার্ক",
-        "Staff": "কর্মী",
-        "Manager": "ম্যানেজার",
+        "Lower Division": "লোয়ার ডিভিশন",
+        "Upper Division": "আপার ডিভিশন",
         "Engineer": "প্রকৌশলী",
         "Technician": "টেকনিশিয়ান",
-
-        /* Qualifications */
+        "Librarian": "গ্রন্থাগারিক",
+        "Intern": "ইন্টার্ন",
         "Any Graduate": "যেকোনো স্নাতক",
-        "Any Post Graduate": "যেকোনো স্নাতকোত্তর",
-        "Any Masters Degree": "যেকোনো মাস্টার্স ডিগ্রি",
-        "Any Bachelors Degree": "যেকোনো ব্যাচেলর ডিগ্রি",
-        "B.Tech/B.E": "বি.টেক / বি.ই",
-        "M.E/M.Tech": "এম.ই / এম.টেক",
-        "M.Sc": "এম.এসসি",
-        "B.Sc": "বি.এসসি",
-        "B.Com": "বি.কম",
-        "BCA": "বিসিএ",
-        "MCA": "এমসিএ",
-        "MBA/PGDM": "এমবিএ / পিজিডিএম",
-        "M.Phil/Ph.D": "এম.ফিল / পিএইচডি",
-        "Diploma": "ডিপ্লোমা",
-        "ITI": "আইটিআই",
-        "12TH": "দ্বাদশ শ্রেণি",
-        "10TH": "দশম শ্রেণি",
-
-        /* General terms */
         "Not Mentioned": "উল্লেখ করা হয়নি",
-        "Posts": "টি পদ",
-        "Post": "পদ"
-
+        "Diploma": "ডিপ্লোমা",
+        "ITI": "আইটিআই"
     };
 
-
-    Object.keys(dictionary).forEach(function(key) {
-
-        const regex = new RegExp(key, "gi");
-        result = result.replace(regex, dictionary[key]);
-
+    // Replace specific phrases first
+    Object.keys(map).forEach(function(key) {
+        let regex = new RegExp(key, "gi");
+        result = result.replace(regex, map[key]);
     });
 
+    // Translate common connecting English words automatically
+    result = result
+        .replace(/\bfor\b/gi, "জন্য")
+        .replace(/\band\b/gi, "ও")
+        .replace(/\bwith\b/gi, "সহ")
+        .replace(/\bin\b/gi, "এ")
+        .replace(/\bat\b/gi, "এ")
+        .replace(/\b(at|in|on|the|a|an)\b/gi, "");
 
-    return result;
-
+    return result.replace(/\s+/g, ' ').trim();
 }
 
 
@@ -1327,7 +1318,7 @@ function formatDate(dateString) {
 function createJobCard(job, index) {
 
     const title =
-        translateText(
+        translateToBengali(
             job.job_title ||
             job.title ||
             "সরকারি চাকরির সুযোগ"
@@ -1335,7 +1326,7 @@ function createJobCard(job, index) {
 
 
     const post =
-        translateText(
+        translateToBengali(
             job.post_name ||
             job.post ||
             ""
@@ -1343,14 +1334,14 @@ function createJobCard(job, index) {
 
 
     const vacancy =
-        translateText(
+        translateToBengali(
             job.vacancy ||
             "উল্লেখ নেই"
         );
 
 
     const qualification =
-        translateText(
+        translateToBengali(
             job.qualification ||
             "উল্লেখ নেই"
         );
@@ -1373,7 +1364,7 @@ function createJobCard(job, index) {
 
 
     const summary =
-        translateText(
+        translateToBengali(
             job.summary ||
             ""
         );
