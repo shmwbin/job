@@ -1224,13 +1224,13 @@ function escapeHTML(value) {
 
         .replace(/"/g, "&quot;")
 
-        .replace(/'/g, "&#039;");
+        .replace(./g, "&#039;");
 
 }
 
 
 /* =====================================================
-   BENGALI TRANSLATION
+   BENGALI TRANSLATION (Auto Translate Dictionary)
    ===================================================== */
 
 function translateText(text) {
@@ -1242,74 +1242,61 @@ function translateText(text) {
 
     const dictionary = {
 
-        "Any Graduate":
-            "যেকোনো স্নাতক",
+        /* Job Titles / Org Keywords */
+        "West Bengal": "পশ্চিমবঙ্গ",
+        "WB": "পশ্চিমবঙ্গ",
+        "Government": "সরকারি",
+        "Govt": "সরকারি",
+        "Recruitment": "নিয়োগ",
+        "Notification": "বিজ্ঞপ্তি",
+        "Jobs": "চাকরি",
+        "Job": "চাকরি",
+        "Walk-in-Interview": "ওয়াক-ইন ইন্টারভিউ",
+        "Interview": "সাক্ষাৎকার",
+        "Data Entry Operator": "ডেটা এন্ট্রি অপারেটর",
+        "Nurse": "নোর্স",
+        "Medical Officer": "মেডিকেল অফিসার",
+        "Teacher": "শিক্ষক",
+        "Professor": "অধ্যাপক",
+        "Assistant": "সহায়তাকারী / অ্যাসিস্ট্যান্ট",
+        "Clerk": "ক্লার্ক",
+        "Staff": "কর্মী",
+        "Manager": "ম্যানেজার",
+        "Engineer": "প্রকৌশলী",
+        "Technician": "টেকনিশিয়ান",
 
-        "Any Post Graduate":
-            "যেকোনো স্নাতকোত্তর",
+        /* Qualifications */
+        "Any Graduate": "যেকোনো স্নাতক",
+        "Any Post Graduate": "যেকোনো স্নাতকোত্তর",
+        "Any Masters Degree": "যেকোনো মাস্টার্স ডিগ্রি",
+        "Any Bachelors Degree": "যেকোনো ব্যাচেলর ডিগ্রি",
+        "B.Tech/B.E": "বি.টেক / বি.ই",
+        "M.E/M.Tech": "এম.ই / এম.টেক",
+        "M.Sc": "এম.এসসি",
+        "B.Sc": "বি.এসসি",
+        "B.Com": "বি.কম",
+        "BCA": "বিসিএ",
+        "MCA": "এমসিএ",
+        "MBA/PGDM": "এমবিএ / পিজিডিএম",
+        "M.Phil/Ph.D": "এম.ফিল / পিএইচডি",
+        "Diploma": "ডিপ্লোমা",
+        "ITI": "আইটিআই",
+        "12TH": "দ্বাদশ শ্রেণি",
+        "10TH": "দশম শ্রেণি",
 
-        "Any Masters Degree":
-            "যেকোনো মাস্টার্স ডিগ্রি",
-
-        "Any Bachelors Degree":
-            "যেকোনো ব্যাচেলর ডিগ্রি",
-
-        "B.Tech/B.E":
-            "B.Tech/B.E",
-
-        "M.E/M.Tech":
-            "M.E/M.Tech",
-
-        "M.Sc":
-            "M.Sc",
-
-        "B.Sc":
-            "B.Sc",
-
-        "B.Com":
-            "B.Com",
-
-        "BCA":
-            "BCA",
-
-        "MCA":
-            "MCA",
-
-        "MBA/PGDM":
-            "MBA/PGDM",
-
-        "M.Phil/Ph.D":
-            "M.Phil/Ph.D",
-
-        "Diploma":
-            "ডিপ্লোমা",
-
-        "ITI":
-            "ITI",
-
-        "12TH":
-            "দ্বাদশ শ্রেণি",
-
-        "10TH":
-            "দশম শ্রেণি",
-
-        "Not Mentioned":
-            "উল্লেখ করা হয়নি",
-
-        "Posts":
-            "টি পদ",
-
-        "Post":
-            "পদ"
+        /* General terms */
+        "Not Mentioned": "উল্লেখ করা হয়নি",
+        "Posts": "টি পদ",
+        "Post": "পদ"
 
     };
 
 
     Object.keys(dictionary).forEach(function(key) {
 
-        result =
-            result.split(key)
-                   .join(dictionary[key]);
+        // Case-insensitive replacement for keywords
+        const regex = new RegExp(key, "gi");
+        result = result.replace(regex, dictionary[key]);
 
     });
 
@@ -1588,7 +1575,7 @@ function renderJobs(jobs) {
 
                 <br>
 
-                কোনো চাকরির তথ্য পাওয়া যায়নি।
+                কোনো চাকরির তথ্য পাওয়া যায়নি।
 
             </div>
 
@@ -1658,7 +1645,7 @@ async function loadJobs(showLoading = true) {
 
             throw new Error(
                 data.error ||
-                "API থেকে সঠিক তথ্য পাওয়া যায়নি।"
+                "API থেকে সঠিক তথ্য পাওয়া যায়নি।"
             );
 
         }
@@ -1734,7 +1721,7 @@ async function loadJobs(showLoading = true) {
 
 
         jobCount.textContent =
-            "তথ্য লোড করা যায়নি।";
+            "তথ্য লোড করা যায়নি.";
 
 
     } finally {
@@ -1804,7 +1791,7 @@ searchInput.addEventListener(
         jobCount.innerHTML =
 
             `<strong>${filtered.length}</strong>
-             টি ফলাফল পাওয়া গেছে`;
+             টি ফলাফল পাওয়া গেছে`;
 
     }
 );
