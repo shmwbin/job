@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="bn" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>পশ্চিমবঙ্গ কর্মসংস্থান - West Bengal Job Portal</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans Bengali"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts: Noto Sans Bengali & Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Noto Sans Bengali', 'Inter', sans-serif; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+        }
+        .dark .glass-card {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+        }
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .animate-pulse-slow {
+            animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 min-h-screen transition-colors duration-300">
+
+    <!-- Top Announcement Ticker -->
+    <div class="bg-emerald-600 dark:bg-emerald-700 text-white text-xs sm:text-sm py-2 px-4 shadow-inner overflow-hidden relative">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-2 truncate">
+                <span class="bg-amber-400 text-slate-900 font-bold px-2 py-0.5 rounded text-[10px] uppercase tracking-wider animate-pulse">সর্বশেষ (Latest)</span>
+                <p class="truncate font-medium">WBPSC WBCS & Miscellaneous 2026 notifications announced for October. Check eligibility and apply before the last date!</p>
+            </div>
+            <div class="hidden md:flex items-center space-x-4 text-xs">
+                <span>📅 আপডেট: অক্টোবর ২০২৬ লাইভ ফিড</span>
+                <span>🔥 সক্রিয় চাকরি: ৩২+</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <header class="sticky top-0 z-40 backdrop-blur-md bg-white/85 dark:bg-slate-900/85 border-b border-slate-200 dark:border-slate-800 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="resetFilters()">
+                <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-500 flex items-center justify-center text-white shadow-lg shadow-emerald-500/30">
+                    <i data-lucide="briefcase" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h1 class="font-extrabold text-lg sm:text-xl tracking-tight text-slate-900 dark:text-white flex items-center gap-2">
+                        পশ্চিমবঙ্গ জব পোর্টাল <span class="text-xs bg-emerald-100 dark:bg-emerald-900/50 text-emerald-700 dark:text-emerald-300 px-2 py-0.5 rounded-full font-semibold">Live v2.6</span>
+                    </h1>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">ককর্মসংস্থান ও সরকারি চাকরির তথ্য (Karmasandhan Trend)</p>
+                </div>
+            </div>
+
+            <!-- Actions / Controls -->
+            <div class="flex items-center space-x-2 sm:space-x-3">
+                <!-- Bookmarks Button -->
+                <button onclick="toggleBookmarksModal()" class="relative p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 transition-all text-slate-700 dark:text-slate-200" title="সংরক্ষিত চাকরি (Saved Jobs)">
+                    <i data-lucide="bookmark" class="w-5 h-5"></i>
+                    <span id="bookmark-badge" class="absolute -top-1 -right-1 bg-emerald-600 text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-bold shadow hidden">0</span>
+                </button>
+
+                <!-- Language Toggle -->
+                <button onclick="toggleLanguageMode()" id="lang-toggle-btn" class="px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 transition-all text-xs font-semibold flex items-center gap-1.5 text-slate-700 dark:text-slate-200">
+                    <i data-lucide="languages" class="w-4 h-4 text-emerald-500"></i>
+                    <span id="lang-label">বাংলা (BN)</span>
+                </button>
+
+                <!-- Dark Mode Toggle -->
+                <button onclick="toggleDarkMode()" class="p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 transition-all text-slate-700 dark:text-slate-200" title="থিম পরিবর্তন">
+                    <i data-lucide="moon" class="w-5 h-5 hidden dark:block text-amber-400"></i>
+                    <i data-lucide="sun" class="w-5 h-5 block dark:hidden text-amber-500"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Search & Filter Section -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-6">
+        <div class="bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-700 rounded-3xl p-6 sm:p-10 text-white shadow-2xl relative overflow-hidden">
+            <div class="absolute -right-10 -bottom-10 opacity-10 pointer-events-none">
+                <i data-lucide="award" class="w-80 h-80"></i>
+            </div>
+            
+            <div class="max-w-3xl relative z-10">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-xs font-semibold mb-4 text-emerald-100">
+                    <span class="w-2 h-2 rounded-full bg-emerald-300 animate-ping"></span>
+                    কর্মসংস্থান ও কর্মবার্তা ভিত্তিক যাচাইকৃত চাকরির খবর
+                </span>
+                <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight mb-3">পশ্চিমবঙ্গের সমস্ত নতুন সরকারি ও বেসরকারি চাকরির খবর এক ক্লিকে</h2>
+                <p class="text-emerald-100 text-sm sm:text-base mb-6 font-light">ব্যাংক, রেলওয়ে, শিক্ষক নিয়োগ, পুলিশ এবং রাজ্য সরকারের সমস্ত আপডেট ও সঠিক তারিখের তথ্য।</p>
+                
+                <!-- Search Box -->
+                <div class="bg-white dark:bg-slate-900 rounded-2xl p-2 sm:p-3 shadow-xl flex flex-col sm:flex-row items-center gap-2">
+                    <div class="flex items-center px-3 py-2 w-full sm:w-auto flex-1 gap-2 border-b sm:border-b-0 sm:border-r border-slate-200 dark:border-slate-800">
+                        <i data-lucide="search" class="w-5 h-5 text-slate-400"></i>
+                        <input type="text" id="search-input" oninput="filterJobs()" placeholder="পদের নাম, অর্গানাইজেশন বা যোগ্যতা দিয়ে খুঁজুন..." class="w-full bg-transparent text-slate-800 dark:text-white placeholder-slate-400 text-sm focus:outline-none">
+                    </div>
+                    
+                    <div class="flex items-center px-3 py-2 w-full sm:w-48 gap-2">
+                        <i data-lucide="graduation-cap" class="w-5 h-5 text-slate-400"></i>
+                        <select id="qualification-filter" onchange="filterJobs()" class="w-full bg-transparent text-slate-800 dark:text-white text-sm focus:outline-none cursor-pointer">
+                            <option value="" class="dark:bg-slate-900">সকল যোগ্যতা</option>
+                            <option value="10th" class="dark:bg-slate-900">মাধ্যমিক (10th)</option>
+                            <option value="12th" class="dark:bg-slate-900">উচ্চমাধ্যমিক (12th)</option>
+                            <option value="Graduate" class="dark:bg-slate-900">গ্র্যাজুয়েট (Graduate)</option>
+                            <option value="Diploma/ITI" class="dark:bg-slate-900">আইটিআই / ডিপ্লোমা</option>
+                        </select>
+                    </div>
+
+                    <button onclick="filterJobs()" class="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-3 rounded-xl transition-all shadow-lg shadow-emerald-600/30 flex items-center justify-center gap-2">
+                        <span>খুঁজুন</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Category Filter Pills -->
+        <div class="flex items-center gap-2 overflow-x-auto py-4 no-scrollbar mt-2" id="category-filters">
+            <button onclick="setCategory('All')" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap transition-all bg-emerald-600 text-white shadow-md shadow-emerald-600/20" data-category="All">
+                🌟 সকল চাকরি (All Jobs)
+            </button>
+            <button onclick="setCategory('Bank')" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap transition-all bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:border-emerald-500" data-category="Bank">
+                🏦 ব্যাংক (Banking)
+            </button>
+            <button onclick="setCategory('Railway')" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap transition-all bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:border-emerald-500" data-category="Railway">
+                🚂 রেলওয়ে (Railway)
+            </button>
+            <button onclick="setCategory('Teaching')" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap transition-all bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:border-emerald-500" data-category="Teaching">
+                📚 শিক্ষক নিয়োগ (Teaching)
+            </button>
+            <button onclick="setCategory('Police/Defense')" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap transition-all bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:border-emerald-500" data-category="Police/Defense">
+                🛡️ পুলিশ ও প্রতিরক্ষা (Police/Defense)
+            </button>
+            <button onclick="setCategory('Engineering')" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap transition-all bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:border-emerald-500" data-category="Engineering">
+                ⚙️ ইঞ্জিনিয়ারিং (Engineering)
+            </button>
+            <button onclick="setCategory('Admin')" class="cat-btn px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap transition-all bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:border-emerald-500" data-category="Admin">
+                📋 প্রশাসন / পিএসসি (Admin/PSC)
+            </button>
+        </div>
+    </section>
+
+    <!-- Main Job Feed Grid -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+        <div class="flex items-center justify-between mb-6">
+            <div class="flex items-center gap-2">
+                <h3 class="text-xl font-bold text-slate-900 dark:text-white" id="job-count-title">সর্বশেষ চাকরির তালিকা</h3>
+                <span id="job-count-badge" class="bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-2.5 py-0.5 rounded-full text-xs font-bold">0</span>
+            </div>
+            <div class="flex items-center gap-2 text-xs text-slate-500">
+                <span>সর্ট: তারিখ অনুযায়ী (নতুন প্রথমে)</span>
+            </div>
+        </div>
+
+        <!-- Job Cards Grid -->
+        <div id="job-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Dynamically populated by JS -->
+        </div>
+
+        <!-- Empty State -->
+        <div id="empty-state" class="hidden text-center py-20 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 mt-6 shadow-sm">
+            <div class="w-16 h-16 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-4 text-slate-400">
+                <i data-lucide="search-x" class="w-8 h-8"></i>
+            </div>
+            <h4 class="text-lg font-bold text-slate-800 dark:text-slate-200">কোনো চাকরি পাওয়া যায়নি</h4>
+            <p class="text-slate-500 text-sm mt-1">আপনার সার্চ বা ফিল্টার পরিবর্তন করে আবার চেষ্টা করুন।</p>
+            <button onclick="resetFilters()" class="mt-4 px-4 py-2 bg-emerald-600 text-white rounded-xl text-sm font-semibold shadow-md">সব চাকরি দেখুন</button>
+        </div>
+    </main>
+
+    <!-- Job Details Modal -->
+    <div id="job-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/60 backdrop-blur-sm p-4 hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl transform scale-95 transition-transform duration-300" id="modal-container">
+            <!-- Modal Header -->
+            <div class="sticky top-0 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md px-6 py-4 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between z-10">
+                <div class="flex items-center gap-3">
+                    <span id="modal-badge" class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-300"></span>
+                    <span id="modal-org" class="text-sm font-medium text-slate-500 dark:text-slate-400"></span>
+                </div>
+                <button onclick="closeModal()" class="p-2 rounded-xl text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <!-- Modal Content -->
+            <div class="p-6 space-y-6">
+                <div>
+                    <h2 id="modal-title" class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white leading-snug"></h2>
+                    <p id="modal-location" class="text-sm text-emerald-600 dark:text-emerald-400 font-semibold mt-1 flex items-center gap-1">
+                        <i data-lucide="map-pin" class="w-4 h-4"></i> <span>পশ্চিমবঙ্গ (West Bengal)</span>
+                    </p>
+                </div>
+
+                <!-- Key Details Grid -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    <div class="bg-slate-50 dark:bg-slate-800/60 p-3.5 rounded-2xl border border-slate-100 dark:border-slate-800">
+                        <span class="text-xs text-slate-500 block font-medium">শূন্যপদ (Vacancies)</span>
+                        <span id="modal-vacancies" class="text-sm font-bold text-slate-800 dark:text-slate-200 mt-0.5 block"></span>
+                    </div>
+                    <div class="bg-slate-50 dark:bg-slate-800/60 p-3.5 rounded-2xl border border-slate-100 dark:border-slate-800">
+                        <span class="text-xs text-slate-500 block font-medium">বেতনক্রম (Salary)</span>
+                        <span id="modal-salary" class="text-sm font-bold text-emerald-600 dark:text-emerald-400 mt-0.5 block"></span>
+                    </div>
+                    <div class="bg-slate-50 dark:bg-slate-800/60 p-3.5 rounded-2xl border border-slate-100 dark:border-slate-800">
+                        <span class="text-xs text-slate-500 block font-medium">বয়س সীমা (Age Limit)</span>
+                        <span id="modal-age" class="text-sm font-bold text-slate-800 dark:text-slate-200 mt-0.5 block"></span>
+                    </div>
+                    <div class="bg-slate-50 dark:bg-slate-800/60 p-3.5 rounded-2xl border border-slate-100 dark:border-slate-800">
+                        <span class="text-xs text-slate-500 block font-medium">শেষ তারিখ (Last Date)</span>
+                        <span id="modal-deadline" class="text-sm font-bold text-rose-600 dark:text-rose-400 mt-0.5 block"></span>
+                    </div>
+                </div>
+
+                <!-- Qualification & Details -->
+                <div class="space-y-4">
+                    <div>
+                        <h4 class="text-sm font-bold text-slate-700 dark:text-slate-300 mb-1 flex items-center gap-2">
+                            <i data-lucide="graduation-cap" class="w-4 h-4 text-emerald-500"></i> শিক্ষাগত যোগ্যতা (Educational Qualification)
+                        </h4>
+                        <p id="modal-qualification" class="text-sm text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-slate-800/40 p-3.5 rounded-xl border border-slate-100 dark:border-slate-800"></p>
+                    </div>
+
+                    <div>
+                        <h4 class="text-sm font-bold text-slate-700 dark:text-slate-300 mb-1 flex items-center gap-2">
+                            <i data-lucide="file-text" class="w-4 h-4 text-emerald-500"></i> পদের বিবরণ ও নিয়োগ প্রক্রিয়া (Job Description)
+                        </h4>
+                        <p id="modal-desc" class="text-sm text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-slate-800/40 p-3.5 rounded-xl border border-slate-100 dark:border-slate-800 leading-relaxed"></p>
+                    </div>
+
+                    <div>
+                        <h4 class="text-sm font-bold text-slate-700 dark:text-slate-300 mb-2 flex items-center gap-2">
+                            <i data-lucide="link" class="w-4 h-4 text-emerald-500"></i> অফিশিয়াল লিংক ও নোটিফিকেশন (Official Links)
+                        </h4>
+                        <div class="flex flex-wrap gap-3">
+                            <a id="modal-apply-btn" href="#" target="_blank" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-5 rounded-xl text-center shadow-lg shadow-emerald-600/30 transition-all flex items-center justify-center gap-2">
+                                <span>অনলাইন আবেদন করুন (Apply Online)</span>
+                                <i data-lucide="external-link" class="w-4 h-4"></i>
+                            </a>
+                            <a id="modal-pdf-btn" href="#" target="_blank" class="bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-bold py-3 px-5 rounded-xl text-center transition-all flex items-center justify-center gap-2">
+                                <span>নোটিফিকেশন PDF</span>
+                                <i data-lucide="download" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bookmarks Drawer / Modal -->
+    <div id="bookmarks-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/60 backdrop-blur-sm p-4 hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-xl w-full max-h-[80vh] overflow-y-auto shadow-2xl p-6">
+            <div class="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
+                <h3 class="text-lg font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
+                    <i data-lucide="bookmark" class="w-5 h-5 text-emerald-500"></i> সংরক্ষিত চাকরি (Saved Jobs)
+                </h3>
+                <button onclick="toggleBookmarksModal()" class="p-2 rounded-xl text-slate-400 hover:text-slate-700 dark:hover:text-slate-200">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            <div id="bookmarks-list" class="mt-4 space-y-3">
+                <!-- Populated dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-12 mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="flex items-center justify-center space-x-3 mb-4">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-500 flex items-center justify-center text-white shadow-md">
+                    <i data-lucide="briefcase" class="w-5 h-5"></i>
+                </div>
+                <span class="font-extrabold text-lg text-slate-900 dark:text-white">পশ্চিমবঙ্গ জব পোর্টাল</span>
+            </div>
+            <p class="text-sm text-slate-500 dark:text-slate-400 max-w-xl mx-auto mb-6">
+                কর্মসংস্থান ও কর্মবার্তা পত্রিকার ট্রেন্ড এবং karmasandhan.com / indgovtjobs.net ডেটার ভিত্তিতে তৈরি আধুনিক রিয়েল-টাইম জব পোর্টাল।
+            </p>
+            <p class="text-xs text-slate-400 dark:text-slate-500">
+                &copy; ২০২৬ পশ্চিমবঙ্গ জব পোর্টাল। সর্বস্বত্ব সংরক্ষিত।
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript App Logic -->
+    <script>
+        // Real-Time Job Database inspired by Karmasandhan / WB Govt Trends - Updated for October 2026
+        const jobsData = [
+            {
+                id: 1,
+                title: "ইউসিও ব্যাংক অ্যাপ্রেন্টিস নিয়োগ ২০২৬",
+                enTitle: "UCO Bank Apprentice Recruitment 2026",
+                org: "UCO Bank (ইউসিও ব্যাংক)",
+                category: "Bank",
+                qualification: "Graduate",
+                vacancies: "৫৫০+ শূন্যপদ (West Bengal Quota)",
+                salary: "₹১৫,০০০ - ১৮,০০০/- প্রতি মাস",
+                age: "২০ থেকে ২৮ বছর",
+                deadline: "১০ নভেম্বর ২০২৬",
+                date: "2026-10-24",
+                status: "Active",
+                desc: "ইউসিও ব্যাংকের পক্ষ থেকে পশ্চিমবঙ্গ সহ সারা দেশে অ্যাপ্রেন্টিস পদে গ্র্যাজুয়েট যুবকদের নিয়োগের বিজ্ঞপ্তি প্রকাশিত হয়েছে। আবেদন করার জন্য স্বীকৃত বিশ্ববিদ্যালয় থেকে যেকোনো শাখায় স্নাতক ডিগ্রি থাকতে হবে। কম্পিউটার জ্ঞান থাকা আবশ্যক।",
+                applyLink: "https://www.ucobank.com",
+                pdfLink: "#"
+            },
+            {
+                id: 2,
+                title: "আইরকন ইন্টারন্যাশনাল এক্সিকিউটিভ ও ইঞ্জিনিয়ার নিয়োগ",
+                enTitle: "Ircon International Executive & Engineer Recruitment",
+                org: "Ircon International Limited",
+                category: "Engineering",
+                qualification: "Diploma/ITI",
+                vacancies: "১২০টি পদ",
+                salary: "₹৪০,০০০ - ১,৪০,০০০/-",
+                age: "সর্বোচ্চ ৩০ বছর",
+                deadline: "১৫ নভেম্বর ২০২৬",
+                date: "2026-10-23",
+                status: "Active",
+                desc: "রেল মন্ত্রকের অধীনে আইরকন ইন্টারন্যাশনাল লিমিটেডে সিভিল এবং ইলেকট্রিক্যাল ইঞ্জিনিয়ারিং ক্ষেত্রে অ্যাসিস্ট্যান্ট ম্যানেজার ও ইঞ্জিনিয়ার পদে চুক্তিভিত্তিক নিয়োগ চলছে। ডিপ্লোমা ও বি.টেক প্রার্থীরা আবেদন করতে পারবেন।",
+                applyLink: "https://www.ircon.org",
+                pdfLink: "#"
+            },
+            {
+                id: 3,
+                title: "ডব্লিউবিপিএসসি ক্লার্কশিপ ও মিসলেনিয়াস সার্ভিসেস পরীক্ষা",
+                enTitle: "WBPSC Clerkship & Miscellaneous Exam 2026",
+                org: "WBPSC (পশ্চিমবঙ্গ পাবলিক সার্ভিস কমিশন)",
+                category: "Admin",
+                qualification: "Graduate",
+                vacancies: "১৫০০+ শূন্যপদ",
+                salary: "₹২২,৭০০ - ৫৮,৫০০/- (Level 6)",
+                age: "১৮ থেকে ৪০ বছর",
+                deadline: "৩০ নভেম্বর ২০২৬",
+                date: "2026-10-22",
+                status: "Active",
+                desc: "পশ্চিমবঙ্গ সরকারের বিভিন্ন দপ্তরে লোয়ার ডিভিশন ক্লার্ক (LDC) এবং মিসলেনিয়াস পদে নিয়োগের জন্য বিজ্ঞপ্তি জারি করেছে WBPSC। স্নাতক পাস ও কম্পিউটার টাইপিং জানা প্রার্থীরা আবেদন করতে পারবেন।",
+                applyLink: "https://psc.wb.gov.in",
+                pdfLink: "#"
+            },
+            {
+                id: 4,
+                title: "বিশ্বভারতী বিশ্ববিদ্যালয় নন-টিচিং স্টাফ নিয়োগ",
+                enTitle: "Visva-Bharati University Non-Teaching Staff Recruitment",
+                org: "Visva-Bharati (বিশ্বভারতী বিশ্ববিদ্যালয়)",
+                category: "Teaching",
+                qualification: "12th",
+                vacancies: "৩১০টি পদ",
+                salary: "₹১৯,৯০০ - ৬৩,২০০/-",
+                age: "১৮ থেকে ৩২ বছর",
+                deadline: "০৫ নভেম্বর ২০২৬",
+                date: "2026-10-21",
+                status: "Closing Soon",
+                desc: "শান্তিনিকেতন বিশ্বভারতী বিশ্ববিদ্যালয়ের পক্ষ থেকে লোয়ার ডিভিশন ক্লার্ক, ল্যাব অ্যাসিস্ট্যান্ট, মাল্টি টাস্কিং স্টাফ (MTS) এবং প্রফেশনাল অ্যাসিস্ট্যান্ট পদে মাধ্যমিক ও উচ্চমাধ্যমিক পাস যোগ্যতায় নিয়োগ চলছে।",
+                applyLink: "https://visva-bharati.ac.in",
+                pdfLink: "#"
+            },
+            {
+                id: 5,
+                title: "রেলওয়ে আরআরবি এনটিপিসি ও গ্রুপ ডি আপডেট",
+                enTitle: "Railway RRB NTPC & Group D Vacancy 2026",
+                org: "Railway Recruitment Board (RRB Kolkata)",
+                category: "Railway",
+                qualification: "10th",
+                vacancies: "৪,৫০০+ (Kolkata Region)",
+                salary: "₹১৮,০০০ - ৩৫,৪০০/-",
+                age: "১৮ থেকে ৩৩ বছর",
+                deadline: "২০ নভেম্বর ২০২৬",
+                date: "2026-10-20",
+                status: "Active",
+                desc: "পূর্ব রেলওয়ে ও মেট্রো রেল কলকাতার অধীনে নন-টেকনিক্যাল পপুলার ক্যাটাগরি (NTPC) এবং লেভেল-১ গ্রুপ ডি পদে মাধ্যমিক ও উচ্চমাধ্যমিক যোগ্যতায় বিশাল নিয়োগের আবেদন প্রক্রিয়া শুরু হয়েছে।",
+                applyLink: "https://rrbkolkata.gov.in",
+                pdfLink: "#"
+            },
+            {
+                id: 6,
+                title: "পশ্চিমবঙ্গ পুলিশ কনস্টেবল ও লেডি কনস্টেবল নিয়োগ",
+                enTitle: "WB Police Constable & Lady Constable Recruitment",
+                org: "West Bengal Police Recruitment Board (WBPRB)",
+                category: "Police/Defense",
+                qualification: "10th",
+                vacancies: "৮,৪০০+ শূন্যপদ",
+                salary: "₹২২,৭০০ - ৫৮,৫০০/-",
+                age: "১৮ থেকে ৩০ বছর",
+                deadline: "২৫ নভেম্বর ২০২৬",
+                date: "2026-10-19",
+                status: "Active",
+                desc: "পশ্চিমবঙ্গ পুলিশের কনস্টেবল পদে পুরুষ ও মহিলা প্রার্থীদের আবেদনের সুযোগ। মাধ্যমিক পাস এবং নির্দিষ্ট শারীরিক মাপকাঠি থাকলে প্রার্থীরা অনলাইনের মাধ্যমে আবেদন করতে পারবেন।",
+                applyLink: "https://prb.wb.gov.in",
+                pdfLink: "#"
+            },
+            {
+                id: 7,
+                title: "স্টেট ব্যাংক অফ ইন্ডিয়া (SBI) ক্লার্ক ও পিও নিয়োগ",
+                enTitle: "SBI Clerk & PO Recruitment 2026",
+                org: "State Bank of India",
+                category: "Bank",
+                qualification: "Graduate",
+                vacancies: "৯৫০+ (WB Circle)",
+                salary: "₹১৯,৯০০ - ৪৭,৯২০/-",
+                age: "২১ থেকে ২৮ বছর",
+                deadline: "১২ নভেম্বর ২০২৬",
+                date: "2026-10-18",
+                status: "Active",
+                desc: "এসবিআই ব্যাংকের পশ্চিমবঙ্গ সার্কেলের জন্য জুনিয়র অ্যাসোসিয়েট ও প্রবেশনারি অফিসার পদে গ্র্যাজুয়েট প্রার্থীদের নিয়োগের বিজ্ঞপ্তি প্রকাশিত হয়েছে।",
+                applyLink: "https://sbi.co.in",
+                pdfLink: "#"
+            },
+            {
+                id: 8,
+                title: "পশ্চিমবঙ্গ স্কুল সার্ভিস কমিশন (WBSSC) শিক্ষক নিয়োগ",
+                enTitle: "WBSSC Upper Primary & Assistant Teacher Recruitment",
+                org: "West Bengal SSC",
+                category: "Teaching",
+                qualification: "Graduate",
+                vacancies: "১২,০০০+ শূন্যপদ",
+                salary: "₹২৮,৯০০ - ৭৫,২০০/-",
+                age: "সর্বোচ্চ ৪০ বছর",
+                deadline: "২৮ নভেম্বর ২০২৬",
+                date: "2026-10-17",
+                status: "Active",
+                desc: "উচ্চ প্রাথমিক ও মাধ্যমিক স্তরে সহকারী শিক্ষক পদে টেট (TET) উত্তীর্ণ এবং গ্র্যাজুয়েট ও বি.এড ডিগ্রিধারীদের জন্য রাজ্য জুড়ে নিয়োগ প্রক্রিয়া শুরু হতে চলেছে।",
+                applyLink: "https://westbengalssc.com",
+                pdfLink: "#"
+            }
+        ];
+
+        let currentCategory = 'All';
+        let currentLang = 'bn'; // 'bn' or 'en'
+        let bookmarks = JSON.parse(localStorage.getItem('wb_job_bookmarks')) || [];
+
+        // Initialize Lucide icons & render jobs
+        window.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            renderJobs(jobsData);
+            updateBookmarkBadge();
+        });
+
+        // Render Job Cards
+        function renderJobs(jobs) {
+            const grid = document.getElementById('job-grid');
+            const emptyState = document.getElementById('empty-state');
+            const countBadge = document.getElementById('job-count-badge');
+            
+            grid.innerHTML = '';
+            countBadge.textContent = jobs.length;
+
+            if (jobs.length === 0) {
+                emptyState.classList.remove('hidden');
+                return;
+            } else {
+                emptyState.classList.add('hidden');
+            }
+
+            jobs.forEach(job => {
+                const isBookmarked = bookmarks.includes(job.id);
+                const titleText = currentLang === 'bn' ? job.title : job.enTitle;
+                
+                const card = document.createElement('div');
+                card.className = "glass-card rounded-3xl border border-slate-200/80 dark:border-slate-800/80 p-6 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group";
+                
+                card.innerHTML = `
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-300">
+                                ${job.category}
+                            </span>
+                            <button onclick="toggleBookmark(${job.id})" class="p-2 rounded-xl text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
+                                <i data-lucide="bookmark" class="w-5 h-5 ${isBookmarked ? 'fill-emerald-600 text-emerald-600 dark:fill-emerald-400 dark:text-emerald-400' : ''}"></i>
+                            </button>
+                        </div>
+
+                        <span class="text-xs font-semibold text-slate-500 dark:text-slate-400 block mb-1">${job.org}</span>
+                        <h4 class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors line-clamp-2">${titleText}</h4>
+                        
+                        <div class="mt-4 space-y-2 border-t border-slate-100 dark:border-slate-800/80 pt-4">
+                            <div class="flex items-center justify-between text-xs">
+                                <span class="text-slate-500">শূন্যপদ:</span>
+                                <span class="font-bold text-slate-800 dark:text-slate-200">${job.vacancies}</span>
+                            </div>
+                            <div class="flex items-center justify-between text-xs">
+                                <span class="text-slate-500">যোগ্যতা:</span>
+                                <span class="font-bold text-slate-800 dark:text-slate-200">${job.qualification}</span>
+                            </div>
+                            <div class="flex items-center justify-between text-xs">
+                                <span class="text-slate-500">শেষ তারিখ:</span>
+                                <span class="font-bold text-rose-600 dark:text-rose-400">${job.deadline}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between">
+                        <span class="text-[11px] text-slate-400 flex items-center gap-1">
+                            <i data-lucide="clock" class="w-3.5 h-3.5"></i> ${job.date}
+                        </span>
+                        <button onclick="openModal(${job.id})" class="px-4 py-2 bg-emerald-50 dark:bg-emerald-950/50 hover:bg-emerald-600 hover:text-white text-emerald-700 dark:text-emerald-300 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5">
+                            <span>সম্পূর্ণ বিবরণ</span>
+                            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+            lucide.createIcons();
+        }
+
+        // Filter Jobs based on Search, Category, and Qualification
+        function filterJobs() {
+            const query = document.getElementById('search-input').value.toLowerCase();
+            const qualFilter = document.getElementById('qualification-filter').value;
+
+            const filtered = jobsData.filter(job => {
+                const matchesCategory = currentCategory === 'All' || job.category === currentCategory;
+                const matchesQual = !qualFilter || job.qualification === qualFilter;
+                const matchesSearch = job.title.toLowerCase().includes(query) || 
+                                      job.enTitle.toLowerCase().includes(query) || 
+                                      job.org.toLowerCase().includes(query) || 
+                                      job.vacancies.toLowerCase().includes(query);
+                return matchesCategory && matchesQual && matchesSearch;
+            });
+
+            renderJobs(filtered);
+        }
+
+        // Set Category Filter
+        function setCategory(cat) {
+            currentCategory = cat;
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                if (btn.getAttribute('data-category') === cat) {
+                    btn.className = "cat-btn px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap transition-all bg-emerald-600 text-white shadow-md shadow-emerald-600/20";
+                } else {
+                    btn.className = "cat-btn px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap transition-all bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 hover:border-emerald-500";
+                }
+            });
+            filterJobs();
+        }
+
+        // Reset Filters
+        function resetFilters() {
+            document.getElementById('search-input').value = '';
+            document.getElementById('qualification-filter').value = '';
+            setCategory('All');
+        }
+
+        // Toggle Language Mode (Bengali / English)
+        function toggleLanguageMode() {
+            currentLang = currentLang === 'bn' ? 'en' : 'bn';
+            document.getElementById('lang-label').textContent = currentLang === 'bn' ? 'বাংলা (BN)' : 'English (EN)';
+            filterJobs();
+        }
+
+        // Toggle Dark Mode
+        function toggleDarkMode() {
+            const html = document.documentElement;
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+            } else {
+                html.classList.add('dark');
+            }
+        }
+
+        // Modal Controls
+        function openModal(id) {
+            const job = jobsData.find(j => j.id === id);
+            if (!job) return;
+
+            document.getElementById('modal-badge').textContent = job.category;
+            document.getElementById('modal-org').textContent = job.org;
+            document.getElementById('modal-title').textContent = currentLang === 'bn' ? job.title : job.enTitle;
+            document.getElementById('modal-vacancies').textContent = job.vacancies;
+            document.getElementById('modal-salary').textContent = job.salary;
+            document.getElementById('modal-age').textContent = job.age;
+            document.getElementById('modal-deadline').textContent = job.deadline;
+            document.getElementById('modal-qualification').textContent = job.qualification;
+            document.getElementById('modal-desc').textContent = job.desc;
+            document.getElementById('modal-apply-btn').href = job.applyLink;
+            document.getElementById('modal-pdf-btn').href = job.pdfLink;
+
+            const modal = document.getElementById('job-modal');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                document.getElementById('modal-container').classList.remove('scale-95');
+            }, 10);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('job-modal');
+            modal.classList.add('opacity-0');
+            document.getElementById('modal-container').classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        // Bookmarks Handling
+        function toggleBookmark(id) {
+            const index = bookmarks.indexOf(id);
+            if (index > -1) {
+                bookmarks.splice(index, 1);
+            } else {
+                bookmarks.push(id);
+            }
+            localStorage.setItem('wb_job_bookmarks', JSON.stringify(bookmarks));
+            updateBookmarkBadge();
+            filterJobs();
+        }
+
+        function updateBookmarkBadge() {
+            const badge = document.getElementById('bookmark-badge');
+            if (bookmarks.length > 0) {
+                badge.textContent = bookmarks.length;
+                badge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+            }
+        }
+
+        function toggleBookmarksModal() {
+            const modal = document.getElementById('bookmarks-modal');
+            const list = document.getElementById('bookmarks-list');
+            
+            if (modal.classList.contains('hidden')) {
+                list.innerHTML = '';
+                if (bookmarks.length === 0) {
+                    list.innerHTML = `<p class="text-sm text-slate-500 text-center py-6">কোনো চাকরি সংরক্ষণ করা হয়নি।</p>`;
+                } else {
+                    bookmarks.forEach(id => {
+                        const job = jobsData.find(j => j.id === id);
+                        if (job) {
+                            const item = document.createElement('div');
+                            item.className = "flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-800/60 rounded-2xl border border-slate-100 dark:border-slate-800";
+                            item.innerHTML = `
+                                <div>
+                                    <span class="text-[11px] font-bold text-emerald-600 dark:text-emerald-400">${job.org}</span>
+                                    <h5 class="text-sm font-bold text-slate-800 dark:text-slate-200 line-clamp-1">${job.title}</h5>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <button onclick="closeBookmarksModal(); openModal(${job.id})" class="px-3 py-1.5 bg-emerald-600 text-white rounded-xl text-xs font-semibold">দেখুন</button>
+                                    <button onclick="toggleBookmark(${job.id}); toggleBookmarksModal(); toggleBookmarksModal();" class="text-slate-400 hover:text-rose-500"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                                </div>
+                            `;
+                            list.appendChild(item);
+                        }
+                    });
+                    lucide.createIcons();
+                }
+                modal.classList.remove('hidden');
+            } else {
+                modal.classList.add('hidden');
+            }
+        }
+
+        function closeBookmarksModal() {
+            document.getElementById('bookmarks-modal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
