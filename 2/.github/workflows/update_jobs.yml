@@ -1,0 +1,36 @@
+name: Auto Update Jobs
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # প্রতিদিন একবার রান করবে (UTC সময় অনুযায়ী)
+  workflow_dispatch:
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run Scraper Script
+        run: |
+          python scraper.py
+
+      - name: Commit and push changes if any
+        run: |
+          git config --global user.name "GitHub Action Bot"
+          git config --global user.email "action@github.com"
+          git add jobs.json
+          git commit -m "Auto-update job listings via GitHub Action" || echo "No changes to commit"
+          git push
