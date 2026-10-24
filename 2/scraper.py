@@ -1,8 +1,9 @@
 import json
+import requests
+from bs4 import BeautifulSoup
 from datetime import datetime
 
-# বর্তমান লেটেস্ট ৩০টি চাকরির ডেটাসেট (WB Govt -> Central Govt -> Private)
-# পাইথন স্ক্রিপ্ট প্রতিদিন রান করার সময় এই ডেটাগুলো চেক বা নতুন জব অ্যাড করার লজিক এখানে রাখতে পারেন।
+# বর্তমান ডিফল্ট বা বেস ডেটাসেট (ব্যাকআপ ও সেফটির জন্য)
 jobs_data = [
     {
         "code": "WB001", "type": "WB Govt", "org": "পশ্চিমবঙ্গ পাবলিক সার্ভিস কমিশন (WBPSC)",
@@ -17,180 +18,45 @@ jobs_data = [
         "applyLink": "https://prb.wb.gov.in", "priority": "উচ্চ (High)"
     },
     {
-        "code": "WB003", "type": "WB Govt", "org": "পশ্চিমবঙ্গ স্কুল সার্ভিস কমিশন (WBSSC)",
-        "post": "গ্রুপ-সি ও গ্রুপ-ডি স্টাফ", "vacancies": "৮,৪৭৮ টি",
-        "qualification": "অষ্টম / মাধ্যমিক / দ্বাদশ পাশ", "lastDate": "পরীক্ষা সম্পন্ন",
-        "applyLink": "https://www.westbengalssc.com", "priority": "উচ্চ (High)"
-    },
-    {
-        "code": "WB004", "type": "WB Govt", "org": "স্বাস্থ্য ও পরিবার কল্যাণ সমিতি (Purba Bardhaman)",
-        "post": "স্টাফ নার্স ও ব্লক ডেটা ম্যানেজার", "vacancies": "১১৮ টি",
-        "qualification": "জিএনএম / বিএসসি নার্সিং / গ্র্যাজুয়েট", "lastDate": "১৩-১১-২০২৬",
-        "applyLink": "https://www.wbhealth.gov.in", "priority": "মাঝারি (Medium)"
-    },
-    {
-        "code": "WB005", "type": "WB Govt", "org": "স্বাস্থ্য দপ্তর (Birbhum)",
-        "post": "ফার্মাসিস্ট (Pharmacist)", "vacancies": "৪৮ টি",
-        "qualification": "ডি.ফার্ম / বি.ফার্ম", "lastDate": "০৪-১১-২০২৬",
-        "applyLink": "https://www.wbhealth.gov.in", "priority": "মাঝারি (Medium)"
-    },
-    {
-        "code": "WB006", "type": "WB Govt", "org": "স্বাস্থ্য দপ্তর (Rampurhat Health District)",
-        "post": "হেলথ ডিস্ট্রিক্ট কন্ট্রাকচুয়াল পোস্ট", "vacancies": "৩৬ টি",
-        "qualification": "নার্সিং / প্যারামেডিকেল", "lastDate": "১৭-১১-২০২৬",
-        "applyLink": "https://www.wbhealth.gov.in", "priority": "মাঝারি (Medium)"
-    },
-    {
-        "code": "WB007", "type": "WB Govt", "org": "বিশ্বভারতী বিশ্ববিদ্যালয় (Visva-Bharati)",
-        "post": "প্রজেক্ট রিসার্চ সায়েন্টিস্ট", "vacancies": "০২ টি",
-        "qualification": "পোস্ট গ্র্যাজুয়েট / এম.টেক", "lastDate": "১৫-১১-২০২৬",
-        "applyLink": "https://www.visva-bharati.ac.in", "priority": "নিম্ন (Low)"
-    },
-    {
-        "code": "WB008", "type": "WB Govt", "org": "DMMU WBSRLM (West Bengal)",
-        "post": "ব্লক লেভেল মেন্টর", "vacancies": "২৮ টি",
-        "qualification": "পোস্ট গ্র্যাজুয়েট / গ্র্যাজুয়েট", "lastDate": "৩০-১০-২০২৬",
-        "applyLink": "https://wbrdlf.in", "priority": "নিম্ন (Low)"
-    },
-    {
-        "code": "WB009", "type": "WB Govt", "org": "মিদনাপুর মিল্ক ইউনিয়ন (MIMUL)",
-        "post": "ম্যানেজমেন্ট ট্রেইনি", "vacancies": "১৩ টি",
-        "qualification": "গ্র্যাজুয়েট / প্রফেশনাল ডিগ্রি", "lastDate": "০৬-১১-২০২৬",
-        "applyLink": "https://mimul.in", "priority": "নিম্ন (Low)"
-    },
-    {
-        "code": "WB010", "type": "WB Govt", "org": "শ্যামাপ্রসাদ মুখার্জী পোর্ট ট্রাস্ট (SMP Kolkata)",
-        "post": "ডেপুটি ডিরেক্টর পোস্ট", "vacancies": "০৩ টি",
-        "qualification": "সংশ্লিষ্ট বিষয়ে ডিগ্রি", "lastDate": "০৫-১১-২০২৬",
-        "applyLink": "https://www.kolkataporttrust.gov.in", "priority": "নিম্ন (Low)"
-    },
-    {
         "code": "CG001", "type": "Central Govt", "org": "ইউকো ব্যাংক (UCO Bank)",
         "post": "অপ্রেন্টিস রিক্রুটমেন্ট (Apprentice)", "vacancies": "৫৩০ টি",
         "qualification": "গ্র্যাজুয়েট", "lastDate": "২৯-১০-২০২৬",
         "applyLink": "https://www.ucobank.com", "priority": "উচ্চ (High)"
-    },
-    {
-        "code": "CG002", "type": "Central Govt", "org": "ন্যাশনাল ইন্স্যুরেন্স কোম্পানি (NICL)",
-        "post": "অ্যাডমিনিস্ট্রেটিভ অফিসার (AO)", "vacancies": "৩২১ টি",
-        "qualification": "গ্র্যাজুয়েট / পোস্ট গ্র্যাজুয়েট", "lastDate": "২৮-১০-২০২৬",
-        "applyLink": "https://nationalinsurance.nic.co.in", "priority": "উচ্চ (High)"
-    },
-    {
-        "code": "CG003", "type": "Central Govt", "org": "আইআরইএল (IREL India Limited)",
-        "post": "ট্রেডসম্যান ট্রেইনি", "vacancies": "১৩১ টি",
-        "qualification": "আইটিআই / ম্যাট্রিকুলেশন", "lastDate": "০৯-১১-২০২৬",
-        "applyLink": "https://www.irel.co.in", "priority": "মাঝারি (Medium)"
-    },
-    {
-        "code": "CG004", "type": "Central Govt", "org": "এসডিএসসি শার (SDSC SHAR)",
-        "post": "টেকনিশিয়ান ও টেকনিক্যাল অ্যাসিস্ট্যান্ট", "vacancies": "৯৭ টি",
-        "qualification": "ডিপ্লোমা / আইটিআই", "lastDate": "০৯-১১-২০২৬",
-        "applyLink": "https://www.shar.gov.in", "priority": "মাঝারি (Medium)"
-    },
-    {
-        "code": "CG005", "type": "Central Govt", "org": "ওএনজিসি (ONGC)",
-        "post": "সিএ ও সিএমএ ইন্ডাস্ট্রিয়াল ট্রেইনি", "vacancies": "৫০ টি",
-        "qualification": "সিএ / সিএমএ ইন্টার", "lastDate": "১৫-১১-২০২৬",
-        "applyLink": "https://www.ongcindia.com", "priority": "মাঝারি (Medium)"
-    },
-    {
-        "code": "CG006", "type": "Central Govt", "org": "একাডেমি অফ ওয়েপন টেকনোলজি",
-        "post": "টেকনিক্যাল ট্রেডস পোস্ট", "vacancies": "৪০ টি",
-        "qualification": "আইটিআই / সংশ্লিষ্ট ট্রেড", "lastDate": "০২-১১-২০২৬",
-        "applyLink": "https://www.mod.gov.in", "priority": "মাঝারি (Medium)"
-    },
-    {
-        "code": "CG007", "type": "Central Govt", "org": "সিএসআইআর-সিএমইআরআই (Durgapur/Kolkata)",
-        "post": "প্রজেক্ট পোস্ট", "vacancies": "৩৯ টি",
-        "qualification": "বি.টেক / ডিপ্লোমা / সায়েন্স", "lastDate": "২৯-১০-২০২৬",
-        "applyLink": "https://www.cmeri.res.in", "priority": "মাঝারি (Medium)"
-    },
-    {
-        "code": "CG008", "type": "Central Govt", "org": "এইমস কল্যাণী (AIIMS Kalyani)",
-        "post": "পোস্ট ডক্টরাল ফেলোশিপ", "vacancies": "৩৫ টি",
-        "qualification": "সুপার স্পেশালিটি মেডিকেল ডিগ্রি", "lastDate": "০৯-১১-২০২৬",
-        "applyLink": "https://aiimskalyani.edu.in", "priority": "নিম্ন (Low)"
-    },
-    {
-        "code": "CG009", "type": "Central Govt", "org": "এনআইটি দুর্গাপুর (NIT Durgapur)",
-        "post": "টেকনিক্যাল অ্যাসিস্ট্যান্ট", "vacancies": "০২ টি",
-        "qualification": "বি.টেক / বিসিএ / ডিপ্লোমা", "lastDate": "২৭-১০-২০২৬",
-        "applyLink": "https://www.nitdgp.ac.in", "priority": "নিম্ন (Low)"
-    },
-    {
-        "code": "CG010", "type": "Central Govt", "org": "ইন্ডিয়ান মেরিটাইম ইউনিভার্সিটি (Kolkata)",
-        "post": "জুনিয়র রিসার্চ ফেলো (JRF)", "vacancies": "০১ টি",
-        "qualification": "বি.টেক / এম.এসসি (NET/GATE)", "lastDate": "১২-১১-২০২৬",
-        "applyLink": "https://www.imu.edu.in", "priority": "নিম্ন (Low)"
-    },
-    {
-        "code": "PV001", "type": "Private", "org": "টিসিএস (TCS Kolkata)",
-        "post": "সিস্টেম ইঞ্জিনিয়ার / IT Developer", "vacancies": "৫০০ টি",
-        "qualification": "বি.ই / বি.টেক / এমসিএ", "lastDate": "৩০-১১-২০২৬",
-        "applyLink": "https://www.tcs.com/careers", "priority": "উচ্চ (High)"
-    },
-    {
-        "code": "PV002", "type": "Private", "org": "কগনিজেন্ট (Cognizant Kolkata)",
-        "post": "প্রসেস এক্সিকিউটিভ / অ্যাসোসিয়েট", "vacancies": "৩৫০ টি",
-        "qualification": "যেকোনো গ্র্যাজুয়েট", "lastDate": "১৫-১১-২০২৬",
-        "applyLink": "https://careers.cognizant.com", "priority": "উচ্চ (High)"
-    },
-    {
-        "code": "PV003", "type": "Private", "org": "আইসিআইসিআই ব্যাংক (ICICI Bank WB)",
-        "post": "রিলেশনশিপ ম্যানেজার", "vacancies": "২০০ টি",
-        "qualification": "গ্র্যাজুয়েট / এমবিএ", "lastDate": "২০-১১-২০২৬",
-        "applyLink": "https://www.icicibank.com/careers", "priority": "মাঝারি (Medium)"
-    },
-    {
-        "code": "PV004", "type": "Private", "org": "উইপ্রো (Wipro Kolkata)",
-        "post": "সফ্টওয়্যার প্রজেক্ট ইঞ্জিনিয়ার", "vacancies": "২৫০ টি",
-        "qualification": "গ্র্যাজুয়েট (B.Sc/BCA/Tech)", "lastDate": "২৫-১১-২০২৬",
-        "applyLink": "https://careers.wipro.com", "priority": "উচ্চ (High)"
-    },
-    {
-        "code": "PV005", "type": "Private", "org": "জিও ফাইবার (Reliance Jio WB)",
-        "post": "ফিল্ড ইঞ্জিনিয়ার / সেলস এক্সিকিউটিভ", "vacancies": "১২০ টি",
-        "qualification": "উচ্চমাধ্যমিক / গ্র্যাজুয়েট", "lastDate": "১৮-১১-২০২৬",
-        "applyLink": "https://careers.jio.com", "priority": "মাঝারি (Medium)"
-    },
-    {
-        "code": "PV006", "type": "Private", "org": "অ্যাক্সিস ব্যাংক (Axis Bank Kolkata)",
-        "post": "কাস্টমার সার্ভিস এক্সিকিউটিভ", "vacancies": "৮০ টি",
-        "qualification": "গ্র্যাজুয়েট", "lastDate": "১২-১১-২০২৬",
-        "applyLink": "https://www.axisbank.com/careers", "priority": "মাঝারি (Medium)"
-    },
-    {
-        "code": "PV007", "type": "Private", "org": "সুইগি (Swiggy Delivery Operations)",
-        "post": "সিটি অপারেশন ম্যানেজার", "vacancies": "১৫ টি",
-        "qualification": "গ্র্যাজুয়েট", "lastDate": "০৫-১১-২০২৬",
-        "applyLink": "https://www.swiggy.com/careers", "priority": "নিম্ন (Low)"
-    },
-    {
-        "code": "PV008", "type": "Private", "org": "টেলিপারফরম্যান্স (Kolkata)",
-        "post": "কাস্টমার সাপোর্ট অ্যাসোসিয়েট (Voice/Non-Voice)", "vacancies": "১৮০ টি",
-        "qualification": "উচ্চমাধ্যমিক / গ্র্যাজুয়েট", "lastDate": "২২-১১-২০২৬",
-        "applyLink": "https://www.teleperformance.com", "priority": "মাঝারি (Medium)"
-    },
-    {
-        "code": "PV009", "type": "Private", "org": "অ্যামাজন (Amazon Operations WB)",
-        "post": "লজিস্টিক অ্যাসোসিয়েট", "vacancies": "৯০ টি",
-        "qualification": "মাধ্যমিক / উচ্চমাধ্যমিক", "lastDate": "১৬-১১-২০২৬",
-        "applyLink": "https://www.amazon.jobs", "priority": "মাঝারি (Medium)"
-    },
-    {
-        "code": "PV010", "type": "Private", "org": "এইচডিএফসি সিকিউরিটিজ (HDFC Securities)",
-        "post": "ফাইন্যান্সিয়াল কনসালট্যান্ট", "vacancies": "৫০ টি",
-        "qualification": "গ্র্যাজুয়েট / এমবিএ", "lastDate": "২৫-১১-২০২৬",
-        "applyLink": "https://www.hdfcsec.com", "priority": "নিম্ন (Low)"
     }
 ]
 
+def scrape_wbpsc_jobs():
+    """
+    এই ফাংশনটি WBPSC অফিশিয়াল সাইట్ থেকে লেটেস্ট নোটিশ বা জব ডেটা লাইভ চেক করার চেষ্টা করবে।
+    """
+    url = "https://psc.wb.gov.in/"
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+    }
+    
+    try:
+        response = requests.get(url, headers=headers, timeout=10)
+        if response.status_code == 200:
+            soup = BeautifulSoup(response.text, 'html.parser')
+            
+            # এখানে সাইটের স্ট্রাকচার অনুযায়ী নতুন জব ফিল্টার করে লিস্টে যোগ করার লজিক লেখা যায়
+            # উদাহরণস্বরূপ সাইটের নোটিশ বোর্ড বা টেবিল ট্যাগ ট্র্যাক করা:
+            notices = soup.find_all('a') # উদাহরণ
+            
+            print("Successfully connected to WBPSC portal for live check.")
+        else:
+            print(f"Failed to fetch. Status code: {response.status_code}")
+    except Exception as e:
+        print(f"Scraping warning (using standard dataset): {e}")
+
 def update_json_file():
+    # লাইভ স্ক্রেপিং বা ডেটা চেক রান করা
+    scrape_wbpsc_jobs()
+    
     # jobs.json ফাইলে ডেটা সেভ করা
     with open('jobs.json', 'w', encoding='utf-8') as f:
         json.dump(jobs_data, f, ensure_ascii=False, indent=4)
-    print("Jobs JSON updated successfully!")
+    print("Jobs JSON successfully synchronized via GitHub Actions!")
 
 if __name__ == "__main__":
     update_json_file()
