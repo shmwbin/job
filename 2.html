@@ -1,22 +1,22 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full">
+<html lang="bn" class="h-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WB Job Seeker Alerts & Priority Dashboard</title>
+    <title>পশ্চিমবঙ্গ চাকরিপ্রার্থী প্রায়োরিটি পোর্টাল</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Font: Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Google Font: Inter & Noto Sans Bengali -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             darkMode: 'class',
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
+                        sans: ['"Noto Sans Bengali"', 'sans-serif'],
                     },
                 }
             }
@@ -36,15 +36,15 @@
                     <i class="fa-solid fa-briefcase"></i>
                 </div>
                 <div>
-                    <h1 class="text-lg font-bold tracking-tight">WB Job Portal</h1>
-                    <p class="text-xs text-indigo-200">West Bengal Job Seeker Priority Alerts</p>
+                    <h1 class="text-base sm:text-lg font-bold tracking-tight">ডব্লিউবি জব পোর্টাল</h1>
+                    <p class="text-xs text-indigo-200">পশ্চিমবঙ্গ চাকরিপ্রার্থী প্রায়োরিটি অ্যালার্ট</p>
                 </div>
             </div>
             <div class="flex items-center space-x-3">
-                <button onclick="openBookmarksModal()" class="relative bg-indigo-600 hover:bg-indigo-500 text-white px-3 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2 shadow-sm border border-indigo-500">
+                <button onclick="openBookmarksModal()" class="relative bg-indigo-600 hover:bg-indigo-500 text-white px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium transition flex items-center gap-2 shadow-sm border border-indigo-500">
                     <i class="fa-solid fa-bookmark text-amber-300"></i>
-                    <span class="hidden sm:inline">Saved Jobs</span>
-                    <span id="bookmark-badge" class="bg-amber-500 text-white text-xs px-2 py-0.5 rounded-full font-bold">0</span>
+                    <span class="hidden sm:inline">সংরক্ষিত চাকরি</span>
+                    <span id="bookmark-badge" class="bg-amber-500 text-white text-xs px-2 py-0.5 rounded-full font-bold">০</span>
                 </button>
             </div>
         </div>
@@ -57,8 +57,8 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between">
                 <div>
-                    <p class="text-xs font-medium text-slate-500 uppercase tracking-wider">Total Active Jobs</p>
-                    <h3 id="stat-total" class="text-2xl font-bold text-slate-900 mt-1">20</h3>
+                    <p class="text-xs font-medium text-slate-500 uppercase tracking-wider">মোট সক্রিয় চাকরি</p>
+                    <h3 id="stat-total" class="text-2xl font-bold text-slate-900 mt-1">২০</h3>
                 </div>
                 <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl">
                     <i class="fa-solid fa-list-check"></i>
@@ -66,8 +66,8 @@
             </div>
             <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between">
                 <div>
-                    <p class="text-xs font-medium text-slate-500 uppercase tracking-wider">High Priority</p>
-                    <h3 id="stat-high" class="text-2xl font-bold text-rose-600 mt-1">0</h3>
+                    <p class="text-xs font-medium text-slate-500 uppercase tracking-wider">উচ্চ অগ্রাধিকার (High Priority)</p>
+                    <h3 id="stat-high" class="text-2xl font-bold text-rose-600 mt-1">০</h3>
                 </div>
                 <div class="w-12 h-12 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center text-xl">
                     <i class="fa-solid fa-fire"></i>
@@ -75,8 +75,8 @@
             </div>
             <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between">
                 <div>
-                    <p class="text-xs font-medium text-slate-500 uppercase tracking-wider">Total Vacancies</p>
-                    <h3 id="stat-vacancies" class="text-2xl font-bold text-emerald-600 mt-1">0</h3>
+                    <p class="text-xs font-medium text-slate-500 uppercase tracking-wider">মোট শূন্যপদ</p>
+                    <h3 id="stat-vacancies" class="text-2xl font-bold text-emerald-600 mt-1">০</h3>
                 </div>
                 <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl">
                     <i class="fa-solid fa-users"></i>
@@ -84,8 +84,8 @@
             </div>
             <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between">
                 <div>
-                    <p class="text-xs font-medium text-slate-500 uppercase tracking-wider">Saved Jobs</p>
-                    <h3 id="stat-saved" class="text-2xl font-bold text-amber-600 mt-1">0</h3>
+                    <p class="text-xs font-medium text-slate-500 uppercase tracking-wider">সংরক্ষিত চাকরি</p>
+                    <h3 id="stat-saved" class="text-2xl font-bold text-amber-600 mt-1">০</h3>
                 </div>
                 <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-xl">
                     <i class="fa-solid fa-bookmark"></i>
@@ -101,28 +101,28 @@
                     <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
                         <i class="fa-solid fa-search"></i>
                     </span>
-                    <input type="text" id="search-input" oninput="filterJobs()" placeholder="Search by organization, post, or qualification..." class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition">
+                    <input type="text" id="search-input" oninput="filterJobs()" placeholder="সংস্থা, পদের নাম বা যোগ্যতা দিয়ে খুঁজুন..." class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition">
                 </div>
                 
                 <!-- Sort Options -->
                 <div class="flex items-center gap-3 w-full md:w-auto justify-end">
-                    <label for="sort-select" class="text-xs font-medium text-slate-500 uppercase whitespace-nowrap">Sort By:</label>
+                    <label for="sort-select" class="text-xs font-medium text-slate-500 uppercase whitespace-nowrap">সাজানোর পদ্ধতি:</label>
                     <select id="sort-select" onchange="filterJobs()" class="bg-slate-50 border border-slate-200 text-slate-700 text-sm rounded-xl px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                        <option value="priority">Priority (High to Low)</option>
-                        <option value="vacancies-desc">Vacancies (High to Low)</option>
-                        <option value="date-asc">Deadline (Earliest First)</option>
+                        <option value="priority">অগ্রাধিকার (উচ্চ থেকে নিম্ন)</option>
+                        <option value="vacancies-desc">শূন্যপদ (বেশি থেকে কম)</option>
+                        <option value="date-asc">শেষ তারিখ (কাছাকাছি)</option>
                     </select>
                 </div>
             </div>
 
             <!-- Category Filter Tabs -->
             <div class="flex items-center gap-2 overflow-x-auto pb-2 pt-1 no-scrollbar">
-                <button onclick="setCategory('All')" class="category-btn px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition bg-indigo-600 text-white shadow-sm" data-category="All">All Jobs</button>
-                <button onclick="setCategory('High Priority')" class="category-btn px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition bg-slate-100 text-slate-600 hover:bg-slate-200" data-category="High Priority">🔥 High Priority</button>
-                <button onclick="setCategory('Banking')" class="category-btn px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition bg-slate-100 text-slate-600 hover:bg-slate-200" data-category="Banking">🏦 Banking</button>
-                <button onclick="setCategory('Medical')" class="category-btn px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition bg-slate-100 text-slate-600 hover:bg-slate-200" data-category="Medical">🏥 Medical / Health</button>
-                <button onclick="setCategory('Engineering/Technical')" class="category-btn px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition bg-slate-100 text-slate-600 hover:bg-slate-200" data-category="Engineering/Technical">⚙️ Engineering / Technical</button>
-                <button onclick="setCategory('Teaching/Research')" class="category-btn px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition bg-slate-100 text-slate-600 hover:bg-slate-200" data-category="Teaching/Research">📚 Teaching / Research</button>
+                <button onclick="setCategory('All')" class="category-btn px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition bg-indigo-600 text-white shadow-sm" data-category="All">সব চাকরি</button>
+                <button onclick="setCategory('High Priority')" class="category-btn px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition bg-slate-100 text-slate-600 hover:bg-slate-200" data-category="High Priority">🔥 উচ্চ অগ্রাধিকার</button>
+                <button onclick="setCategory('Banking')" class="category-btn px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition bg-slate-100 text-slate-600 hover:bg-slate-200" data-category="Banking">🏦 ব্যাংকিং</button>
+                <button onclick="setCategory('Medical')" class="category-btn px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition bg-slate-100 text-slate-600 hover:bg-slate-200" data-category="Medical">🏥 স্বাস্থ্য / মেডিকেল</button>
+                <button onclick="setCategory('Engineering/Technical')" class="category-btn px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition bg-slate-100 text-slate-600 hover:bg-slate-200" data-category="Engineering/Technical">⚙️ প্রকৌশলী / টেকনিক্যাল</button>
+                <button onclick="setCategory('Teaching/Research')" class="category-btn px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition bg-slate-100 text-slate-600 hover:bg-slate-200" data-category="Teaching/Research">📚 শিক্ষকতা / গবেষণা</button>
             </div>
         </div>
 
@@ -136,15 +136,15 @@
             <div class="w-16 h-16 bg-slate-100 text-slate-400 rounded-full flex items-center justify-center text-2xl mb-4">
                 <i class="fa-solid fa-folder-open"></i>
             </div>
-            <h3 class="text-lg font-bold text-slate-700">No matching jobs found</h3>
-            <p class="text-sm text-slate-500 mt-1">Try adjusting your search query or category filters.</p>
+            <h3 class="text-lg font-bold text-slate-700">কোনো চাকরি পাওয়া যায়নি</h3>
+            <p class="text-sm text-slate-500 mt-1">আপনার সার্চ বা ফিল্টার পরিবর্তন করে আবার চেষ্টা করুন।</p>
         </div>
 
     </main>
 
     <!-- Footer -->
     <footer class="bg-white border-t border-slate-200 mt-12 py-6 text-center text-xs text-slate-500">
-        <p>West Bengal Job Seeker Alerts Dashboard &copy; 2026. Built with modern priority matrix algorithms.</p>
+        <p>পশ্চিমবঙ্গ চাকরিপ্রার্থী প্রায়োরিটি পোর্টাল &copy; ২০২৬। সর্বস্বত্ব সংরক্ষিত।</p>
     </footer>
 
     <!-- Saved Jobs Modal -->
@@ -153,7 +153,7 @@
             <div class="px-6 py-4 bg-slate-50 border-b border-slate-100 flex items-center justify-between">
                 <div class="flex items-center gap-2">
                     <i class="fa-solid fa-bookmark text-amber-500"></i>
-                    <h3 class="font-bold text-slate-800">Saved Job Alerts</h3>
+                    <h3 class="font-bold text-slate-800">সংরক্ষিত চাকরির তালিকা</h3>
                 </div>
                 <button onclick="closeBookmarksModal()" class="text-slate-400 hover:text-slate-600 text-lg w-8 h-8 rounded-lg flex items-center justify-center hover:bg-slate-200 transition">
                     <i class="fa-solid fa-xmark"></i>
@@ -163,7 +163,7 @@
                 <!-- Bookmarked items rendered here -->
             </div>
             <div class="px-6 py-4 bg-slate-50 border-t border-slate-100 flex justify-end">
-                <button onclick="closeBookmarksModal()" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-sm font-medium transition">Close</button>
+                <button onclick="closeBookmarksModal()" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-sm font-medium transition">বন্ধ করুন</button>
             </div>
         </div>
     </div>
@@ -172,251 +172,273 @@
     <div id="detail-modal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-white w-full max-w-lg rounded-2xl shadow-xl overflow-hidden flex flex-col">
             <div class="px-6 py-4 bg-indigo-600 text-white flex items-center justify-between">
-                <h3 id="modal-org-title" class="font-bold text-lg">Job Details</h3>
+                <h3 id="modal-org-title" class="font-bold text-lg">চাকরির বিবরণ</h3>
                 <button onclick="closeDetailModal()" class="text-indigo-200 hover:text-white text-lg w-8 h-8 rounded-lg flex items-center justify-center hover:bg-indigo-500 transition">
                     <i class="fa-solid fa-xmark"></i>
                 </button>
             </div>
             <div class="p-6 space-y-4 text-sm text-slate-600">
                 <div>
-                    <span class="text-xs font-semibold text-slate-400 uppercase">Post Name</span>
+                    <span class="text-xs font-semibold text-slate-400 uppercase">পদের নাম</span>
                     <h4 id="modal-post-name" class="font-bold text-slate-900 text-base"></h4>
                 </div>
                 <div class="grid grid-cols-2 gap-4">
                     <div>
-                        <span class="text-xs font-semibold text-slate-400 uppercase">Vacancies</span>
+                        <span class="text-xs font-semibold text-slate-400 uppercase">শূন্যপদ</span>
                         <p id="modal-vacancies" class="font-semibold text-emerald-600"></p>
                     </div>
                     <div>
-                        <span class="text-xs font-semibold text-slate-400 uppercase">Priority Level</span>
+                        <span class="text-xs font-semibold text-slate-400 uppercase">অগ্রাধিকার মাত্রা</span>
                         <p id="modal-priority" class="font-semibold"></p>
                     </div>
                 </div>
                 <div>
-                    <span class="text-xs font-semibold text-slate-400 uppercase">Required Qualification</span>
+                    <span class="text-xs font-semibold text-slate-400 uppercase">প্রয়োজনীয় শিক্ষাগত যোগ্যতা</span>
                     <p id="modal-qualification" class="text-slate-800 font-medium mt-0.5"></p>
                 </div>
                 <div>
-                    <span class="text-xs font-semibold text-slate-400 uppercase">Application Deadline</span>
+                    <span class="text-xs font-semibold text-slate-400 uppercase">আবেদনের শেষ তারিখ</span>
                     <p id="modal-deadline" class="text-rose-600 font-semibold mt-0.5"></p>
                 </div>
                 <div>
-                    <span class="text-xs font-semibold text-slate-400 uppercase">Category</span>
+                    <span class="text-xs font-semibold text-slate-400 uppercase">বিভাগ</span>
                     <p id="modal-category" class="text-slate-800 font-medium mt-0.5"></p>
                 </div>
             </div>
             <div class="px-6 py-4 bg-slate-50 border-t border-slate-100 flex justify-between items-center">
                 <button id="modal-save-btn" onclick="toggleBookmarkFromModal()" class="px-4 py-2 border border-slate-200 text-slate-700 hover:bg-slate-100 rounded-xl text-sm font-medium transition flex items-center gap-2">
-                    <i class="fa-regular fa-bookmark"></i> Save Job
+                    <i class="fa-regular fa-bookmark"></i> সেভ করুন
                 </button>
-                <button onclick="simulateApply()" class="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-sm font-medium transition shadow-sm">Apply Now <i class="fa-solid fa-arrow-up-right-from-square ml-1 text-xs"></i></button>
+                <a id="modal-apply-link" href="#" target="_blank" class="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-sm font-medium transition shadow-sm inline-flex items-center gap-2">
+                    সরাসরি আবেদন করুন <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                </a>
             </div>
         </div>
     </div>
 
     <!-- JavaScript Logic -->
     <script>
-        // Dataset of Top 20 Latest Jobs for West Bengal Job Seekers
+        // Dataset of Top 20 Latest Jobs for West Bengal Job Seekers in Bengali
         const jobsData = [
             {
                 id: "WB001",
-                organization: "WBPSC",
-                postName: "Sub-Surveyor Recruitment",
+                organization: "ডব্লিউবিপিএসসি (WBPSC)",
+                postName: "সাব-সার্ভেয়ার রিক্রুটমেন্ট",
                 vacancies: 1145,
-                qualification: "Diploma / Relevant Engineering",
-                lastDate: "2026-11-09",
-                priority: "High",
-                category: "Engineering/Technical"
+                qualification: "ডিপ্লোমা / সংশ্লিষ্ট প্রকৌশলী",
+                lastDate: "২০২৬-১১-০৯",
+                priority: "উচ্চ",
+                category: "Engineering/Technical",
+                applyUrl: "https://psc.wb.gov.in/"
             },
             {
                 id: "WB002",
-                organization: "UCO Bank",
-                postName: "Apprentice Recruitment",
+                organization: "ইউকো ব্যাংক (UCO Bank)",
+                postName: "অপ্রেন্টিস রিক্রুটমেন্ট",
                 vacancies: 530,
-                qualification: "Graduate in any discipline",
-                lastDate: "2026-10-29",
-                priority: "High",
-                category: "Banking"
+                qualification: "যেকোনো বিষয়ে স্নাতক",
+                lastDate: "২০২৬-১০-২৯",
+                priority: "উচ্চ",
+                category: "Banking",
+                applyUrl: "https://www.ucobank.com/"
             },
             {
                 id: "WB003",
-                organization: "NICL",
-                postName: "Administrative Officer (AO)",
+                organization: "এনআইসিএল (NICL)",
+                postName: "অ্যাডমিনিস্ট্রেটিভ অফিসার (AO)",
                 vacancies: 321,
-                qualification: "Graduate / Post Graduate",
-                lastDate: "2026-10-28",
-                priority: "High",
-                category: "Banking"
+                qualification: "স্নাতক / স্নাতকোত্তর",
+                lastDate: "২০২৬-১০-২৮",
+                priority: "উচ্চ",
+                category: "Banking",
+                applyUrl: "https://nationalinsurance.nic.co.in/"
             },
             {
                 id: "WB004",
-                organization: "WBPSC",
-                postName: "English Stenographer",
+                organization: "ডব্লিউবিপিএসসি (WBPSC)",
+                postName: "ইংরেজি স্টেনোগ্রাফার",
                 vacancies: 266,
-                qualification: "10th Pass + Steno Skill",
-                lastDate: "2026-11-07",
-                priority: "High",
-                category: "High Priority"
+                qualification: "মাধ্যমিক পাশ + স্টেনো দক্ষতা",
+                lastDate: "২০২৬-১১-০৭",
+                priority: "উচ্চ",
+                category: "High Priority",
+                applyUrl: "https://psc.wb.gov.in/"
             },
             {
                 id: "WB005",
-                organization: "DH&FWS Purba Bardhaman",
-                postName: "Staff Nurse & Block Data Manager",
+                organization: "স্বাস্থ্য দপ্তর, পূর্ব বর্ধমান",
+                postName: "স্টাফ নার্স ও ব্লক ডেটা ম্যানেজার",
                 vacancies: 118,
-                qualification: "GNM / BSc Nursing / Graduate",
-                lastDate: "2026-11-13",
-                priority: "Medium",
-                category: "Medical"
+                qualification: "জিএনএম / বিএসসি নার্সিং / স্নাতক",
+                lastDate: "২০২৬-১১-১৩",
+                priority: "মাঝারি",
+                category: "Medical",
+                applyUrl: "https://www.wbhealth.gov.in/"
             },
             {
                 id: "WB006",
-                organization: "IREL",
-                postName: "Tradesman Trainee",
+                organization: "আইআরইএল (IREL)",
+                postName: "ট্রেডসম্যান ট্রেনি",
                 vacancies: 131,
-                qualification: "ITI / Matriculation",
-                lastDate: "2026-11-09",
-                priority: "Medium",
-                category: "Engineering/Technical"
+                qualification: "আইটিআই (ITI) / ম্যাট্রিকুলেশন",
+                lastDate: "২০২৬-১১-০৯",
+                priority: "মাঝারি",
+                category: "Engineering/Technical",
+                applyUrl: "https://www.irel.co.in/"
             },
             {
                 id: "WB007",
-                organization: "SDSC SHAR",
-                postName: "Technician & Technical Assistant",
+                organization: "এসডিএসসি শার (SDSC SHAR)",
+                postName: "টেকনিশিয়ান ও টেকনিক্যাল অ্যাসিস্ট্যান্ট",
                 vacancies: 97,
-                qualification: "Diploma / ITI",
-                lastDate: "2026-11-09",
-                priority: "Medium",
-                category: "Engineering/Technical"
+                qualification: "ডিপ্লোমা / আইটিআই",
+                lastDate: "২০২৬-১১-০৯",
+                priority: "মাঝারি",
+                category: "Engineering/Technical",
+                applyUrl: "https://www.shar.gov.in/"
             },
             {
                 id: "WB008",
-                organization: "ONGC",
-                postName: "CA & CMA Industrial Trainee",
+                organization: "ওএনজিসি (ONGC)",
+                postName: "সিএ ও সিএমএ ইন্ডাস্ট্রিয়াল ট্রেনি",
                 vacancies: 50,
-                qualification: "CA / CMA Inter",
-                lastDate: "2026-11-15",
-                priority: "Medium",
-                category: "Banking"
+                qualification: "সিএ / সিএমএ ইন্টার",
+                lastDate: "২০২৬-১১-১৫",
+                priority: "মাঝারি",
+                category: "Banking",
+                applyUrl: "https://www.ongcindia.com/"
             },
             {
                 id: "WB009",
-                organization: "DHFWS Birbhum",
-                postName: "Pharmacist",
+                organization: "স্বাস্থ্য দপ্তর, বীরভূম",
+                postName: "ফার্মাসিস্ট",
                 vacancies: 48,
-                qualification: "D.Pharm / B.Pharm",
-                lastDate: "2026-11-04",
-                priority: "Medium",
-                category: "Medical"
+                qualification: "ডি.ফার্ম / বি.ফার্ম",
+                lastDate: "২০২৬-১১-০৪",
+                priority: "মাঝারি",
+                category: "Medical",
+                applyUrl: "https://www.wbhealth.gov.in/"
             },
             {
                 id: "WB010",
-                organization: "Academy of Weapon Tech",
-                postName: "Technical Trades Posts",
+                organization: "অ্যাকাডেমি অব ওয়েপন টেকনোলজি",
+                postName: "টেকনিক্যাল ট্রেডস পোস্ট",
                 vacancies: 40,
-                qualification: "ITI / Relevant Trade",
-                lastDate: "2026-11-02",
-                priority: "Medium",
-                category: "Engineering/Technical"
+                qualification: "আইটিআই / সংশ্লিষ্ট ট্রেড",
+                lastDate: "২০২৬-১১-০২",
+                priority: "মাঝারি",
+                category: "Engineering/Technical",
+                applyUrl: "https://www.mod.gov.in/"
             },
             {
                 id: "WB011",
-                organization: "CSIR-CMERI",
-                postName: "Project Posts (Kolkata/Durgapur)",
+                organization: "সিএসআইআর-সিএমইআরআই (Durgapur/Kolkata)",
+                postName: "প্রজেক্ট পোস্ট",
                 vacancies: 39,
-                qualification: "B.Tech / Diploma / Science",
-                lastDate: "2026-10-29",
-                priority: "Medium",
-                category: "Teaching/Research"
+                qualification: "বি.টেক / ডিপ্লোমা / বিজ্ঞান স্নাতক",
+                lastDate: "২০২৬-১০-২৯",
+                priority: "মাঝারি",
+                category: "Teaching/Research",
+                applyUrl: "https://www.cmeri.res.in/"
             },
             {
                 id: "WB012",
-                organization: "DHFWS Rampurhat",
-                postName: "Health District Contractual Posts",
+                organization: "স্বাস্থ্য দপ্তর, রামপুরহাট",
+                postName: "স্বাস্থ্য জেলা চুক্তিভিত্তিক পদ",
                 vacancies: 36,
-                qualification: "Nursing / Paramedical",
-                lastDate: "2026-11-17",
-                priority: "Medium",
-                category: "Medical"
+                qualification: "নার্সিং / প্যারামেডিকেল",
+                lastDate: "২০২৬-১১-১৭",
+                priority: "মাঝারি",
+                category: "Medical",
+                applyUrl: "https://www.wbhealth.gov.in/"
             },
             {
                 id: "WB013",
-                organization: "AIIMS Kalyani",
-                postName: "Post Doctoral Fellowship",
+                organization: "এইমস কল্যাণী (AIIMS Kalyani)",
+                postName: "পোস্ট ডক্টরাল ফেলোশিপ",
                 vacancies: 35,
-                qualification: "Super Specialty Medical Degree",
-                lastDate: "2026-11-09",
-                priority: "Low",
-                category: "Medical"
+                qualification: "সুপার স্পেশালিটি মেডিকেল ডিগ্রি",
+                lastDate: "২০২৬-১১-০৯",
+                priority: "নিম্ন",
+                category: "Medical",
+                applyUrl: "https://aiimskalyani.edu.in/"
             },
             {
                 id: "WB014",
-                organization: "DMMU WBSRLM",
-                postName: "Block Level Mentor",
+                organization: "ডিএমএমইউ ডব্লিউবিএসআরএলএম",
+                postName: "ব্লক লেভেল মেন্টর",
                 vacancies: 28,
-                qualification: "Post Graduate / Graduate",
-                lastDate: "2026-10-30",
-                priority: "Low",
-                category: "High Priority"
+                qualification: "স্নাতকোত্তর / স্নাতক",
+                lastDate: "২০২৬-১০-৩০",
+                priority: "নিম্ন",
+                category: "High Priority",
+                applyUrl: "https://anm.wb.gov.in/"
             },
             {
                 id: "WB015",
-                organization: "MIMUL Midnapore",
-                postName: "Management Trainee",
+                organization: "মিমুল মেদিনীপুর (MIMUL)",
+                postName: "ম্যানেজমেন্ট ট্রেনি",
                 vacancies: 13,
-                qualification: "Graduate / Professional Degree",
-                lastDate: "2026-11-06",
-                priority: "Low",
-                category: "Banking"
+                qualification: "স্নাতক / পেশাগত ডিগ্রি",
+                lastDate: "২০২৬-১১-০৬",
+                priority: "নিম্ন",
+                category: "Banking",
+                applyUrl: "https://wbdairy.gov.in/"
             },
             {
                 id: "WB016",
-                organization: "AIESL",
-                postName: "Security Officer",
+                organization: "এআইইএসএল (AIESL)",
+                postName: "সিকিউরিটি অফিসার",
                 vacancies: 11,
-                qualification: "Graduate in any stream",
-                lastDate: "2026-11-03",
-                priority: "Low",
-                category: "High Priority"
+                qualification: "যেকোনো শাখায় স্নাতক",
+                lastDate: "২০২৬-১১-০৩",
+                priority: "নিম্ন",
+                category: "High Priority",
+                applyUrl: "https://www.aiesl.in/"
             },
             {
                 id: "WB017",
-                organization: "SMP Kolkata",
-                postName: "Dy. Director Posts (Port Trust)",
+                organization: "এসএমপি কোলকাতা পোর্ট ট্রাস্ট",
+                postName: "ডেপুটি ডিরেক্টর পোস্ট",
                 vacancies: 3,
-                qualification: "Degree in Relevant Field",
-                lastDate: "2026-11-05",
-                priority: "Low",
-                category: "Engineering/Technical"
+                qualification: "সংশ্লিষ্ট ক্ষেত্রে ডিগ্রি",
+                lastDate: "২০২৬-১১-০৫",
+                priority: "নিম্ন",
+                category: "Engineering/Technical",
+                applyUrl: "https://www.kolkataporttrust.gov.in/"
             },
             {
                 id: "WB018",
-                organization: "Visva-Bharati University",
-                postName: "Project Research Scientist",
+                organization: "বিশ্বভারতী বিশ্ববিদ্যালয়",
+                postName: "প্রজেক্ট রিসার্চ সায়েন্টিস্ট",
                 vacancies: 2,
-                qualification: "Post Graduate / M.Tech",
-                lastDate: "2026-11-15",
-                priority: "Low",
-                category: "Teaching/Research"
+                qualification: "স্নাতকোত্তর / এম.টেক",
+                lastDate: "২০২৬-১১-১৫",
+                priority: "নিম্ন",
+                category: "Teaching/Research",
+                applyUrl: "https://www.visva-bharati.ac.in/"
             },
             {
                 id: "WB019",
-                organization: "NIT Durgapur",
-                postName: "Technical Assistant",
+                organization: "এনআইটি দুর্গাপুর (NIT Durgapur)",
+                postName: "টেকনিক্যাল অ্যাসিস্ট্যান্ট",
                 vacancies: 2,
-                qualification: "B.Tech / BCA / Diploma",
-                lastDate: "2026-10-27",
-                priority: "Low",
-                category: "Teaching/Research"
+                qualification: "বি.টেক / বিসিএ / ডিপ্লোমা",
+                lastDate: "২০২৬-১০-২৭",
+                priority: "নিম্ন",
+                category: "Teaching/Research",
+                applyUrl: "https://nitdgp.ac.in/"
             },
             {
                 id: "WB020",
-                organization: "Indian Maritime University",
-                postName: "Junior Research Fellow (Kolkata)",
+                organization: "ইন্ডিয়ান মেরিটাইম ইউনিভার্সিটি",
+                postName: "জুনিয়র রিসার্চ ফেলো (কলকাতা)",
                 vacancies: 1,
-                qualification: "B.Tech / M.Sc with NET/GATE",
-                lastDate: "2026-11-12",
-                priority: "Low",
-                category: "Teaching/Research"
+                qualification: "নেট/গেট সহ বি.টেক / এম.এসসি",
+                lastDate: "২০২৬-১১-১২",
+                priority: "নিম্ন",
+                category: "Teaching/Research",
+                applyUrl: "https://www.imu.edu.in/"
             }
         ];
 
@@ -431,11 +453,11 @@
         };
 
         function updateStats() {
-            document.getElementById('stat-total').innerText = jobsData.length;
-            const highCount = jobsData.filter(j => j.priority === 'High').length;
+            document.getElementById('stat-total').innerText = "২০";
+            const highCount = jobsData.filter(j => j.priority === 'উচ্চ').length;
             document.getElementById('stat-high').innerText = highCount;
             const totalVacancies = jobsData.reduce((sum, j) => sum + j.vacancies, 0);
-            document.getElementById('stat-vacancies').innerText = totalVacancies.toLocaleString();
+            document.getElementById('stat-vacancies').innerText = totalVacancies.toLocaleString('bn-BD');
             document.getElementById('stat-saved').innerText = bookmarkedJobs.length;
             document.getElementById('bookmark-badge').innerText = bookmarkedJobs.length;
         }
@@ -461,7 +483,7 @@
 
             let filtered = jobsData.filter(job => {
                 const matchesCategory = currentCategory === 'All' || 
-                                       (currentCategory === 'High Priority' ? job.priority === 'High' : job.category === currentCategory);
+                                       (currentCategory === 'High Priority' ? job.priority === 'উচ্চ' : job.category === currentCategory);
                 const matchesQuery = job.organization.toLowerCase().includes(query) || 
                                      job.postName.toLowerCase().includes(query) || 
                                      job.qualification.toLowerCase().includes(query) ||
@@ -472,7 +494,7 @@
             // Sorting logic
             filtered.sort((a, b) => {
                 if (sortBy === 'priority') {
-                    const rank = { "High": 1, "Medium": 2, "Low": 3 };
+                    const rank = { "উচ্চ": 1, "মাঝারি": 2, "নিম্ন": 3 };
                     if (rank[a.priority] !== rank[b.priority]) {
                         return rank[a.priority] - rank[b.priority];
                     }
@@ -505,8 +527,8 @@
                 const isBookmarked = bookmarkedJobs.includes(job.id);
                 
                 let priorityBadgeColor = 'bg-slate-100 text-slate-700';
-                if (job.priority === 'High') priorityBadgeColor = 'bg-rose-50 text-rose-700 border border-rose-200';
-                else if (job.priority === 'Medium') priorityBadgeColor = 'bg-amber-50 text-amber-700 border border-amber-200';
+                if (job.priority === 'উচ্চ') priorityBadgeColor = 'bg-rose-50 text-rose-700 border border-rose-200';
+                else if (job.priority === 'মাঝারি') priorityBadgeColor = 'bg-amber-50 text-amber-700 border border-amber-200';
                 else priorityBadgeColor = 'bg-blue-50 text-blue-700 border border-blue-200';
 
                 const card = document.createElement('div');
@@ -517,7 +539,7 @@
                             <span class="text-xs font-bold px-2.5 py-1 rounded-lg bg-indigo-50 text-indigo-700">${job.id}</span>
                             <div class="flex items-center gap-2">
                                 <span class="text-xs font-semibold px-2.5 py-1 rounded-lg ${priorityBadgeColor}">
-                                    ${job.priority} Priority
+                                    ${job.priority} অগ্রাধিকার
                                 </span>
                                 <button onclick="toggleBookmark('${job.id}')" class="w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-amber-500 hover:bg-slate-50 transition">
                                     <i class="${isBookmarked ? 'fa-solid text-amber-500' : 'fa-regular'} fa-bookmark"></i>
@@ -530,25 +552,27 @@
                         
                         <div class="mt-3 space-y-2 text-sm text-slate-600">
                             <div class="flex items-center justify-between">
-                                <span class="text-slate-500 text-xs">Vacancies:</span>
-                                <span class="font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">${job.vacancies} Posts</span>
+                                <span class="text-slate-500 text-xs">শূন্যপদ:</span>
+                                <span class="font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">${job.vacancies} টি পদ</span>
                             </div>
                             <div class="flex items-center justify-between">
-                                <span class="text-slate-500 text-xs">Qualification:</span>
-                                <span class="font-medium text-slate-800 text-xs truncate max-w-[180px]" title="${job.qualification}">${job.qualification}</span>
+                                <span class="text-slate-500 text-xs">শিক্ষাগত যোগ্যতা:</span>
+                                <span class="font-medium text-slate-800 text-xs truncate max-w-[170px]" title="${job.qualification}">${job.qualification}</span>
                             </div>
                             <div class="flex items-center justify-between">
-                                <span class="text-slate-500 text-xs">Last Date:</span>
+                                <span class="text-slate-500 text-xs">শেষ তারিখ:</span>
                                 <span class="font-semibold text-rose-600 text-xs">${job.lastDate}</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
-                        <span class="text-[11px] text-slate-400 font-medium">${job.category}</span>
-                        <button onclick="openDetailModal('${job.id}')" class="px-3.5 py-1.5 bg-indigo-50 hover:bg-indigo-600 text-indigo-700 hover:text-white rounded-xl text-xs font-semibold transition">
-                            View Details
+                    <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
+                        <button onclick="openDetailModal('${job.id}')" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-semibold transition">
+                            বিস্তারিত
                         </button>
+                        <a href="${job.applyUrl}" target="_blank" onclick="showApplyToast()" class="px-3.5 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-semibold transition flex items-center gap-1.5 shadow-sm">
+                            আবেদন করুন <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                        </a>
                     </div>
                 `;
                 grid.appendChild(card);
@@ -559,10 +583,10 @@
             const index = bookmarkedJobs.indexOf(jobId);
             if (index > -1) {
                 bookmarkedJobs.splice(index, 1);
-                showToast("Job removed from saved list", "info");
+                showToast("সংরক্ষিত তালিকা থেকে চাকরিটি সরানো হয়েছে", "info");
             } else {
                 bookmarkedJobs.push(jobId);
-                showToast("Job successfully bookmarked!", "success");
+                showToast("চাকরিটি সফলভাবে সেভ করা হয়েছে!", "success");
             }
             localStorage.setItem('wb_bookmarked_jobs', JSON.stringify(bookmarkedJobs));
             updateStats();
@@ -582,11 +606,14 @@
 
             document.getElementById('modal-org-title').innerText = job.organization;
             document.getElementById('modal-post-name').innerText = job.postName;
-            document.getElementById('modal-vacancies').innerText = job.vacancies + " Openings";
-            document.getElementById('modal-priority').innerText = job.priority + " Priority";
+            document.getElementById('modal-vacancies').innerText = job.vacancies + " টি শূন্যপদ";
+            document.getElementById('modal-priority').innerText = job.priority + " অগ্রাধিকার";
             document.getElementById('modal-qualification').innerText = job.qualification;
             document.getElementById('modal-deadline').innerText = job.lastDate;
             document.getElementById('modal-category').innerText = job.category;
+            
+            const applyLinkBtn = document.getElementById('modal-apply-link');
+            applyLinkBtn.href = job.applyUrl;
 
             updateModalBookmarkButton();
             document.getElementById('detail-modal').classList.remove('hidden');
@@ -601,9 +628,9 @@
             const btn = document.getElementById('modal-save-btn');
             const isBookmarked = bookmarkedJobs.includes(activeModalJobId);
             if (isBookmarked) {
-                btn.innerHTML = `<i class="fa-solid fa-bookmark text-amber-500"></i> Saved`;
+                btn.innerHTML = `<i class="fa-solid fa-bookmark text-amber-500"></i> সেভ করা আছে`;
             } else {
-                btn.innerHTML = `<i class="fa-regular fa-bookmark"></i> Save Job`;
+                btn.innerHTML = `<i class="fa-regular fa-bookmark"></i> সেভ করুন`;
             }
         }
 
@@ -627,7 +654,7 @@
             listContainer.innerHTML = '';
 
             if (bookmarkedJobs.length === 0) {
-                listContainer.innerHTML = `<p class="text-center text-slate-400 py-8 text-sm">No saved jobs yet. Click the bookmark icon on any job card to save it here.</p>`;
+                listContainer.innerHTML = `<p class="text-center text-slate-400 py-8 text-sm">কোনো সংরক্ষিত চাকরি নেই। যেকোনো চাকরির কার্ডের বুকমার্ক আইকনে ক্লিক করে এখানে সেভ করতে পারেন।</p>`;
                 return;
             }
 
@@ -641,10 +668,10 @@
                     <div>
                         <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-indigo-50 text-indigo-700">${job.id}</span>
                         <h4 class="font-bold text-slate-800 text-sm mt-1">${job.postName}</h4>
-                        <p class="text-xs text-slate-500">${job.organization} &bull; Deadline: <span class="text-rose-600 font-semibold">${job.lastDate}</span></p>
+                        <p class="text-xs text-slate-500">${job.organization} &bull; শেষ তারিখ: <span class="text-rose-600 font-semibold">${job.lastDate}</span></p>
                     </div>
                     <div class="flex items-center gap-2">
-                        <button onclick="openDetailModal('${job.id}'); closeBookmarksModal();" class="px-3 py-1.5 bg-indigo-600 text-white rounded-lg text-xs font-medium hover:bg-indigo-700 transition">View</button>
+                        <a href="${job.applyUrl}" target="_blank" class="px-3 py-1.5 bg-indigo-600 text-white rounded-lg text-xs font-medium hover:bg-indigo-700 transition">আবেদন</a>
                         <button onclick="toggleBookmark('${job.id}')" class="w-8 h-8 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition flex items-center justify-center"><i class="fa-solid fa-trash-can text-xs"></i></button>
                     </div>
                 `;
@@ -652,18 +679,14 @@
             });
         }
 
-        function simulateApply() {
-            showToast("Redirecting to official West Bengal recruitment portal...", "success");
-            setTimeout(() => {
-                closeDetailModal();
-            }, 1000);
+        function showApplyToast() {
+            showToast("অফিশিয়াল পোর্টালে রিডাইরেক্ট করা হচ্ছে...", "success");
         }
 
         function showToast(message, type = 'success') {
             const container = document.getElementById('toast-container');
             const toast = document.createElement('div');
-            const bgClass = type === 'success' ? 'bg-slate-900 text-white' : 'bg-slate-900 text-white';
-            toast.className = `${bgClass} px-4 py-3 rounded-xl shadow-lg text-xs font-medium flex items-center gap-3 transform translate-y-2 opacity-0 transition-all duration-300`;
+            toast.className = `bg-slate-900 text-white px-4 py-3 rounded-xl shadow-lg text-xs font-medium flex items-center gap-3 transform translate-y-2 opacity-0 transition-all duration-300`;
             toast.innerHTML = `
                 <i class="fa-solid fa-circle-check text-emerald-400"></i>
                 <span>${message}</span>
